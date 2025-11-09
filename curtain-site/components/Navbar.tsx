@@ -35,8 +35,8 @@ export default function Navbar() {
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
           <Link href="/" className="flex items-center">
-            <span className="text-xl font-bold text-primary">On The Spot</span>
-            <span className="text-xl font-normal text-gray-700 ml-2">Curtain Cleaning</span>
+            <span className="text-xl font-bold text-primary">Curtain Cleaning</span>
+            <span className="text-xl font-normal text-gray-700 ml-2">Johannesburg</span>
           </Link>
 
           {/* Desktop Navigation */}
