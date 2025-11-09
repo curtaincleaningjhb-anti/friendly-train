@@ -95,11 +95,12 @@ The website uses Next.js 14 App Router for optimal performance and SEO. Key desi
 - ✅ Email validation, duplicate detection, error handling
 - ⚙️ Requires MAILCHIMP_API_KEY and MAILCHIMP_AUDIENCE_ID environment variables
 
-**Analytics (Google Analytics 4)**:
-- ✅ Google Analytics component with automatic page view tracking
+**Analytics & Tracking**:
+- ✅ Google Tag Manager (GTM-KSZ36GDD) integrated site-wide
+- ✅ Google Analytics 4 with automatic page view tracking
 - ✅ Next.js App Router integration with proper query parameter handling
-- ✅ Conditional loading based on environment variable
-- ⚙️ Requires NEXT_PUBLIC_GA_MEASUREMENT_ID environment variable
+- ✅ GTM allows managing all tracking tags (Analytics, Facebook Pixel, conversion tracking) without code changes
+- ⚙️ Requires NEXT_PUBLIC_GA_MEASUREMENT_ID environment variable for GA4
 
 **Payment Processing (Stripe)**:
 - ✅ Booking deposit page at /booking/deposit
