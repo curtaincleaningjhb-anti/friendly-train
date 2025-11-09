@@ -1,5 +1,5 @@
 import { db } from './db';
-import { contentBlocks, siteSettings } from './db/schema';
+import { contentBlocks, siteSettings, services, locations } from './db/schema';
 import { eq } from 'drizzle-orm';
 
 // Default fallback content if database is empty
@@ -99,4 +99,40 @@ export async function getSiteSettings() {
     contact: DEFAULT_CONTACT,
     social: DEFAULT_SOCIAL,
   };
+}
+
+export async function getServiceContent(slug: string) {
+  try {
+    const result = await db
+      .select()
+      .from(services)
+      .where(eq(services.slug, slug))
+      .limit(1);
+
+    if (result.length > 0) {
+      return result[0];
+    }
+  } catch (error) {
+    console.error(`Failed to fetch service content for ${slug}:`, error);
+  }
+  
+  return null;
+}
+
+export async function getLocationContent(slug: string) {
+  try {
+    const result = await db
+      .select()
+      .from(locations)
+      .where(eq(locations.slug, slug))
+      .limit(1);
+
+    if (result.length > 0) {
+      return result[0];
+    }
+  } catch (error) {
+    console.error(`Failed to fetch location content for ${slug}:`, error);
+  }
+  
+  return null;
 }

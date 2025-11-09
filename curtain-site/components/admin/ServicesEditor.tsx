@@ -31,9 +31,9 @@ export default function ServicesEditor() {
 
   const servicesList = [
     { slug: 'curtain-cleaning', name: 'Curtain Cleaning' },
-    { slug: 'mattress-sanitization', name: 'Mattress Sanitization' },
+    { slug: 'mattress-cleaning', name: 'Mattress Cleaning' },
     { slug: 'upholstery-cleaning', name: 'Upholstery Cleaning' },
-    { slug: 'persian-rug-cleaning', name: 'Persian Rug Cleaning' },
+    { slug: 'rug-cleaning', name: 'Rug Cleaning' },
     { slug: 'fabric-protection', name: 'Fabric Protection' },
     { slug: 'fireproofing', name: 'Fireproofing' },
   ];
@@ -47,6 +47,19 @@ export default function ServicesEditor() {
       const service = services.find(s => s.slug === selectedService);
       if (service) {
         setFormData(service);
+      } else {
+        const serviceName = servicesList.find(s => s.slug === selectedService)?.name || '';
+        setFormData({
+          slug: selectedService,
+          title: serviceName,
+          subtitle: '',
+          intro: '',
+          bullets: [''],
+          longContent: { sections: [{ heading: '', content: '' }] },
+          seoTitle: '',
+          seoDescription: '',
+          published: true,
+        });
       }
     }
   }, [selectedService, services]);

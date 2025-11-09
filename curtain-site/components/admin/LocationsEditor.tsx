@@ -44,6 +44,18 @@ export default function LocationsEditor() {
       const location = locations.find(l => l.slug === selectedLocation);
       if (location) {
         setFormData(location);
+      } else {
+        const locationName = locationsList.find(l => l.slug === selectedLocation)?.name || '';
+        setFormData({
+          slug: selectedLocation,
+          title: locationName,
+          intro: '',
+          neighborhoods: [''],
+          longContent: { sections: [{ heading: '', content: '' }] },
+          seoTitle: '',
+          seoDescription: '',
+          published: true,
+        });
       }
     }
   }, [selectedLocation, locations]);

@@ -5,6 +5,8 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import HomepageEditor from '@/components/admin/HomepageEditor';
 import SettingsEditor from '@/components/admin/SettingsEditor';
+import ServicesEditor from '@/components/admin/ServicesEditor';
+import LocationsEditor from '@/components/admin/LocationsEditor';
 
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
@@ -105,20 +107,14 @@ export default function AdminDashboard() {
             {activeTab === 'services' && (
               <div>
                 <h2 className="text-xl font-bold mb-4">Services Management</h2>
-                <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-lg">
-                  <p className="font-semibold">🚧 Under Construction</p>
-                  <p className="text-sm mt-1">Services editing form coming soon...</p>
-                </div>
+                <ServicesEditor />
               </div>
             )}
 
             {activeTab === 'locations' && (
               <div>
                 <h2 className="text-xl font-bold mb-4">Locations Management</h2>
-                <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-lg">
-                  <p className="font-semibold">🚧 Under Construction</p>
-                  <p className="text-sm mt-1">Locations editing form coming soon...</p>
-                </div>
+                <LocationsEditor />
               </div>
             )}
 
