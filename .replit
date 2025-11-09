@@ -6,7 +6,6 @@ channel = "stable-24_11"
 packages = ["static-web-server"]
 
 [deployment]
-publicDir = "/"
 deploymentTarget = "autoscale"
 run = ["npm", "run", "start", "--prefix", "curtain-site"]
 build = ["npm", "run", "build", "--prefix", "curtain-site"]
@@ -57,7 +56,7 @@ localPort = 5000
 externalPort = 80
 
 [[ports]]
-localPort = 39483
+localPort = 36593
 externalPort = 3000
 
 [agent]

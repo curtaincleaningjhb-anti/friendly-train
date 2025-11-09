@@ -1,5 +1,6 @@
 import type { Metadata } from "next";
 import Script from "next/script";
+import { Suspense } from "react";
 import "./globals.css";
 import Navbar from "@/components/Navbar";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
@@ -273,7 +274,11 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
             style={{ display: 'none', visibility: 'hidden' }}
           />
         </noscript>
-        {gaId && <GoogleAnalytics measurementId={gaId} />}
+        {gaId && (
+          <Suspense fallback={null}>
+            <GoogleAnalytics measurementId={gaId} />
+          </Suspense>
+        )}
         <GeoLocation />
         <Navbar />
         {children}
