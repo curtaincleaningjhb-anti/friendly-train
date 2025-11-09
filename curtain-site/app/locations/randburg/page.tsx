@@ -24,7 +24,7 @@ export default function RandburgPage() {
     "@type": "LocalBusiness",
     "name": "On The Spot Curtain Cleaning - Randburg",
     "telephone": "+27716226753",
-    "email": "info@curtaincleaning.org",
+    "email": "info@curtaincleaning.co.za",
     "url": "https://www.curtainclean.co.za",
     "address": {
       "@type": "PostalAddress",

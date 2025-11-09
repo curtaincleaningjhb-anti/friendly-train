@@ -30,7 +30,7 @@ export default function SandtonPage() {
     "name": "On The Spot Curtain Cleaning - Sandton",
     "description": "Professional on-site curtain cleaning, mattress sanitization, and upholstery cleaning service in Sandton and surrounding areas.",
     "telephone": "+27716226753",
-    "email": "info@curtaincleaning.org",
+    "email": "info@curtaincleaning.co.za",
     "url": "https://www.curtainclean.co.za",
     "priceRange": "$$",
     "address": {

@@ -19,11 +19,11 @@ export default function Home() {
             </p>
             <div className="flex flex-wrap gap-4">
               <a 
-                href="tel:0716226753"
+                href="tel:+27750119200"
                 className="bg-white text-primary hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 inline-flex items-center gap-2"
               >
                 <PhoneIcon className="h-6 w-6" />
-                Call Now: 071 622 6753
+                Call Now: +27 75 011 9200
               </a>
               <Link 
                 href="#quote"
@@ -253,28 +253,21 @@ export default function Home() {
 
           <div className="flex flex-col md:flex-row justify-center gap-6 mb-8">
             <a 
-              href="tel:0716226753"
+              href="tel:+27750119200"
               className="bg-primary text-white hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center gap-2"
             >
               <PhoneIcon className="h-6 w-6" />
-              Mobile: 071 622 6753
-            </a>
-            <a 
-              href="tel:0615222037"
-              className="bg-secondary text-white hover:bg-blue-600 px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center gap-2"
-            >
-              <PhoneIcon className="h-6 w-6" />
-              Office: 061 522 2037
+              Mobile: +27 75 011 9200
             </a>
           </div>
 
           <div className="flex flex-col md:flex-row justify-center gap-6">
             <a 
-              href="mailto:info@curtaincleaning.org"
+              href="mailto:info@curtaincleaning.co.za"
               className="text-primary hover:text-primary-dark font-semibold text-lg inline-flex items-center justify-center gap-2"
             >
               <EnvelopeIcon className="h-6 w-6" />
-              info@curtaincleaning.org
+              info@curtaincleaning.co.za
             </a>
             <a 
               href="https://www.curtainclean.co.za"

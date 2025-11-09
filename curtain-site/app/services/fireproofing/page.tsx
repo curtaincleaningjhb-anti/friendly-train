@@ -33,7 +33,7 @@ export default function FireproofingPage() {
       "@type": "LocalBusiness",
       "name": "On The Spot Curtain Cleaning",
       "telephone": "+27716226753",
-      "email": "info@curtaincleaning.org",
+      "email": "info@curtaincleaning.co.za",
       "url": "https://www.curtainclean.co.za",
       "address": {
         "@type": "PostalAddress",

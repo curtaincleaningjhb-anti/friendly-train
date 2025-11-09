@@ -24,7 +24,7 @@ export default function RosebankPage() {
     "@type": "LocalBusiness",
     "name": "On The Spot Curtain Cleaning - Rosebank",
     "telephone": "+27716226753",
-    "email": "info@curtaincleaning.org",
+    "email": "info@curtaincleaning.co.za",
     "url": "https://www.curtainclean.co.za",
     "address": {
       "@type": "PostalAddress",

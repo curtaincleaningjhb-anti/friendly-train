@@ -31,18 +31,18 @@ export default function Footer() {
             </p>
             <div className="space-y-2">
               <a 
-                href="tel:0716226753"
+                href="tel:+27750119200"
                 className="flex items-center gap-2 text-gray-400 hover:text-white"
               >
                 <PhoneIcon className="h-5 w-5" />
-                <span>071 622 6753</span>
+                <span>+27 75 011 9200</span>
               </a>
               <a 
-                href="mailto:info@curtaincleaning.org"
+                href="mailto:info@curtaincleaning.co.za"
                 className="flex items-center gap-2 text-gray-400 hover:text-white"
               >
                 <EnvelopeIcon className="h-5 w-5" />
-                <span>info@curtaincleaning.org</span>
+                <span>info@curtaincleaning.co.za</span>
               </a>
             </div>
           </div>
@@ -131,7 +131,7 @@ export default function Footer() {
               </li>
               <li>
                 <a 
-                  href="https://wa.me/27716226753?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20curtain%20cleaning"
+                  href="https://wa.me/27750119200?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20curtain%20cleaning"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="text-gray-400 hover:text-white"

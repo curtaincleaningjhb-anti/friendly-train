@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import Script from "next/script";
 import "./globals.css";
+import Navbar from "@/components/Navbar";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Footer from "@/components/Footer";
@@ -92,6 +93,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {gaId && <GoogleAnalytics measurementId={gaId} />}
+        <Navbar />
         {children}
         <Footer />
         <FloatingWhatsApp />

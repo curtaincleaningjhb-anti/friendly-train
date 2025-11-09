@@ -5,7 +5,7 @@ import ContactForm from "@/components/ContactForm";
 
 export const metadata: Metadata = {
   title: "Contact Us | Free Quote for Curtain Cleaning in Johannesburg",
-  description: "Get a free quote for curtain cleaning, mattress sanitization, and upholstery cleaning in Johannesburg. Call 071 622 6753 or fill out our contact form.",
+  description: "Get a free quote for curtain cleaning, mattress sanitization, and upholstery cleaning in Johannesburg. Call +27 75 011 9200 or fill out our contact form.",
   alternates: {
     canonical: "/contact",
   },
@@ -18,8 +18,8 @@ export default function ContactPage() {
     "mainEntity": {
       "@type": "LocalBusiness",
       "name": "On The Spot Curtain Cleaning",
-      "telephone": "+27716226753",
-      "email": "info@curtaincleaning.org",
+      "telephone": "+27750119200",
+      "email": "info@curtaincleaning.co.za",
       "url": "https://www.curtainclean.co.za",
       "address": {
         "@type": "PostalAddress",
@@ -82,16 +82,10 @@ export default function ContactPage() {
                     </h3>
                     <div className="space-y-2 ml-7">
                       <a 
-                        href="tel:0716226753"
+                        href="tel:+27750119200"
                         className="block text-gray-700 hover:text-primary font-semibold"
                       >
-                        Mobile: 071 622 6753
-                      </a>
-                      <a 
-                        href="tel:0615222037"
-                        className="block text-gray-700 hover:text-primary font-semibold"
-                      >
-                        Office: 061 522 2037
+                        Mobile: +27 75 011 9200
                       </a>
                     </div>
                   </div>
@@ -102,10 +96,10 @@ export default function ContactPage() {
                       Email
                     </h3>
                     <a 
-                      href="mailto:info@curtaincleaning.org"
+                      href="mailto:info@curtaincleaning.co.za"
                       className="block text-gray-700 hover:text-primary font-semibold ml-7"
                     >
-                      info@curtaincleaning.org
+                      info@curtaincleaning.co.za
                     </a>
                   </div>
 
