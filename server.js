@@ -31,22 +31,30 @@ async function getCredentials() {
     }
   ).then(res => res.json()).then(data => data.items?.[0]);
 
-  if (!connectionSettings || (!connectionSettings.settings.account_sid || !connectionSettings.settings.api_key || !connectionSettings.settings.api_key_secret)) {
+  if (!connectionSettings || !connectionSettings.settings.account_sid) {
     throw new Error('Twilio not connected');
   }
+
+  const settings = connectionSettings.settings;
+  
   return {
-    accountSid: connectionSettings.settings.account_sid,
-    apiKey: connectionSettings.settings.api_key,
-    apiKeySecret: connectionSettings.settings.api_key_secret,
-    phoneNumber: connectionSettings.settings.phone_number
+    accountSid: settings.account_sid,
+    authToken: settings.auth_token || settings.api_key_secret,
+    apiKey: settings.api_key,
+    phoneNumber: settings.phone_number
   };
 }
 
 async function getTwilioClient() {
-  const { accountSid, apiKey, apiKeySecret } = await getCredentials();
-  return twilio(apiKey, apiKeySecret, {
-    accountSid: accountSid
-  });
+  const credentials = await getCredentials();
+  
+  if (credentials.apiKey) {
+    return twilio(credentials.apiKey, credentials.authToken, {
+      accountSid: credentials.accountSid
+    });
+  } else {
+    return twilio(credentials.accountSid, credentials.authToken);
+  }
 }
 
 async function getTwilioFromPhoneNumber() {
