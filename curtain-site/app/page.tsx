@@ -1,7 +1,10 @@
 import Link from "next/link";
 import { PhoneIcon, EnvelopeIcon, MapPinIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
+import { getHomepageHero, getHomepageTrustBadges } from "@/lib/content";
 
-export default function Home() {
+export default async function Home() {
+  const hero = await getHomepageHero();
+  const trustBadges = await getHomepageTrustBadges();
   const faqSchema = {
     "@context": "https://schema.org",
     "@type": "FAQPage",
@@ -61,13 +64,13 @@ export default function Home() {
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Curtain Cleaning Johannesburg | Professional On-Site Service
+              {hero.title}
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-blue-100">
-              We clean curtains where they hang - No takedown, No shrinkage, No hassle
+              {hero.subtitle}
             </p>
             <p className="text-lg mb-8 text-blue-50">
-              Serving Sandton, Bryanston, Fourways, Rosebank, and all Johannesburg suburbs
+              {hero.location}
             </p>
             <div className="flex flex-wrap gap-4">
               <a 
@@ -75,13 +78,13 @@ export default function Home() {
                 className="bg-white text-primary hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 inline-flex items-center gap-2"
               >
                 <PhoneIcon className="h-6 w-6" />
-                Call Now: +27 75 011 9200
+                {hero.cta1Text}
               </a>
               <Link 
                 href="#quote"
                 className="bg-accent text-gray-900 hover:bg-green-400 px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105"
               >
-                Get Free Quote
+                {hero.cta2Text}
               </Link>
             </div>
           </div>
@@ -92,26 +95,13 @@ export default function Home() {
       <section className="bg-gray-50 py-12 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            <div className="text-center">
-              <CheckCircleIcon className="h-12 w-12 text-accent mx-auto mb-3" />
-              <h3 className="font-bold text-lg mb-2">No Shrinkage Guarantee</h3>
-              <p className="text-gray-700">All work guaranteed against shrinkage and fabric damage</p>
-            </div>
-            <div className="text-center">
-              <CheckCircleIcon className="h-12 w-12 text-accent mx-auto mb-3" />
-              <h3 className="font-bold text-lg mb-2">On-Site Service</h3>
-              <p className="text-gray-700">Curtains cleaned where they hang - minimal disruption</p>
-            </div>
-            <div className="text-center">
-              <CheckCircleIcon className="h-12 w-12 text-accent mx-auto mb-3" />
-              <h3 className="font-bold text-lg mb-2">Same-Day Available</h3>
-              <p className="text-gray-700">Hotels & offices can rent rooms same day</p>
-            </div>
-            <div className="text-center">
-              <CheckCircleIcon className="h-12 w-12 text-accent mx-auto mb-3" />
-              <h3 className="font-bold text-lg mb-2">Hardware Servicing</h3>
-              <p className="text-gray-700">We repair and service all curtain hardware</p>
-            </div>
+            {trustBadges.map((badge, index) => (
+              <div key={index} className="text-center">
+                <CheckCircleIcon className="h-12 w-12 text-accent mx-auto mb-3" />
+                <h3 className="font-bold text-lg mb-2">{badge.title}</h3>
+                <p className="text-gray-700">{badge.description}</p>
+              </div>
+            ))}
           </div>
         </div>
       </section>

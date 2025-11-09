@@ -3,6 +3,8 @@
 import { useSession, signOut } from 'next-auth/react';
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
+import HomepageEditor from '@/components/admin/HomepageEditor';
+import SettingsEditor from '@/components/admin/SettingsEditor';
 
 export default function AdminDashboard() {
   const { data: session, status } = useSession();
@@ -96,10 +98,7 @@ export default function AdminDashboard() {
             {activeTab === 'homepage' && (
               <div>
                 <h2 className="text-xl font-bold mb-4">Homepage Content</h2>
-                <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-lg">
-                  <p className="font-semibold">🚧 Under Construction</p>
-                  <p className="text-sm mt-1">Homepage editing form coming soon...</p>
-                </div>
+                <HomepageEditor />
               </div>
             )}
 
@@ -126,10 +125,7 @@ export default function AdminDashboard() {
             {activeTab === 'settings' && (
               <div>
                 <h2 className="text-xl font-bold mb-4">Site Settings</h2>
-                <div className="bg-yellow-50 border border-yellow-200 text-yellow-800 p-4 rounded-lg">
-                  <p className="font-semibold">🚧 Under Construction</p>
-                  <p className="text-sm mt-1">Settings form coming soon...</p>
-                </div>
+                <SettingsEditor />
               </div>
             )}
           </div>
