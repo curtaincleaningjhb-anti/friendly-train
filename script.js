@@ -96,20 +96,29 @@ document.addEventListener('DOMContentLoaded', () => {
     }
   }
 
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
   function displayMessages(messages) {
     messageHistory.innerHTML = messages.map(msg => {
       const date = new Date(msg.created_at);
       const formattedDate = date.toLocaleString();
+      const safePhoneNumber = escapeHtml(msg.phone_number);
+      const safeMessage = escapeHtml(msg.message);
+      const safeStatus = escapeHtml(msg.status);
       
       return `
         <div class="message-item">
           <div class="message-header">
-            <span class="phone-number">${msg.phone_number}</span>
+            <span class="phone-number">${safePhoneNumber}</span>
             <span class="message-date">${formattedDate}</span>
           </div>
-          <div class="message-body">${msg.message}</div>
+          <div class="message-body">${safeMessage}</div>
           <div class="message-footer">
-            <span class="message-status status-${msg.status}">${msg.status}</span>
+            <span class="message-status status-${safeStatus}">${safeStatus}</span>
           </div>
         </div>
       `;

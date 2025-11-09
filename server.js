@@ -9,6 +9,26 @@ const pool = new Pool({
   connectionString: process.env.DATABASE_URL
 });
 
+async function initializeDatabase() {
+  try {
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS sms_messages (
+        id SERIAL PRIMARY KEY,
+        phone_number VARCHAR(20) NOT NULL,
+        message TEXT NOT NULL,
+        status VARCHAR(20) NOT NULL,
+        message_sid VARCHAR(50),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    console.log('Database initialized successfully');
+  } catch (error) {
+    console.error('Error initializing database:', error);
+  }
+}
+
+initializeDatabase();
+
 const app = express();
 app.use(cors());
 app.use(express.json());
