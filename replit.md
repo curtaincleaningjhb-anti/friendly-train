@@ -35,6 +35,8 @@ curtain-site/              # Main Next.js application
     GoogleAnalytics.tsx    # Google Analytics 4 integration
     NewsletterForm.tsx     # Mailchimp email capture
     Footer.tsx             # Site footer with newsletter signup
+    Navbar.tsx             # Navigation with ARIA labels and keyboard accessibility
+    GeoLocation.tsx        # Geo-location detection for proximity messaging
   public/                  # Static assets
   
 legacy-messaging/          # Previous project (archived, not in use)
@@ -78,6 +80,37 @@ The website uses Next.js 14 App Router for optimal performance and SEO. Key desi
 - ✅ Dynamic sitemap.xml and robots.txt for search engine crawling
 - ✅ Canonical URLs and proper heading hierarchy
 - ✅ Breadcrumb navigation on all pages
+
+**Advanced Local SEO Optimization (Map Pack / Local Pack)**:
+- ✅ Enhanced LocalBusiness schema with Map Pack optimization fields:
+  - `knowsAbout` array with 18+ LSI keywords for semantic understanding
+  - `paymentAccepted` and `currenciesAccepted` for business completeness
+  - `serviceArea` with GeoCircle (25km radius) for proximity-based ranking
+  - Expanded `areaServed` with 9 Johannesburg neighborhoods
+- ✅ Geo-targeting meta tags (geo.region: ZA-GP, geo.placename: Johannesburg, ICBM coordinates)
+- ✅ LSI (Latent Semantic Indexing) keywords throughout content:
+  - "curtain dry cleaning, drapery care, window treatments"
+  - "upholstery restoration, sofa cleaning, couch cleaning"
+  - "mattress sanitizing, soft furnishing maintenance"
+- ✅ Geo-location detection component for proximity-based personalization
+  - Displays location banner for users within 25km of Johannesburg
+  - Calculates and shows distance to business
+  - Auto-dismissible proximity messaging
+
+**Accessibility (WCAG Compliance)**:
+- ✅ Comprehensive ARIA labels throughout navigation:
+  - `aria-label` on all interactive elements (buttons, links, menus)
+  - `aria-expanded` for dropdown menu state
+  - `aria-haspopup` for menu buttons
+  - `aria-controls` for menu relationships
+  - `aria-current` for active page indication
+  - `aria-hidden` for decorative icons
+  - `role="menu"` and `role="menuitem"` for semantic structure
+- ✅ Full keyboard accessibility:
+  - onClick handlers for click/tap support
+  - onKeyDown handlers for Enter and Space key navigation
+  - Tab navigation support across all interactive elements
+- ✅ Screen reader compatibility verified by architect review
 
 ### Integrated Features
 
@@ -139,6 +172,41 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_xxxxx
 - All integrations degrade gracefully if environment variables are missing
 
 ## Recent Changes
+
+**November 9, 2025 - Advanced Local SEO & Accessibility**:
+
+**Local SEO Enhancements**:
+- Enhanced LocalBusiness schema with Map Pack optimization:
+  - Added `knowsAbout` array with 18+ LSI keywords (curtain cleaning, drapery care, upholstery restoration, etc.)
+  - Added `paymentAccepted` (Cash, Credit Card, Debit Card, EFT) and `currenciesAccepted` (ZAR)
+  - Implemented `serviceArea` with GeoCircle (25km radius from -26.2041, 28.0473)
+  - Expanded `areaServed` from 5 to 9 Johannesburg neighborhoods
+- Added geo-targeting meta tags for local search optimization:
+  - `geo.region: ZA-GP` (Gauteng Province, South Africa)
+  - `geo.placename: Johannesburg`
+  - `geo.position` and `ICBM` coordinates for precise location
+- Integrated LSI keywords throughout homepage content for semantic relevance
+- Created GeoLocation component for proximity-based personalization:
+  - Detects user location via IP geolocation (ipapi.co)
+  - Calculates distance to business using Haversine formula
+  - Displays personalized banner for users within 25km of Johannesburg
+  - Auto-dismissible with close button
+
+**Accessibility Improvements (WCAG Compliance)**:
+- Added comprehensive ARIA labels to Navbar component:
+  - `aria-label`, `aria-expanded`, `aria-haspopup`, `aria-controls`, `aria-current` attributes
+  - `role="menu"` and `role="menuitem"` for semantic navigation structure
+  - `aria-hidden` for decorative icons
+- Implemented full keyboard accessibility:
+  - onClick handlers on all dropdown buttons for click/tap support
+  - onKeyDown handlers for Enter and Space key navigation
+  - Desktop Services and Locations dropdowns now fully keyboard-operable
+- Verified screen reader compatibility (architect-reviewed)
+
+**Technical Changes**:
+- Fixed Next.js hydration error by moving JSON-LD schema from `<head>` to `<body>`
+- All changes validated against schema.org standards
+- Workflow tested and running successfully with no errors
 
 **November 9, 2025 - Complete Website Launch**:
 
