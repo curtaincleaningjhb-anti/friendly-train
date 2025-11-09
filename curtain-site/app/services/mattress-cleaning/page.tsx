@@ -3,8 +3,8 @@ import Link from "next/link";
 import { PhoneIcon, CheckCircleIcon, HomeIcon } from "@heroicons/react/24/solid";
 
 export const metadata: Metadata = {
-  title: "Mattress Sanitization & Deep Cleaning Johannesburg | On-Site Service",
-  description: "Professional on-site mattress sanitization in Johannesburg. Clinical deep cleaning removes dust mites, bacteria & allergens. Healthier sleeping environment. Call 071 622 6753 for quote.",
+  title: "Mattress Cleaning Johannesburg | Sanitization & Deep Cleaning Service",
+  description: "Professional mattress cleaning Johannesburg. On-site sanitization removes dust mites, bacteria & allergens. Healthier sleeping environment. Call +27 75 011 9200 for a free quote.",
   keywords: [
     "mattress cleaning Johannesburg",
     "mattress sanitization",
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     canonical: "/services/mattress-cleaning",
   },
   openGraph: {
-    title: "Mattress Sanitization & Deep Cleaning Johannesburg",
-    description: "Professional on-site mattress sanitization. Clinical deep cleaning removes dust mites, bacteria & allergens.",
+    title: "Mattress Cleaning Johannesburg | Sanitization & Deep Cleaning Service",
+    description: "Professional mattress cleaning Johannesburg. On-site sanitization removes dust mites, bacteria & allergens.",
     url: "https://www.curtainclean.co.za/services/mattress-cleaning",
   },
 };
@@ -25,33 +25,63 @@ export const metadata: Metadata = {
 export default function MattressCleaningPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Mattress Cleaning and Sanitization",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "On The Spot Curtain Cleaning",
-      "telephone": "+27716226753",
-      "email": "info@curtaincleaning.co.za",
-      "url": "https://www.curtainclean.co.za",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Johannesburg",
-        "addressRegion": "Gauteng",
-        "addressCountry": "ZA"
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.curtainclean.co.za/services/mattress-cleaning#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.curtainclean.co.za"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "https://www.curtainclean.co.za/#services"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Mattress Cleaning",
+            "item": "https://www.curtainclean.co.za/services/mattress-cleaning"
+          }
+        ]
       },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Johannesburg"
+      {
+        "@type": "Service",
+        "@id": "https://www.curtainclean.co.za/services/mattress-cleaning#service",
+        "serviceType": "Mattress Cleaning and Sanitization",
+        "provider": {
+          "@type": "LocalBusiness",
+          "@id": "https://www.curtainclean.co.za/#business",
+          "name": "Curtain Cleaning Johannesburg",
+          "telephone": "+27750119200",
+          "email": "info@curtaincleaning.co.za",
+          "url": "https://www.curtainclean.co.za",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Johannesburg",
+            "addressRegion": "Gauteng",
+            "addressCountry": "ZA"
+          },
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Johannesburg"
+            }
+          ]
+        },
+        "description": "Professional on-site mattress deep cleaning and sanitization service that removes dust mites, bacteria, and allergens.",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "ZAR"
         }
-      ]
-    },
-    "description": "Professional on-site mattress deep cleaning and sanitization service that removes dust mites, bacteria, and allergens.",
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "priceCurrency": "ZAR"
-    }
+      }
+    ]
   };
 
   return (

@@ -4,8 +4,8 @@ import { PhoneIcon, CheckCircleIcon, HomeIcon } from "@heroicons/react/24/solid"
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
-  title: "Persian & Oriental Rug Cleaning Johannesburg | Expert Rug Care",
-  description: "Specialist Persian, Oriental, and area rug cleaning in Johannesburg. Hand-washing, deep cleaning, and restoration for valuable rugs. Pet-safe products. Call 071 622 6753.",
+  title: "Persian Rug Cleaning Johannesburg | Oriental & Area Rug Care",
+  description: "Specialist Persian, Oriental & area rug cleaning Johannesburg. Hand-washing, deep cleaning & restoration for valuable rugs. Pet-safe products. Call +27 75 011 9200 for a free quote.",
   keywords: [
     "Persian rug cleaning Johannesburg",
     "Oriental rug cleaning",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: "/services/rug-cleaning",
   },
   openGraph: {
-    title: "Persian & Oriental Rug Cleaning Johannesburg | Expert Care",
-    description: "Specialist Persian and Oriental rug cleaning services in Johannesburg.",
+    title: "Persian Rug Cleaning Johannesburg | Oriental & Area Rug Care",
+    description: "Specialist Persian & Oriental rug cleaning services in Johannesburg.",
     url: "https://www.curtainclean.co.za/services/rug-cleaning",
   },
 };
@@ -27,33 +27,63 @@ export const metadata: Metadata = {
 export default function RugCleaningPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Rug Cleaning",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "On The Spot Curtain Cleaning",
-      "telephone": "+27716226753",
-      "email": "info@curtaincleaning.co.za",
-      "url": "https://www.curtainclean.co.za",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Johannesburg",
-        "addressRegion": "Gauteng",
-        "addressCountry": "ZA"
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.curtainclean.co.za/services/rug-cleaning#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.curtainclean.co.za"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "https://www.curtainclean.co.za/#services"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Rug Cleaning",
+            "item": "https://www.curtainclean.co.za/services/rug-cleaning"
+          }
+        ]
       },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Johannesburg"
+      {
+        "@type": "Service",
+        "@id": "https://www.curtainclean.co.za/services/rug-cleaning#service",
+        "serviceType": "Rug Cleaning",
+        "provider": {
+          "@type": "LocalBusiness",
+          "@id": "https://www.curtainclean.co.za/#business",
+          "name": "Curtain Cleaning Johannesburg",
+          "telephone": "+27750119200",
+          "email": "info@curtaincleaning.co.za",
+          "url": "https://www.curtainclean.co.za",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Johannesburg",
+            "addressRegion": "Gauteng",
+            "addressCountry": "ZA"
+          },
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Johannesburg"
+            }
+          ]
+        },
+        "description": "Specialist Persian, Oriental, and area rug cleaning services in Johannesburg.",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "ZAR"
         }
-      ]
-    },
-    "description": "Specialist Persian, Oriental, and area rug cleaning services.",
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "priceCurrency": "ZAR"
-    }
+      }
+    ]
   };
 
   return (

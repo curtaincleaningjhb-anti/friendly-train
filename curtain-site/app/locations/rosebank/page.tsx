@@ -4,8 +4,8 @@ import { PhoneIcon, HomeIcon, MapPinIcon } from "@heroicons/react/24/solid";
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
-  title: "Curtain Cleaning Rosebank | Professional On-Site Service",
-  description: "Professional curtain cleaning in Rosebank, Johannesburg. On-site service with no takedown. Also mattress, upholstery, and rug cleaning. Call 071 622 6753.",
+  title: "Curtain Cleaning Rosebank Johannesburg | Morningside On-Site Service",
+  description: "Professional curtain cleaning Rosebank & Morningside, Johannesburg. On-site service with no takedown. Mattress, upholstery & rug cleaning. Call +27 75 011 9200 for a free quote.",
   keywords: [
     "curtain cleaning Rosebank",
     "mattress cleaning Rosebank",
@@ -21,21 +21,50 @@ export const metadata: Metadata = {
 export default function RosebankPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "On The Spot Curtain Cleaning - Rosebank",
-    "telephone": "+27716226753",
-    "email": "info@curtaincleaning.co.za",
-    "url": "https://www.curtainclean.co.za",
-    "address": {
-      "@type": "PostalAddress",
-      "addressLocality": "Rosebank",
-      "addressRegion": "Gauteng",
-      "addressCountry": "ZA"
-    },
-    "areaServed": {
-      "@type": "City",
-      "name": "Rosebank"
-    }
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.curtainclean.co.za/locations/rosebank#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.curtainclean.co.za"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Locations",
+            "item": "https://www.curtainclean.co.za/#locations"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Rosebank",
+            "item": "https://www.curtainclean.co.za/locations/rosebank"
+          }
+        ]
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://www.curtainclean.co.za/locations/rosebank#business",
+        "name": "Curtain Cleaning Johannesburg - Rosebank",
+        "telephone": "+27750119200",
+        "email": "info@curtaincleaning.co.za",
+        "url": "https://www.curtainclean.co.za",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Rosebank",
+          "addressRegion": "Gauteng",
+          "addressCountry": "ZA"
+        },
+        "areaServed": {
+          "@type": "City",
+          "name": "Rosebank"
+        }
+      }
+    ]
   };
 
   return (
@@ -65,9 +94,9 @@ export default function RosebankPage() {
               Professional on-site cleaning for Rosebank, Morningside & surrounding areas
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:0716226753" className="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all">
+              <a href="tel:+27750119200" className="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all">
                 <PhoneIcon className="h-5 w-5" />
-                Call 071 622 6753
+                Call +27 75 011 9200
               </a>
               <WhatsAppButton />
             </div>
@@ -122,9 +151,9 @@ export default function RosebankPage() {
             <h2 className="text-4xl font-bold mb-6">Get Your Free Quote Today</h2>
             <p className="text-xl mb-8">Serving Rosebank with professional cleaning services</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <a href="tel:0716226753" className="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all">
+              <a href="tel:+27750119200" className="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all">
                 <PhoneIcon className="h-5 w-5" />
-                Call 071 622 6753
+                Call +27 75 011 9200
               </a>
               <Link href="/contact" className="inline-flex items-center justify-center gap-2 bg-secondary hover:bg-secondary/90 text-white font-bold py-4 px-8 rounded-lg transition-all">
                 Request Quote

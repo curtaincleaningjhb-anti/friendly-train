@@ -4,8 +4,8 @@ import { PhoneIcon, CheckCircleIcon, HomeIcon } from "@heroicons/react/24/solid"
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
-  title: "Professional Upholstery Cleaning Johannesburg | Sofas, Chairs & Couches",
-  description: "Expert upholstery cleaning in Johannesburg. Deep clean sofas, chairs, couches, and fabric furniture. Stain removal, deodorizing, and fabric protection available. Call 071 622 6753.",
+  title: "Upholstery Cleaning Johannesburg | Sofas, Chairs & Couches",
+  description: "Expert upholstery cleaning Johannesburg. Deep clean sofas, chairs, couches, and fabric furniture. Stain removal, deodorizing & fabric protection. Call +27 75 011 9200 for a free quote.",
   keywords: [
     "upholstery cleaning Johannesburg",
     "sofa cleaning",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: "/services/upholstery-cleaning",
   },
   openGraph: {
-    title: "Professional Upholstery Cleaning Johannesburg | Sofas & Chairs",
-    description: "Expert upholstery cleaning for sofas, chairs, and fabric furniture in Johannesburg.",
+    title: "Upholstery Cleaning Johannesburg | Sofas, Chairs & Couches",
+    description: "Expert upholstery cleaning Johannesburg. Deep clean sofas, chairs, and fabric furniture.",
     url: "https://www.curtainclean.co.za/services/upholstery-cleaning",
   },
 };
@@ -27,33 +27,63 @@ export const metadata: Metadata = {
 export default function UpholsteryCleaningPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Upholstery Cleaning",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "On The Spot Curtain Cleaning",
-      "telephone": "+27716226753",
-      "email": "info@curtaincleaning.co.za",
-      "url": "https://www.curtainclean.co.za",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Johannesburg",
-        "addressRegion": "Gauteng",
-        "addressCountry": "ZA"
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.curtainclean.co.za/services/upholstery-cleaning#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.curtainclean.co.za"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "https://www.curtainclean.co.za/#services"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Upholstery Cleaning",
+            "item": "https://www.curtainclean.co.za/services/upholstery-cleaning"
+          }
+        ]
       },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Johannesburg"
+      {
+        "@type": "Service",
+        "@id": "https://www.curtainclean.co.za/services/upholstery-cleaning#service",
+        "serviceType": "Upholstery Cleaning",
+        "provider": {
+          "@type": "LocalBusiness",
+          "@id": "https://www.curtainclean.co.za/#business",
+          "name": "Curtain Cleaning Johannesburg",
+          "telephone": "+27750119200",
+          "email": "info@curtaincleaning.co.za",
+          "url": "https://www.curtainclean.co.za",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Johannesburg",
+            "addressRegion": "Gauteng",
+            "addressCountry": "ZA"
+          },
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Johannesburg"
+            }
+          ]
+        },
+        "description": "Professional upholstery cleaning for sofas, chairs, and fabric furniture in Johannesburg.",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "ZAR"
         }
-      ]
-    },
-    "description": "Professional upholstery cleaning for sofas, chairs, and fabric furniture.",
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "priceCurrency": "ZAR"
-    }
+      }
+    ]
   };
 
   return (

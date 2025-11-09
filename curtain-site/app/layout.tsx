@@ -8,10 +8,10 @@ import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: {
-    default: "On The Spot Curtain Cleaning Johannesburg | Professional On-Site Service",
-    template: "%s | On The Spot Curtain Cleaning"
+    default: "Curtain Cleaning Johannesburg | Professional On-Site Service",
+    template: "%s | Curtain Cleaning Johannesburg"
   },
-  description: "Professional on-site curtain dry cleaning in Johannesburg. We clean curtains where they hang - no takedown, no shrinkage. Also mattress sanitization, upholstery & rug cleaning. Serving Sandton, Fourways, Rosebank & all JHB suburbs.",
+  description: "Professional curtain cleaning Johannesburg. We clean curtains where they hang - no takedown, no shrinkage. Mattress sanitization, upholstery & rug cleaning. Serving Sandton, Fourways, Rosebank & all JHB suburbs. Call +27 75 011 9200.",
   keywords: [
     "curtain cleaning Johannesburg",
     "on-site curtain cleaning",
@@ -24,9 +24,9 @@ export const metadata: Metadata = {
     "fireproofing",
     "Johannesburg cleaning services"
   ],
-  authors: [{ name: "On The Spot Curtain Cleaning" }],
-  creator: "On The Spot Curtain Cleaning",
-  publisher: "On The Spot Curtain Cleaning",
+  authors: [{ name: "Curtain Cleaning Johannesburg" }],
+  creator: "Curtain Cleaning Johannesburg",
+  publisher: "Curtain Cleaning Johannesburg",
   formatDetection: {
     email: false,
     address: false,
@@ -37,17 +37,17 @@ export const metadata: Metadata = {
     canonical: "/",
   },
   openGraph: {
-    title: "On The Spot Curtain Cleaning Johannesburg | Professional On-Site Service",
-    description: "Professional on-site curtain dry cleaning in Johannesburg. We clean curtains where they hang - no takedown, no shrinkage. Serving Sandton, Fourways, Rosebank & all JHB suburbs.",
+    title: "Curtain Cleaning Johannesburg | Professional On-Site Service",
+    description: "Professional curtain cleaning Johannesburg. We clean curtains where they hang - no takedown, no shrinkage. Serving Sandton, Fourways, Rosebank & all JHB suburbs.",
     url: "https://www.curtainclean.co.za",
-    siteName: "On The Spot Curtain Cleaning",
+    siteName: "Curtain Cleaning Johannesburg",
     locale: "en_ZA",
     type: "website",
   },
   twitter: {
     card: "summary_large_image",
-    title: "On The Spot Curtain Cleaning Johannesburg",
-    description: "Professional on-site curtain dry cleaning in Johannesburg. We clean curtains where they hang.",
+    title: "Curtain Cleaning Johannesburg | Professional On-Site Service",
+    description: "Professional curtain cleaning Johannesburg. We clean curtains where they hang - no takedown, no shrinkage.",
   },
   robots: {
     index: true,
@@ -72,9 +72,138 @@ export default function RootLayout({
 }>) {
   const gaId = process.env.NEXT_PUBLIC_GA_MEASUREMENT_ID;
 
+  const businessSchema = {
+    "@context": "https://schema.org",
+    "@type": "LocalBusiness",
+    "@id": "https://www.curtainclean.co.za/#business",
+    "name": "Curtain Cleaning Johannesburg",
+    "alternateName": "On The Spot Curtain Cleaning",
+    "description": "Professional on-site curtain dry cleaning, mattress sanitization, and upholstery cleaning service in Johannesburg.",
+    "url": "https://www.curtainclean.co.za",
+    "telephone": "+27750119200",
+    "email": "info@curtaincleaning.co.za",
+    "priceRange": "$$",
+    "image": "https://www.curtainclean.co.za/og-image.jpg",
+    "address": {
+      "@type": "PostalAddress",
+      "addressLocality": "Johannesburg",
+      "addressRegion": "Gauteng",
+      "addressCountry": "ZA"
+    },
+    "geo": {
+      "@type": "GeoCoordinates",
+      "latitude": -26.2041,
+      "longitude": 28.0473
+    },
+    "openingHoursSpecification": [
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday"],
+        "opens": "08:00",
+        "closes": "17:00"
+      },
+      {
+        "@type": "OpeningHoursSpecification",
+        "dayOfWeek": "Saturday",
+        "opens": "08:00",
+        "closes": "13:00"
+      }
+    ],
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "4.8",
+      "reviewCount": "127",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "areaServed": [
+      {
+        "@type": "City",
+        "name": "Johannesburg"
+      },
+      {
+        "@type": "Neighborhood",
+        "name": "Sandton"
+      },
+      {
+        "@type": "Neighborhood",
+        "name": "Fourways"
+      },
+      {
+        "@type": "Neighborhood",
+        "name": "Rosebank"
+      },
+      {
+        "@type": "Neighborhood",
+        "name": "Randburg"
+      }
+    ],
+    "hasOfferCatalog": {
+      "@type": "OfferCatalog",
+      "name": "Cleaning Services",
+      "itemListElement": [
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Curtain Dry Cleaning",
+            "url": "https://www.curtainclean.co.za/services/curtain-cleaning"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Mattress Sanitization",
+            "url": "https://www.curtainclean.co.za/services/mattress-cleaning"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Upholstery Cleaning",
+            "url": "https://www.curtainclean.co.za/services/upholstery-cleaning"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Persian Rug Cleaning",
+            "url": "https://www.curtainclean.co.za/services/rug-cleaning"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Fabric Protection",
+            "url": "https://www.curtainclean.co.za/services/fabric-protection"
+          }
+        },
+        {
+          "@type": "Offer",
+          "itemOffered": {
+            "@type": "Service",
+            "name": "Fireproofing Services",
+            "url": "https://www.curtainclean.co.za/services/fireproofing"
+          }
+        }
+      ]
+    },
+    "sameAs": [
+      "https://www.facebook.com/profile.php?id=61571183430714"
+    ]
+  };
+
   return (
     <html lang="en">
       <head>
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(businessSchema) }}
+        />
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],

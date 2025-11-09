@@ -3,8 +3,8 @@ import Link from "next/link";
 import { PhoneIcon, MapPinIcon, CheckCircleIcon, HomeIcon } from "@heroicons/react/24/solid";
 
 export const metadata: Metadata = {
-  title: "Curtain Cleaning Sandton | Professional On-Site Service in Sandton",
-  description: "Professional curtain cleaning in Sandton. On-site dry cleaning, mattress sanitization & upholstery cleaning. Serving Hyde Park, Morningside, Bryanston, Rivonia. Call 071 622 6753.",
+  title: "Curtain Cleaning Sandton Johannesburg | On-Site Service Hyde Park",
+  description: "Professional curtain cleaning Sandton & Hyde Park, Johannesburg. On-site dry cleaning, mattress sanitization & upholstery cleaning. Serving Bryanston, Rivonia. Call +27 75 011 9200 for a free quote.",
   keywords: [
     "curtain cleaning Sandton",
     "mattress cleaning Sandton",
@@ -17,7 +17,7 @@ export const metadata: Metadata = {
     canonical: "/locations/sandton",
   },
   openGraph: {
-    title: "Curtain Cleaning Sandton | Professional On-Site Service",
+    title: "Curtain Cleaning Sandton Johannesburg | On-Site Service",
     description: "Professional curtain cleaning in Sandton. On-site service with no takedown required.",
     url: "https://www.curtainclean.co.za/locations/sandton",
   },
@@ -26,10 +26,37 @@ export const metadata: Metadata = {
 export default function SandtonPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "LocalBusiness",
-    "name": "On The Spot Curtain Cleaning - Sandton",
-    "description": "Professional on-site curtain cleaning, mattress sanitization, and upholstery cleaning service in Sandton and surrounding areas.",
-    "telephone": "+27716226753",
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.curtainclean.co.za/locations/sandton#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.curtainclean.co.za"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Locations",
+            "item": "https://www.curtainclean.co.za/#locations"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Sandton",
+            "item": "https://www.curtainclean.co.za/locations/sandton"
+          }
+        ]
+      },
+      {
+        "@type": "LocalBusiness",
+        "@id": "https://www.curtainclean.co.za/locations/sandton#business",
+        "name": "Curtain Cleaning Johannesburg - Sandton",
+        "description": "Professional on-site curtain cleaning, mattress sanitization, and upholstery cleaning service in Sandton and surrounding areas.",
+        "telephone": "+27750119200",
     "email": "info@curtaincleaning.co.za",
     "url": "https://www.curtainclean.co.za",
     "priceRange": "$$",
@@ -65,33 +92,35 @@ export default function SandtonPage() {
         "name": "Sunninghill"
       }
     ],
-    "hasOfferCatalog": {
-      "@type": "OfferCatalog",
-      "name": "Cleaning Services",
-      "itemListElement": [
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Curtain Dry Cleaning"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Mattress Sanitization"
-          }
-        },
-        {
-          "@type": "Offer",
-          "itemOffered": {
-            "@type": "Service",
-            "name": "Upholstery Cleaning"
-          }
+        "hasOfferCatalog": {
+          "@type": "OfferCatalog",
+          "name": "Cleaning Services",
+          "itemListElement": [
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Curtain Dry Cleaning"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Mattress Sanitization"
+              }
+            },
+            {
+              "@type": "Offer",
+              "itemOffered": {
+                "@type": "Service",
+                "name": "Upholstery Cleaning"
+              }
+            }
+          ]
         }
-      ]
-    }
+      }
+    ]
   };
 
   const areas = [

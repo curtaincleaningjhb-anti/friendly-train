@@ -4,8 +4,8 @@ import { PhoneIcon, CheckCircleIcon, HomeIcon, ShieldCheckIcon } from "@heroicon
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
-  title: "Masterguard Fabric Protection Johannesburg | Stain & Spill Protection",
-  description: "Professional Masterguard fabric protection for curtains, upholstery, and carpets in Johannesburg. Protect against stains, spills, and wear. Call 071 622 6753.",
+  title: "Fabric Protection Johannesburg | Masterguard Stain & Spill Protection",
+  description: "Professional Masterguard fabric protection Johannesburg for curtains, upholstery & carpets. Protect against stains, spills & wear. Call +27 75 011 9200 for a free quote.",
   keywords: [
     "fabric protection Johannesburg",
     "Masterguard",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: "/services/fabric-protection",
   },
   openGraph: {
-    title: "Masterguard Fabric Protection Johannesburg | Stain Protection",
-    description: "Professional fabric protection services for curtains, upholstery, and carpets.",
+    title: "Fabric Protection Johannesburg | Masterguard Stain & Spill Protection",
+    description: "Professional fabric protection services for curtains, upholstery, and carpets in Johannesburg.",
     url: "https://www.curtainclean.co.za/services/fabric-protection",
   },
 };
@@ -27,33 +27,63 @@ export const metadata: Metadata = {
 export default function FabricProtectionPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Fabric Protection",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "On The Spot Curtain Cleaning",
-      "telephone": "+27716226753",
-      "email": "info@curtaincleaning.co.za",
-      "url": "https://www.curtainclean.co.za",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Johannesburg",
-        "addressRegion": "Gauteng",
-        "addressCountry": "ZA"
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.curtainclean.co.za/services/fabric-protection#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.curtainclean.co.za"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "https://www.curtainclean.co.za/#services"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Fabric Protection",
+            "item": "https://www.curtainclean.co.za/services/fabric-protection"
+          }
+        ]
       },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Johannesburg"
+      {
+        "@type": "Service",
+        "@id": "https://www.curtainclean.co.za/services/fabric-protection#service",
+        "serviceType": "Fabric Protection",
+        "provider": {
+          "@type": "LocalBusiness",
+          "@id": "https://www.curtainclean.co.za/#business",
+          "name": "Curtain Cleaning Johannesburg",
+          "telephone": "+27750119200",
+          "email": "info@curtaincleaning.co.za",
+          "url": "https://www.curtainclean.co.za",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Johannesburg",
+            "addressRegion": "Gauteng",
+            "addressCountry": "ZA"
+          },
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Johannesburg"
+            }
+          ]
+        },
+        "description": "Professional Masterguard fabric protection services for curtains, upholstery, and carpets in Johannesburg.",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "ZAR"
         }
-      ]
-    },
-    "description": "Professional Masterguard fabric protection services for curtains, upholstery, and carpets.",
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "priceCurrency": "ZAR"
-    }
+      }
+    ]
   };
 
   return (

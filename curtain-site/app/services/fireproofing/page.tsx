@@ -4,8 +4,8 @@ import { PhoneIcon, CheckCircleIcon, HomeIcon, FireIcon } from "@heroicons/react
 import WhatsAppButton from "@/components/WhatsAppButton";
 
 export const metadata: Metadata = {
-  title: "Fireproofing Services Johannesburg | Fire Retardant Treatment for Fabrics",
-  description: "Professional fireproofing and fire retardant treatments for curtains, drapes, and soft furnishings in Johannesburg. Compliance certification available. Call 071 622 6753.",
+  title: "Fireproofing Johannesburg | Fire Retardant Treatment for Fabrics",
+  description: "Professional fireproofing Johannesburg. Fire retardant treatments for curtains, drapes & soft furnishings. Compliance certification available. Call +27 75 011 9200 for a free quote.",
   keywords: [
     "fireproofing Johannesburg",
     "fire retardant treatment",
@@ -18,8 +18,8 @@ export const metadata: Metadata = {
     canonical: "/services/fireproofing",
   },
   openGraph: {
-    title: "Fireproofing Services Johannesburg | Fire Retardant Treatment",
-    description: "Professional fireproofing and fire retardant treatments for fabrics.",
+    title: "Fireproofing Johannesburg | Fire Retardant Treatment for Fabrics",
+    description: "Professional fireproofing and fire retardant treatments for fabrics in Johannesburg.",
     url: "https://www.curtainclean.co.za/services/fireproofing",
   },
 };
@@ -27,33 +27,63 @@ export const metadata: Metadata = {
 export default function FireproofingPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Fireproofing Services",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "On The Spot Curtain Cleaning",
-      "telephone": "+27716226753",
-      "email": "info@curtaincleaning.co.za",
-      "url": "https://www.curtainclean.co.za",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Johannesburg",
-        "addressRegion": "Gauteng",
-        "addressCountry": "ZA"
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.curtainclean.co.za/services/fireproofing#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.curtainclean.co.za"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "https://www.curtainclean.co.za/#services"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Fireproofing",
+            "item": "https://www.curtainclean.co.za/services/fireproofing"
+          }
+        ]
       },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Johannesburg"
+      {
+        "@type": "Service",
+        "@id": "https://www.curtainclean.co.za/services/fireproofing#service",
+        "serviceType": "Fireproofing Services",
+        "provider": {
+          "@type": "LocalBusiness",
+          "@id": "https://www.curtainclean.co.za/#business",
+          "name": "Curtain Cleaning Johannesburg",
+          "telephone": "+27750119200",
+          "email": "info@curtaincleaning.co.za",
+          "url": "https://www.curtainclean.co.za",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Johannesburg",
+            "addressRegion": "Gauteng",
+            "addressCountry": "ZA"
+          },
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Johannesburg"
+            }
+          ]
+        },
+        "description": "Professional fireproofing and fire retardant treatment services for curtains and soft furnishings in Johannesburg.",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "ZAR"
         }
-      ]
-    },
-    "description": "Professional fireproofing and fire retardant treatment services for curtains and soft furnishings.",
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "priceCurrency": "ZAR"
-    }
+      }
+    ]
   };
 
   return (

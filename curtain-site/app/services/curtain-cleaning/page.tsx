@@ -3,8 +3,8 @@ import Link from "next/link";
 import { PhoneIcon, CheckCircleIcon, HomeIcon } from "@heroicons/react/24/solid";
 
 export const metadata: Metadata = {
-  title: "On-Site Curtain Dry Cleaning Johannesburg | No Takedown Required",
-  description: "Professional on-site curtain dry cleaning in Johannesburg. We clean curtains where they hang - no takedown, no shrinkage, no hassle. Hardware cleaning & repair included. Call 071 622 6753.",
+  title: "Curtain Cleaning Johannesburg | Professional On-Site Dry Cleaning Service",
+  description: "Professional curtain cleaning Johannesburg. We clean curtains where they hang - no takedown, no shrinkage, no hassle. Hardware cleaning & repair included. Call +27 75 011 9200 for a free quote.",
   keywords: [
     "curtain cleaning Johannesburg",
     "on-site curtain cleaning",
@@ -16,8 +16,8 @@ export const metadata: Metadata = {
     canonical: "/services/curtain-cleaning",
   },
   openGraph: {
-    title: "On-Site Curtain Dry Cleaning Johannesburg | No Takedown Required",
-    description: "Professional on-site curtain dry cleaning. We clean curtains where they hang - no takedown, no shrinkage.",
+    title: "Curtain Cleaning Johannesburg | Professional On-Site Dry Cleaning Service",
+    description: "Professional curtain cleaning Johannesburg. We clean curtains where they hang - no takedown, no shrinkage.",
     url: "https://www.curtainclean.co.za/services/curtain-cleaning",
   },
 };
@@ -25,33 +25,63 @@ export const metadata: Metadata = {
 export default function CurtainCleaningPage() {
   const jsonLd = {
     "@context": "https://schema.org",
-    "@type": "Service",
-    "serviceType": "Curtain Cleaning",
-    "provider": {
-      "@type": "LocalBusiness",
-      "name": "On The Spot Curtain Cleaning",
-      "telephone": "+27716226753",
-      "email": "info@curtaincleaning.co.za",
-      "url": "https://www.curtainclean.co.za",
-      "address": {
-        "@type": "PostalAddress",
-        "addressLocality": "Johannesburg",
-        "addressRegion": "Gauteng",
-        "addressCountry": "ZA"
+    "@graph": [
+      {
+        "@type": "BreadcrumbList",
+        "@id": "https://www.curtainclean.co.za/services/curtain-cleaning#breadcrumb",
+        "itemListElement": [
+          {
+            "@type": "ListItem",
+            "position": 1,
+            "name": "Home",
+            "item": "https://www.curtainclean.co.za"
+          },
+          {
+            "@type": "ListItem",
+            "position": 2,
+            "name": "Services",
+            "item": "https://www.curtainclean.co.za/#services"
+          },
+          {
+            "@type": "ListItem",
+            "position": 3,
+            "name": "Curtain Cleaning",
+            "item": "https://www.curtainclean.co.za/services/curtain-cleaning"
+          }
+        ]
       },
-      "areaServed": [
-        {
-          "@type": "City",
-          "name": "Johannesburg"
+      {
+        "@type": "Service",
+        "@id": "https://www.curtainclean.co.za/services/curtain-cleaning#service",
+        "serviceType": "Curtain Cleaning",
+        "provider": {
+          "@type": "LocalBusiness",
+          "@id": "https://www.curtainclean.co.za/#business",
+          "name": "Curtain Cleaning Johannesburg",
+          "telephone": "+27750119200",
+          "email": "info@curtaincleaning.co.za",
+          "url": "https://www.curtainclean.co.za",
+          "address": {
+            "@type": "PostalAddress",
+            "addressLocality": "Johannesburg",
+            "addressRegion": "Gauteng",
+            "addressCountry": "ZA"
+          },
+          "areaServed": [
+            {
+              "@type": "City",
+              "name": "Johannesburg"
+            }
+          ]
+        },
+        "description": "Professional on-site curtain dry cleaning service in Johannesburg. We clean curtains where they hang without takedown.",
+        "offers": {
+          "@type": "Offer",
+          "availability": "https://schema.org/InStock",
+          "priceCurrency": "ZAR"
         }
-      ]
-    },
-    "description": "Professional on-site curtain dry cleaning service. We clean curtains where they hang without takedown.",
-    "offers": {
-      "@type": "Offer",
-      "availability": "https://schema.org/InStock",
-      "priceCurrency": "ZAR"
-    }
+      }
+    ]
   };
 
   return (

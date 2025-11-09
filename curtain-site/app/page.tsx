@@ -2,14 +2,66 @@ import Link from "next/link";
 import { PhoneIcon, EnvelopeIcon, MapPinIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
 
 export default function Home() {
+  const faqSchema = {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "How does on-site curtain cleaning work?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We clean your curtains where they hang using specialized dry-cleaning methods. No need to take them down. Our service includes hardware cleaning, repairs, and fabric protection."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Will my curtains shrink?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "No. We guarantee against shrinkage. Our dry-cleaning process is specifically designed to prevent fabric damage and shrinkage, working safely on all fabric types."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Which areas in Johannesburg do you serve?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We serve all Johannesburg suburbs including Sandton, Bryanston, Fourways, Rosebank, Randburg, Parkhurst, Morningside, and surrounding areas."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "Do you offer same-day service?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "Yes. Hotels and offices can rent rooms the same day. We offer flexible scheduling for residential and commercial clients."
+        }
+      },
+      {
+        "@type": "Question",
+        "name": "What other cleaning services do you offer?",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "We offer mattress sanitization, upholstery cleaning, Persian rug cleaning, fabric protection (Masterguard), and fireproofing services for curtains and soft furnishings."
+        }
+      }
+    ]
+  };
+
   return (
     <main>
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
+      />
+
       {/* Hero Section */}
       <section className="gradient-hero text-white py-20 px-4">
         <div className="max-w-7xl mx-auto">
           <div className="max-w-3xl">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Professional On-Site Curtain Cleaning in Johannesburg
+              Curtain Cleaning Johannesburg | Professional On-Site Service
             </h1>
             <p className="text-xl md:text-2xl mb-4 text-blue-100">
               We clean curtains where they hang - No takedown, No shrinkage, No hassle
