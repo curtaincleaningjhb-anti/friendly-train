@@ -1,28 +1,48 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { PhoneIcon, CheckCircleIcon, HomeIcon } from "@heroicons/react/24/solid";
+import { getServiceContent } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Curtain Cleaning Johannesburg | Professional On-Site Dry Cleaning Service",
-  description: "Professional curtain cleaning Johannesburg. We clean curtains where they hang - no takedown, no shrinkage, no hassle. Hardware cleaning & repair included. Call +27 75 011 9200 for a free quote.",
-  keywords: [
-    "curtain cleaning Johannesburg",
-    "on-site curtain cleaning",
-    "curtain dry cleaning",
-    "curtain cleaning service",
-    "professional curtain cleaning"
-  ],
-  alternates: {
-    canonical: "/services/curtain-cleaning",
-  },
-  openGraph: {
-    title: "Curtain Cleaning Johannesburg | Professional On-Site Dry Cleaning Service",
-    description: "Professional curtain cleaning Johannesburg. We clean curtains where they hang - no takedown, no shrinkage.",
-    url: "https://www.curtainclean.co.za/services/curtain-cleaning",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const serviceData = await getServiceContent('curtain-cleaning');
+  
+  const title = serviceData?.seoTitle || "Curtain Cleaning Johannesburg | Professional On-Site Dry Cleaning Service";
+  const description = serviceData?.seoDescription || "Professional curtain cleaning Johannesburg. We clean curtains where they hang - no takedown, no shrinkage, no hassle. Hardware cleaning & repair included. Call +27 75 011 9200 for a free quote.";
 
-export default function CurtainCleaningPage() {
+  return {
+    title,
+    description,
+    keywords: [
+      "curtain cleaning Johannesburg",
+      "on-site curtain cleaning",
+      "curtain dry cleaning",
+      "curtain cleaning service",
+      "professional curtain cleaning"
+    ],
+    alternates: {
+      canonical: "/services/curtain-cleaning",
+    },
+    openGraph: {
+      title,
+      description,
+      url: "https://www.curtainclean.co.za/services/curtain-cleaning",
+    },
+  };
+}
+
+export default async function CurtainCleaningPage() {
+  const serviceData = await getServiceContent('curtain-cleaning');
+  
+  const pageTitle = serviceData?.title || "On-Site Curtain Dry Cleaning";
+  const pageSubtitle = serviceData?.subtitle || "We clean curtains where they hang - No takedown, No shrinkage, No hassle";
+  const introText = serviceData?.intro || "At On The Spot Curtain Cleaning, we specialize in dry cleaning curtains and blinds right where they hang. Our innovative on-site service means no more hassle of taking down your curtains, no risk of shrinkage, and no disruption to your home or business operations.";
+  const bullets = serviceData?.bullets || [
+    "No need to take curtains down or wait days for them to be returned",
+    "Our on-site service is less expensive than traditional dry cleaning",
+    "Work is done at times convenient for you with minimal impact",
+    "Trained staff using professional-grade equipment",
+    "Unique service includes cleaning and repairing curtain tracks, rings, and mechanisms"
+  ];
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -112,10 +132,10 @@ export default function CurtainCleaningPage() {
         <section className="gradient-hero text-white py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              On-Site Curtain Dry Cleaning
+              {pageTitle}
             </h1>
             <p className="text-xl md:text-2xl mb-8">
-              We clean curtains where they hang - No takedown, No shrinkage, No hassle
+              {pageSubtitle}
             </p>
             <a 
               href="tel:0716226753"
@@ -136,9 +156,7 @@ export default function CurtainCleaningPage() {
               </h2>
               
               <p className="text-lg text-gray-700 mb-6">
-                At On The Spot Curtain Cleaning, we specialize in dry cleaning curtains and blinds right where they hang. 
-                Our innovative on-site service means no more hassle of taking down your curtains, no risk of shrinkage, 
-                and no disruption to your home or business operations.
+                {introText}
               </p>
 
               <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-8">
@@ -184,36 +202,12 @@ export default function CurtainCleaningPage() {
               </h3>
 
               <ul className="space-y-4 mb-8">
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <strong>Convenience:</strong> No need to take curtains down or wait days for them to be returned
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <strong>Cost-Effective:</strong> Our on-site service is less expensive than traditional dry cleaning
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <strong>No Disruption:</strong> Work is done at times convenient for you with minimal impact
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <strong>Professional Results:</strong> Trained staff using professional-grade equipment
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
-                  <div>
-                    <strong>Hardware Care:</strong> Unique service includes cleaning and repairing curtain tracks, rings, and mechanisms
-                  </div>
-                </li>
+                {bullets.map((bullet, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <CheckCircleIcon className="h-6 w-6 text-primary mt-1 flex-shrink-0" />
+                    <div>{bullet}</div>
+                  </li>
+                ))}
               </ul>
 
               <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-8">

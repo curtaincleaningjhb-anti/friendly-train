@@ -2,29 +2,41 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { PhoneIcon, CheckCircleIcon, HomeIcon, FireIcon } from "@heroicons/react/24/solid";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { getServiceContent } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Fireproofing Johannesburg | Fire Retardant Treatment for Fabrics",
-  description: "Professional fireproofing Johannesburg. Fire retardant treatments for curtains, drapes & soft furnishings. Compliance certification available. Call +27 75 011 9200 for a free quote.",
-  keywords: [
-    "fireproofing Johannesburg",
-    "fire retardant treatment",
-    "flame retardant",
-    "curtain fireproofing",
-    "fire safety compliance",
-    "commercial fireproofing"
-  ],
-  alternates: {
-    canonical: "/services/fireproofing",
-  },
-  openGraph: {
-    title: "Fireproofing Johannesburg | Fire Retardant Treatment for Fabrics",
-    description: "Professional fireproofing and fire retardant treatments for fabrics in Johannesburg.",
-    url: "https://www.curtainclean.co.za/services/fireproofing",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const serviceData = await getServiceContent('fireproofing');
+  
+  const title = serviceData?.seoTitle || "Fireproofing Johannesburg | Fire Retardant Treatment for Fabrics";
+  const description = serviceData?.seoDescription || "Professional fireproofing Johannesburg. Fire retardant treatments for curtains, drapes & soft furnishings. Compliance certification available. Call +27 75 011 9200 for a free quote.";
 
-export default function FireproofingPage() {
+  return {
+    title,
+    description,
+    keywords: [
+      "fireproofing Johannesburg",
+      "fire retardant treatment",
+      "flame retardant",
+      "curtain fireproofing",
+      "fire safety compliance",
+      "commercial fireproofing"
+    ],
+    alternates: {
+      canonical: "/services/fireproofing",
+    },
+    openGraph: {
+      title,
+      description,
+      url: "https://www.curtainclean.co.za/services/fireproofing",
+    },
+  };
+}
+
+export default async function FireproofingPage() {
+  const serviceData = await getServiceContent('fireproofing');
+  
+  const pageTitle = serviceData?.title || "Professional Fireproofing Services";
+  const pageSubtitle = serviceData?.subtitle || "Fire retardant treatment for curtains and soft furnishings to meet safety regulations";
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -115,10 +127,10 @@ export default function FireproofingPage() {
           <div className="max-w-4xl mx-auto text-center">
             <FireIcon className="h-20 w-20 mx-auto mb-6 text-red-400" />
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Professional Fireproofing Services
+              {pageTitle}
             </h1>
             <p className="text-xl md:text-2xl mb-8">
-              Fire retardant treatment for curtains and soft furnishings to meet safety regulations
+              {pageSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

@@ -2,29 +2,41 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { PhoneIcon, CheckCircleIcon, HomeIcon } from "@heroicons/react/24/solid";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { getServiceContent } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Upholstery Cleaning Johannesburg | Sofas, Chairs & Couches",
-  description: "Expert upholstery cleaning Johannesburg. Deep clean sofas, chairs, couches, and fabric furniture. Stain removal, deodorizing & fabric protection. Call +27 75 011 9200 for a free quote.",
-  keywords: [
-    "upholstery cleaning Johannesburg",
-    "sofa cleaning",
-    "couch cleaning",
-    "furniture cleaning",
-    "fabric furniture cleaning",
-    "upholstery stain removal"
-  ],
-  alternates: {
-    canonical: "/services/upholstery-cleaning",
-  },
-  openGraph: {
-    title: "Upholstery Cleaning Johannesburg | Sofas, Chairs & Couches",
-    description: "Expert upholstery cleaning Johannesburg. Deep clean sofas, chairs, and fabric furniture.",
-    url: "https://www.curtainclean.co.za/services/upholstery-cleaning",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const serviceData = await getServiceContent('upholstery-cleaning');
+  
+  const title = serviceData?.seoTitle || "Upholstery Cleaning Johannesburg | Sofas, Chairs & Couches";
+  const description = serviceData?.seoDescription || "Expert upholstery cleaning Johannesburg. Deep clean sofas, chairs, couches, and fabric furniture. Stain removal, deodorizing & fabric protection. Call +27 75 011 9200 for a free quote.";
 
-export default function UpholsteryCleaningPage() {
+  return {
+    title,
+    description,
+    keywords: [
+      "upholstery cleaning Johannesburg",
+      "sofa cleaning",
+      "couch cleaning",
+      "furniture cleaning",
+      "fabric furniture cleaning",
+      "upholstery stain removal"
+    ],
+    alternates: {
+      canonical: "/services/upholstery-cleaning",
+    },
+    openGraph: {
+      title,
+      description,
+      url: "https://www.curtainclean.co.za/services/upholstery-cleaning",
+    },
+  };
+}
+
+export default async function UpholsteryCleaningPage() {
+  const serviceData = await getServiceContent('upholstery-cleaning');
+  
+  const pageTitle = serviceData?.title || "Professional Upholstery Cleaning in Johannesburg";
+  const pageSubtitle = serviceData?.subtitle || "Deep clean your sofas, chairs, and fabric furniture to look and feel like new";
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -114,10 +126,10 @@ export default function UpholsteryCleaningPage() {
         <section className="gradient-hero text-white py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Professional Upholstery Cleaning in Johannesburg
+              {pageTitle}
             </h1>
             <p className="text-xl md:text-2xl mb-8">
-              Deep clean your sofas, chairs, and fabric furniture to look and feel like new
+              {pageSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

@@ -1,28 +1,48 @@
 import { Metadata } from "next";
 import Link from "next/link";
 import { PhoneIcon, CheckCircleIcon, HomeIcon } from "@heroicons/react/24/solid";
+import { getServiceContent } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Mattress Cleaning Johannesburg | Sanitization & Deep Cleaning Service",
-  description: "Professional mattress cleaning Johannesburg. On-site sanitization removes dust mites, bacteria & allergens. Healthier sleeping environment. Call +27 75 011 9200 for a free quote.",
-  keywords: [
-    "mattress cleaning Johannesburg",
-    "mattress sanitization",
-    "deep mattress cleaning",
-    "dust mite removal",
-    "mattress cleaning service"
-  ],
-  alternates: {
-    canonical: "/services/mattress-cleaning",
-  },
-  openGraph: {
-    title: "Mattress Cleaning Johannesburg | Sanitization & Deep Cleaning Service",
-    description: "Professional mattress cleaning Johannesburg. On-site sanitization removes dust mites, bacteria & allergens.",
-    url: "https://www.curtainclean.co.za/services/mattress-cleaning",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const serviceData = await getServiceContent('mattress-cleaning');
+  
+  const title = serviceData?.seoTitle || "Mattress Cleaning Johannesburg | Sanitization & Deep Cleaning Service";
+  const description = serviceData?.seoDescription || "Professional mattress cleaning Johannesburg. On-site sanitization removes dust mites, bacteria & allergens. Healthier sleeping environment. Call +27 75 011 9200 for a free quote.";
 
-export default function MattressCleaningPage() {
+  return {
+    title,
+    description,
+    keywords: [
+      "mattress cleaning Johannesburg",
+      "mattress sanitization",
+      "deep mattress cleaning",
+      "dust mite removal",
+      "mattress cleaning service"
+    ],
+    alternates: {
+      canonical: "/services/mattress-cleaning",
+    },
+    openGraph: {
+      title,
+      description,
+      url: "https://www.curtainclean.co.za/services/mattress-cleaning",
+    },
+  };
+}
+
+export default async function MattressCleaningPage() {
+  const serviceData = await getServiceContent('mattress-cleaning');
+  
+  const pageTitle = serviceData?.title || "Professional Mattress Sanitization";
+  const pageSubtitle = serviceData?.subtitle || "Clinical deep cleaning that removes dust mites, bacteria, and allergens";
+  const introText = serviceData?.intro || "Our professional mattress sanitization service uses a clinical deep-cleaning process to eliminate dust mites, bacteria, allergens, and accumulated organic matter. The result is a hygienically clean, healthier sleeping environment for you and your family.";
+  const bullets = serviceData?.bullets || [
+    "Eliminates dust mites and allergens that trigger asthma and allergies",
+    "Cleaner sleeping environment promotes better, healthier sleep",
+    "Eliminates bacteria that cause unpleasant mattress odors",
+    "Regular cleaning prevents premature breakdown and extends lifespan",
+    "Creates a cleaner, healthier bedroom for your family"
+  ];
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -112,10 +132,10 @@ export default function MattressCleaningPage() {
         <section className="gradient-hero text-white py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Professional Mattress Sanitization
+              {pageTitle}
             </h1>
             <p className="text-xl md:text-2xl mb-8">
-              Clinical deep cleaning that removes dust mites, bacteria, and allergens
+              {pageSubtitle}
             </p>
             <a 
               href="tel:0716226753"
@@ -148,9 +168,7 @@ export default function MattressCleaningPage() {
               </div>
 
               <p className="text-lg text-gray-700 mb-6">
-                Our professional mattress sanitization service uses a clinical deep-cleaning process to eliminate 
-                dust mites, bacteria, allergens, and accumulated organic matter. The result is a hygienically clean, 
-                healthier sleeping environment for you and your family.
+                {introText}
               </p>
 
               <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-8">
@@ -196,36 +214,12 @@ export default function MattressCleaningPage() {
               </h3>
 
               <ul className="space-y-4 mb-8">
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
-                  <div>
-                    <strong>Allergy Relief:</strong> Eliminates dust mites and allergens that trigger asthma and allergies
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
-                  <div>
-                    <strong>Improved Sleep Quality:</strong> Cleaner sleeping environment promotes better, healthier sleep
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
-                  <div>
-                    <strong>Odor Removal:</strong> Eliminates bacteria that cause unpleasant mattress odors
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
-                  <div>
-                    <strong>Extended Mattress Life:</strong> Regular cleaning prevents premature breakdown and extends lifespan
-                  </div>
-                </li>
-                <li className="flex items-start gap-3">
-                  <CheckCircleIcon className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
-                  <div>
-                    <strong>Hygienic Environment:</strong> Creates a cleaner, healthier bedroom for your family
-                  </div>
-                </li>
+                {bullets.map((bullet, index) => (
+                  <li key={index} className="flex items-start gap-3">
+                    <CheckCircleIcon className="h-6 w-6 text-accent mt-1 flex-shrink-0" />
+                    <div>{bullet}</div>
+                  </li>
+                ))}
               </ul>
 
               <h3 className="text-2xl font-bold text-gray-900 mb-4 mt-8">

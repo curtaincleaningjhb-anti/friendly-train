@@ -2,29 +2,41 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { PhoneIcon, CheckCircleIcon, HomeIcon, ShieldCheckIcon } from "@heroicons/react/24/solid";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { getServiceContent } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Fabric Protection Johannesburg | Masterguard Stain & Spill Protection",
-  description: "Professional Masterguard fabric protection Johannesburg for curtains, upholstery & carpets. Protect against stains, spills & wear. Call +27 75 011 9200 for a free quote.",
-  keywords: [
-    "fabric protection Johannesburg",
-    "Masterguard",
-    "stain protection",
-    "fabric guard",
-    "upholstery protection",
-    "carpet protection"
-  ],
-  alternates: {
-    canonical: "/services/fabric-protection",
-  },
-  openGraph: {
-    title: "Fabric Protection Johannesburg | Masterguard Stain & Spill Protection",
-    description: "Professional fabric protection services for curtains, upholstery, and carpets in Johannesburg.",
-    url: "https://www.curtainclean.co.za/services/fabric-protection",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const serviceData = await getServiceContent('fabric-protection');
+  
+  const title = serviceData?.seoTitle || "Fabric Protection Johannesburg | Masterguard Stain & Spill Protection";
+  const description = serviceData?.seoDescription || "Professional Masterguard fabric protection Johannesburg for curtains, upholstery & carpets. Protect against stains, spills & wear. Call +27 75 011 9200 for a free quote.";
 
-export default function FabricProtectionPage() {
+  return {
+    title,
+    description,
+    keywords: [
+      "fabric protection Johannesburg",
+      "Masterguard",
+      "stain protection",
+      "fabric guard",
+      "upholstery protection",
+      "carpet protection"
+    ],
+    alternates: {
+      canonical: "/services/fabric-protection",
+    },
+    openGraph: {
+      title,
+      description,
+      url: "https://www.curtainclean.co.za/services/fabric-protection",
+    },
+  };
+}
+
+export default async function FabricProtectionPage() {
+  const serviceData = await getServiceContent('fabric-protection');
+  
+  const pageTitle = serviceData?.title || "Masterguard Fabric Protection";
+  const pageSubtitle = serviceData?.subtitle || "Advanced protection against stains, spills, and everyday wear for your fabrics";
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -115,10 +127,10 @@ export default function FabricProtectionPage() {
           <div className="max-w-4xl mx-auto text-center">
             <ShieldCheckIcon className="h-20 w-20 mx-auto mb-6 text-accent" />
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Masterguard Fabric Protection
+              {pageTitle}
             </h1>
             <p className="text-xl md:text-2xl mb-8">
-              Advanced protection against stains, spills, and everyday wear for your fabrics
+              {pageSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a

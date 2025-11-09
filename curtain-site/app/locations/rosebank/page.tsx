@@ -2,23 +2,41 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { PhoneIcon, HomeIcon, MapPinIcon } from "@heroicons/react/24/solid";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { getLocationContent } from '@/lib/content';
 
-export const metadata: Metadata = {
-  title: "Curtain Cleaning Rosebank Johannesburg | Morningside On-Site Service",
-  description: "Professional curtain cleaning Rosebank & Morningside, Johannesburg. On-site service with no takedown. Mattress, upholstery & rug cleaning. Call +27 75 011 9200 for a free quote.",
-  keywords: [
-    "curtain cleaning Rosebank",
-    "mattress cleaning Rosebank",
-    "upholstery cleaning Rosebank",
-    "Morningside curtain cleaning",
-    "Rosebank cleaning service"
-  ],
-  alternates: {
-    canonical: "/locations/rosebank",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const locationData = await getLocationContent('rosebank');
+  
+  return {
+    title: locationData?.seoTitle || "Curtain Cleaning Rosebank Johannesburg | Morningside On-Site Service",
+    description: locationData?.seoDescription || "Professional curtain cleaning Rosebank & Morningside, Johannesburg. On-site service with no takedown. Mattress, upholstery & rug cleaning. Call +27 75 011 9200 for a free quote.",
+    keywords: [
+      "curtain cleaning Rosebank",
+      "mattress cleaning Rosebank",
+      "upholstery cleaning Rosebank",
+      "Morningside curtain cleaning",
+      "Rosebank cleaning service"
+    ],
+    alternates: {
+      canonical: "/locations/rosebank",
+    },
+  };
+}
 
-export default function RosebankPage() {
+export default async function RosebankPage() {
+  const locationData = await getLocationContent('rosebank');
+  
+  const title = locationData?.title || 'Curtain Cleaning Rosebank & Morningside';
+  const intro = locationData?.intro || 'Professional on-site cleaning for Rosebank, Morningside & surrounding areas';
+  const neighborhoods = locationData?.neighborhoods || [
+    "Rosebank",
+    "Morningside",
+    "Parktown",
+    "Houghton",
+    "Saxonwold",
+    "Melrose"
+  ];
+
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -79,7 +97,7 @@ export default function RosebankPage() {
                 Home
               </Link>
               <span>/</span>
-              <span className="text-gray-900 font-semibold">Rosebank</span>
+              <span className="text-gray-900 font-semibold">{title}</span>
             </nav>
           </div>
         </section>
@@ -88,10 +106,10 @@ export default function RosebankPage() {
           <div className="max-w-4xl mx-auto text-center">
             <MapPinIcon className="h-16 w-16 mx-auto mb-6" />
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Curtain Cleaning in Rosebank
+              {title}
             </h1>
             <p className="text-xl md:text-2xl mb-8">
-              Professional on-site cleaning for Rosebank, Morningside & surrounding areas
+              {intro}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:+27750119200" className="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all">
@@ -106,7 +124,7 @@ export default function RosebankPage() {
         <section className="py-16 px-4">
           <div className="max-w-7xl mx-auto">
             <h2 className="text-4xl font-bold text-gray-900 mb-8 text-center">
-              Serving Rosebank & Surrounding Areas
+              Serving {title} & Surrounding Areas
             </h2>
             <div className="grid md:grid-cols-3 gap-8 mb-12">
               <div>
@@ -123,12 +141,9 @@ export default function RosebankPage() {
               <div>
                 <h3 className="font-bold text-lg mb-3">Areas We Cover</h3>
                 <ul className="space-y-2 text-gray-700">
-                  <li>• Rosebank</li>
-                  <li>• Morningside</li>
-                  <li>• Parktown</li>
-                  <li>• Houghton</li>
-                  <li>• Saxonwold</li>
-                  <li>• Melrose</li>
+                  {neighborhoods.map((area) => (
+                    <li key={area}>• {area}</li>
+                  ))}
                 </ul>
               </div>
               <div>
@@ -149,7 +164,7 @@ export default function RosebankPage() {
         <section className="bg-primary text-white py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h2 className="text-4xl font-bold mb-6">Get Your Free Quote Today</h2>
-            <p className="text-xl mb-8">Serving Rosebank with professional cleaning services</p>
+            <p className="text-xl mb-8">Serving {title} with professional cleaning services</p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a href="tel:+27750119200" className="inline-flex items-center justify-center gap-2 bg-white text-primary font-bold py-4 px-8 rounded-lg hover:bg-gray-100 transition-all">
                 <PhoneIcon className="h-5 w-5" />

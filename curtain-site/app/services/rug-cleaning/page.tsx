@@ -2,29 +2,41 @@ import { Metadata } from "next";
 import Link from "next/link";
 import { PhoneIcon, CheckCircleIcon, HomeIcon } from "@heroicons/react/24/solid";
 import WhatsAppButton from "@/components/WhatsAppButton";
+import { getServiceContent } from "@/lib/content";
 
-export const metadata: Metadata = {
-  title: "Persian Rug Cleaning Johannesburg | Oriental & Area Rug Care",
-  description: "Specialist Persian, Oriental & area rug cleaning Johannesburg. Hand-washing, deep cleaning & restoration for valuable rugs. Pet-safe products. Call +27 75 011 9200 for a free quote.",
-  keywords: [
-    "Persian rug cleaning Johannesburg",
-    "Oriental rug cleaning",
-    "area rug cleaning",
-    "rug cleaning service",
-    "antique rug cleaning",
-    "rug restoration"
-  ],
-  alternates: {
-    canonical: "/services/rug-cleaning",
-  },
-  openGraph: {
-    title: "Persian Rug Cleaning Johannesburg | Oriental & Area Rug Care",
-    description: "Specialist Persian & Oriental rug cleaning services in Johannesburg.",
-    url: "https://www.curtainclean.co.za/services/rug-cleaning",
-  },
-};
+export async function generateMetadata(): Promise<Metadata> {
+  const serviceData = await getServiceContent('rug-cleaning');
+  
+  const title = serviceData?.seoTitle || "Persian Rug Cleaning Johannesburg | Oriental & Area Rug Care";
+  const description = serviceData?.seoDescription || "Specialist Persian, Oriental & area rug cleaning Johannesburg. Hand-washing, deep cleaning & restoration for valuable rugs. Pet-safe products. Call +27 75 011 9200 for a free quote.";
 
-export default function RugCleaningPage() {
+  return {
+    title,
+    description,
+    keywords: [
+      "Persian rug cleaning Johannesburg",
+      "Oriental rug cleaning",
+      "area rug cleaning",
+      "rug cleaning service",
+      "antique rug cleaning",
+      "rug restoration"
+    ],
+    alternates: {
+      canonical: "/services/rug-cleaning",
+    },
+    openGraph: {
+      title,
+      description,
+      url: "https://www.curtainclean.co.za/services/rug-cleaning",
+    },
+  };
+}
+
+export default async function RugCleaningPage() {
+  const serviceData = await getServiceContent('rug-cleaning');
+  
+  const pageTitle = serviceData?.title || "Persian & Oriental Rug Cleaning in Johannesburg";
+  const pageSubtitle = serviceData?.subtitle || "Expert care for your valuable Persian, Oriental, and area rugs";
   const jsonLd = {
     "@context": "https://schema.org",
     "@graph": [
@@ -114,10 +126,10 @@ export default function RugCleaningPage() {
         <section className="gradient-hero text-white py-16 px-4">
           <div className="max-w-4xl mx-auto text-center">
             <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              Persian & Oriental Rug Cleaning in Johannesburg
+              {pageTitle}
             </h1>
             <p className="text-xl md:text-2xl mb-8">
-              Expert care for your valuable Persian, Oriental, and area rugs
+              {pageSubtitle}
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <a
