@@ -1,4 +1,24 @@
 document.addEventListener('DOMContentLoaded', () => {
+  const tabButtons = document.querySelectorAll('.tab-button');
+  const tabContents = document.querySelectorAll('.tab-content');
+
+  tabButtons.forEach(button => {
+    button.addEventListener('click', () => {
+      const targetTab = button.dataset.tab;
+      
+      tabButtons.forEach(btn => btn.classList.remove('active'));
+      tabContents.forEach(content => content.classList.remove('active'));
+      
+      button.classList.add('active');
+      document.getElementById(`${targetTab}Tab`).classList.add('active');
+    });
+  });
+
+  initSMSTab();
+  initEmailTab();
+});
+
+function initSMSTab() {
   const form = document.getElementById('smsForm');
   const messageInput = document.getElementById('message');
   const charCount = document.getElementById('charCount');
@@ -124,4 +144,119 @@ document.addEventListener('DOMContentLoaded', () => {
       `;
     }).join('');
   }
-});
+}
+
+function initEmailTab() {
+  const emailForm = document.getElementById('emailForm');
+  const emailStatus = document.getElementById('emailStatus');
+  const sendEmailButton = document.getElementById('sendEmailButton');
+  const emailHistory = document.getElementById('emailHistory');
+
+  loadEmailHistory();
+
+  emailForm.addEventListener('submit', async (e) => {
+    e.preventDefault();
+    
+    const recipientEmail = document.getElementById('recipientEmail').value.trim();
+    const subject = document.getElementById('emailSubject').value.trim();
+    const message = document.getElementById('emailMessage').value.trim();
+
+    if (!recipientEmail || !subject || !message) {
+      showEmailStatus('Please fill in all fields', 'error');
+      return;
+    }
+
+    sendEmailButton.disabled = true;
+    sendEmailButton.textContent = 'Sending...';
+    showEmailStatus('Sending email...', 'info');
+
+    try {
+      const response = await fetch('/api/send-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          to: recipientEmail,
+          subject: subject,
+          message: message
+        })
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        showEmailStatus('Email sent successfully!', 'success');
+        emailForm.reset();
+        loadEmailHistory();
+      } else {
+        showEmailStatus(`Error: ${data.error || 'Failed to send email'}`, 'error');
+      }
+    } catch (error) {
+      showEmailStatus(`Error: ${error.message}`, 'error');
+    } finally {
+      sendEmailButton.disabled = false;
+      sendEmailButton.textContent = 'Send Email';
+    }
+  });
+
+  function showEmailStatus(message, type) {
+    emailStatus.textContent = message;
+    emailStatus.className = `status ${type}`;
+    emailStatus.style.display = 'block';
+    
+    if (type === 'success') {
+      setTimeout(() => {
+        emailStatus.style.display = 'none';
+      }, 5000);
+    }
+  }
+
+  async function loadEmailHistory() {
+    try {
+      const response = await fetch('/api/emails');
+      const emails = await response.json();
+      
+      if (emails.length === 0) {
+        emailHistory.innerHTML = '<p class="no-messages">No emails sent yet</p>';
+      } else {
+        displayEmails(emails);
+      }
+    } catch (error) {
+      emailHistory.innerHTML = '<p class="error">Failed to load email history</p>';
+    }
+  }
+
+  function escapeHtml(text) {
+    const div = document.createElement('div');
+    div.textContent = text;
+    return div.innerHTML;
+  }
+
+  function displayEmails(emails) {
+    emailHistory.innerHTML = emails.map(email => {
+      const date = new Date(email.created_at);
+      const formattedDate = date.toLocaleString();
+      const safeEmail = escapeHtml(email.recipient_email);
+      const safeSubject = escapeHtml(email.subject);
+      const safeMessage = escapeHtml(email.message);
+      const safeStatus = escapeHtml(email.status);
+      
+      return `
+        <div class="message-item">
+          <div class="message-header">
+            <span class="phone-number">${safeEmail}</span>
+            <span class="message-date">${formattedDate}</span>
+          </div>
+          <div class="message-body">
+            <strong>Subject:</strong> ${safeSubject}<br>
+            ${safeMessage}
+          </div>
+          <div class="message-footer">
+            <span class="message-status status-${safeStatus}">${safeStatus}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+}

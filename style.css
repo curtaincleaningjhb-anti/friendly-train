@@ -11,9 +11,50 @@ html, body {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
 }
 
+.tabs {
+  max-width: 500px;
+  margin: 30px auto 0;
+  display: flex;
+  gap: 10px;
+  padding: 0 30px;
+}
+
+.tab-button {
+  flex: 1;
+  padding: 12px;
+  background: rgba(255, 255, 255, 0.2);
+  color: white;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-radius: 8px 8px 0 0;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.3s;
+}
+
+.tab-button:hover {
+  background: rgba(255, 255, 255, 0.3);
+  transform: translateY(-2px);
+}
+
+.tab-button.active {
+  background: white;
+  color: #667eea;
+  border-bottom: 2px solid white;
+  transform: none;
+}
+
+.tab-content {
+  display: none;
+}
+
+.tab-content.active {
+  display: block;
+}
+
 .container {
   max-width: 500px;
-  margin: 50px auto;
+  margin: 0 auto 50px;
   padding: 30px;
   background: white;
   border-radius: 10px;
@@ -40,6 +81,8 @@ label {
 }
 
 input[type="tel"],
+input[type="email"],
+input[type="text"],
 textarea {
   width: 100%;
   padding: 12px;
@@ -51,6 +94,8 @@ textarea {
 }
 
 input[type="tel"]:focus,
+input[type="email"]:focus,
+input[type="text"]:focus,
 textarea:focus {
   outline: none;
   border-color: #667eea;
