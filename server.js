@@ -1,6 +1,13 @@
 import express from 'express';
 import cors from 'cors';
 import twilio from 'twilio';
+import pg from 'pg';
+
+const { Pool } = pg;
+
+const pool = new Pool({
+  connectionString: process.env.DATABASE_URL
+});
 
 const app = express();
 app.use(cors());
@@ -79,6 +86,11 @@ app.post('/api/send-sms', async (req, res) => {
       to: to
     });
 
+    await pool.query(
+      'INSERT INTO sms_messages (phone_number, message, status, message_sid) VALUES ($1, $2, $3, $4)',
+      [to, message, result.status, result.sid]
+    );
+
     res.json({ 
       success: true, 
       messageSid: result.sid,
@@ -88,6 +100,21 @@ app.post('/api/send-sms', async (req, res) => {
     console.error('Error sending SMS:', error);
     res.status(500).json({ 
       error: 'Failed to send SMS', 
+      details: error.message 
+    });
+  }
+});
+
+app.get('/api/messages', async (req, res) => {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM sms_messages ORDER BY created_at DESC LIMIT 50'
+    );
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching messages:', error);
+    res.status(500).json({ 
+      error: 'Failed to fetch messages', 
       details: error.message 
     });
   }
