@@ -32,15 +32,15 @@ author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "workflow.run"
-args = "server"
+args = "dev"
 
 [[workflows.workflow]]
-name = "server"
+name = "dev"
 author = "agent"
 
 [[workflows.workflow.tasks]]
 task = "shell.exec"
-args = "npm start"
+args = "cd curtain-site && npm run dev"
 waitForPort = 5000
 
 [workflows.workflow.metadata]

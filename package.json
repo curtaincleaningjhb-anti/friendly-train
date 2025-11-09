@@ -1,21 +1,16 @@
 {
   "name": "workspace",
   "version": "1.0.0",
-  "type": "module",
-  "main": "server.js",
+  "private": true,
+  "workspaces": [
+    "legacy-messaging",
+    "curtain-site"
+  ],
   "scripts": {
-    "start": "node server.js",
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
-  "description": "",
-  "dependencies": {
-    "@sendgrid/mail": "^8.1.6",
-    "cors": "^2.8.5",
-    "express": "^5.1.0",
-    "pg": "^8.16.3",
-    "twilio": "^5.10.4"
+    "dev": "npm --prefix curtain-site run dev",
+    "build": "npm --prefix curtain-site run build",
+    "start": "npm --prefix curtain-site run start",
+    "lint": "npm --prefix curtain-site run lint",
+    "legacy": "npm --prefix legacy-messaging start"
   }
 }
