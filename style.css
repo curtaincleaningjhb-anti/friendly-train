@@ -122,3 +122,89 @@ button:disabled {
   color: #0c5460;
   border: 1px solid #bee5eb;
 }
+
+.history-section {
+  margin-top: 40px;
+  padding-top: 30px;
+  border-top: 2px solid #e0e0e0;
+}
+
+h2 {
+  color: #2c3e50;
+  margin-bottom: 20px;
+  font-size: 22px;
+}
+
+.message-list {
+  max-height: 500px;
+  overflow-y: auto;
+}
+
+.message-item {
+  background: #f8f9fa;
+  border: 1px solid #e0e0e0;
+  border-radius: 6px;
+  padding: 15px;
+  margin-bottom: 12px;
+}
+
+.message-header {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  font-size: 14px;
+}
+
+.phone-number {
+  font-weight: 600;
+  color: #667eea;
+}
+
+.message-date {
+  color: #7f8c8d;
+  font-size: 12px;
+}
+
+.message-body {
+  color: #2c3e50;
+  margin-bottom: 10px;
+  line-height: 1.5;
+}
+
+.message-footer {
+  text-align: right;
+}
+
+.message-status {
+  display: inline-block;
+  padding: 4px 10px;
+  border-radius: 12px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+}
+
+.status-queued,
+.status-sending {
+  background: #fff3cd;
+  color: #856404;
+}
+
+.status-sent,
+.status-delivered {
+  background: #d4edda;
+  color: #155724;
+}
+
+.status-failed {
+  background: #f8d7da;
+  color: #721c24;
+}
+
+.no-messages,
+.loading {
+  text-align: center;
+  color: #7f8c8d;
+  padding: 20px;
+  font-style: italic;
+}

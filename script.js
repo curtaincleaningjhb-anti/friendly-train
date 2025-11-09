@@ -4,6 +4,9 @@ document.addEventListener('DOMContentLoaded', () => {
   const charCount = document.getElementById('charCount');
   const statusDiv = document.getElementById('status');
   const sendButton = document.getElementById('sendButton');
+  const messageHistory = document.getElementById('messageHistory');
+
+  loadMessageHistory();
 
   messageInput.addEventListener('input', () => {
     const length = messageInput.value.length;
@@ -54,6 +57,7 @@ document.addEventListener('DOMContentLoaded', () => {
         showStatus('SMS sent successfully!', 'success');
         form.reset();
         charCount.textContent = '0 / 160 characters';
+        loadMessageHistory();
       } else {
         showStatus(`Error: ${data.error || 'Failed to send SMS'}`, 'error');
       }
@@ -75,5 +79,40 @@ document.addEventListener('DOMContentLoaded', () => {
         statusDiv.style.display = 'none';
       }, 5000);
     }
+  }
+
+  async function loadMessageHistory() {
+    try {
+      const response = await fetch('/api/messages');
+      const messages = await response.json();
+      
+      if (messages.length === 0) {
+        messageHistory.innerHTML = '<p class="no-messages">No messages sent yet</p>';
+      } else {
+        displayMessages(messages);
+      }
+    } catch (error) {
+      messageHistory.innerHTML = '<p class="error">Failed to load message history</p>';
+    }
+  }
+
+  function displayMessages(messages) {
+    messageHistory.innerHTML = messages.map(msg => {
+      const date = new Date(msg.created_at);
+      const formattedDate = date.toLocaleString();
+      
+      return `
+        <div class="message-item">
+          <div class="message-header">
+            <span class="phone-number">${msg.phone_number}</span>
+            <span class="message-date">${formattedDate}</span>
+          </div>
+          <div class="message-body">${msg.message}</div>
+          <div class="message-footer">
+            <span class="message-status status-${msg.status}">${msg.status}</span>
+          </div>
+        </div>
+      `;
+    }).join('');
   }
 });
