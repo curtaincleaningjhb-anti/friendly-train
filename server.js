@@ -2,6 +2,7 @@ import express from 'express';
 import cors from 'cors';
 import twilio from 'twilio';
 import pg from 'pg';
+import sgMail from '@sendgrid/mail';
 
 const { Pool } = pg;
 
@@ -18,6 +19,16 @@ async function initializeDatabase() {
         message TEXT NOT NULL,
         status VARCHAR(20) NOT NULL,
         message_sid VARCHAR(50),
+        created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+      )
+    `);
+    await pool.query(`
+      CREATE TABLE IF NOT EXISTS email_campaigns (
+        id SERIAL PRIMARY KEY,
+        recipient_email VARCHAR(255) NOT NULL,
+        subject VARCHAR(255) NOT NULL,
+        message TEXT NOT NULL,
+        status VARCHAR(20) NOT NULL,
         created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
       )
     `);
@@ -89,6 +100,47 @@ async function getTwilioFromPhoneNumber() {
   return phoneNumber;
 }
 
+async function getSendGridCredentials() {
+  const hostname = process.env.REPLIT_CONNECTORS_HOSTNAME;
+  const xReplitToken = process.env.REPL_IDENTITY 
+    ? 'repl ' + process.env.REPL_IDENTITY 
+    : process.env.WEB_REPL_RENEWAL 
+    ? 'depl ' + process.env.WEB_REPL_RENEWAL 
+    : null;
+
+  if (!xReplitToken) {
+    throw new Error('X_REPLIT_TOKEN not found for repl/depl');
+  }
+
+  const connectionSettings = await fetch(
+    'https://' + hostname + '/api/v2/connection?include_secrets=true&connector_names=sendgrid',
+    {
+      headers: {
+        'Accept': 'application/json',
+        'X_REPLIT_TOKEN': xReplitToken
+      }
+    }
+  ).then(res => res.json()).then(data => data.items?.[0]);
+
+  if (!connectionSettings || !connectionSettings.settings.api_key || !connectionSettings.settings.from_email) {
+    throw new Error('SendGrid not connected');
+  }
+
+  return {
+    apiKey: connectionSettings.settings.api_key,
+    fromEmail: connectionSettings.settings.from_email
+  };
+}
+
+async function getUncachableSendGridClient() {
+  const { apiKey, fromEmail } = await getSendGridCredentials();
+  sgMail.setApiKey(apiKey);
+  return {
+    client: sgMail,
+    fromEmail: fromEmail
+  };
+}
+
 app.post('/api/send-sms', async (req, res) => {
   try {
     const { to, message } = req.body;
@@ -135,6 +187,59 @@ app.get('/api/messages', async (req, res) => {
     console.error('Error fetching messages:', error);
     res.status(500).json({ 
       error: 'Failed to fetch messages', 
+      details: error.message 
+    });
+  }
+});
+
+app.post('/api/send-email', async (req, res) => {
+  try {
+    const { to, subject, message } = req.body;
+
+    if (!to || !subject || !message) {
+      return res.status(400).json({ error: 'Email, subject, and message are required' });
+    }
+
+    const { client, fromEmail } = await getUncachableSendGridClient();
+
+    const emailData = {
+      to: to,
+      from: fromEmail,
+      subject: subject,
+      text: message,
+      html: `<p>${message.replace(/\n/g, '<br>')}</p>`
+    };
+
+    await client.send(emailData);
+
+    await pool.query(
+      'INSERT INTO email_campaigns (recipient_email, subject, message, status) VALUES ($1, $2, $3, $4)',
+      [to, subject, message, 'sent']
+    );
+
+    res.json({ 
+      success: true,
+      status: 'sent'
+    });
+  } catch (error) {
+    console.error('Error sending email:', error);
+    res.status(500).json({ 
+      error: 'Failed to send email', 
+      details: error.message 
+    });
+  }
+});
+
+app.get('/api/emails', async (req, res) => {
+  try {
+    const result = await pool.query(
+      'SELECT * FROM email_campaigns ORDER BY created_at DESC LIMIT 50'
+    );
+    res.json(result.rows);
+  } catch (error) {
+    console.error('Error fetching emails:', error);
+    res.status(500).json({ 
+      error: 'Failed to fetch emails', 
       details: error.message 
     });
   }
