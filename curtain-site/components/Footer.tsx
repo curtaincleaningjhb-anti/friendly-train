@@ -193,7 +193,7 @@ export default function Footer() {
           {/* Social Media Icons */}
           <div className="flex justify-center gap-6 mb-6">
             <a
-              href="https://facebook.com/onthespotcurtaincleaning"
+              href="https://www.facebook.com/people/Curtain-Cleaning-Johannesburg/61583188967013/"
               target="_blank"
               rel="noopener noreferrer"
               className="text-gray-400 hover:text-white transition-colors"
