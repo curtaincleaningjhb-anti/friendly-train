@@ -81,10 +81,13 @@ The website uses Next.js 14 App Router for optimal performance and SEO. Key desi
 
 ### Integrated Features
 
-**Contact & Lead Capture**:
+**Contact & Lead Capture (SendGrid Email)**:
 - ✅ Contact form at /contact with service selection, location, and message fields
-- ✅ API route /api/contact for form submissions (logs to console, ready for email integration)
+- ✅ API route /api/contact with SendGrid email integration
+- ✅ Automated email notifications sent to business owner for every quote request
+- ✅ Professional HTML email template with customer details, service type, and location
 - ✅ Form validation, loading states, success/error handling
+- ✅ SendGrid integration via Replit connection (automatic API key rotation and management)
 
 **Email Marketing (Mailchimp)**:
 - ✅ Newsletter signup form in footer (site-wide)
@@ -160,11 +163,11 @@ NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY=pk_live_xxxxx
 - Randburg & Parkhurst
 
 **Integrations Implemented**:
+- SendGrid email notifications for contact form submissions
 - Google Analytics 4 with Next.js page view tracking
 - Mailchimp newsletter signup (site-wide footer)
 - Stripe payment integration for booking deposits (R500-R2000)
 - WhatsApp integration (floating button + inline CTAs)
-- Contact form with lead capture (/contact page)
 
 **SEO & Technical**:
 - Dynamic sitemap.xml with all pages
