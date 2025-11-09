@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
+import Footer from "@/components/Footer";
 
 export const metadata: Metadata = {
   title: {
@@ -74,6 +75,7 @@ export default function RootLayout({
       <body className="antialiased">
         {gaId && <GoogleAnalytics measurementId={gaId} />}
         {children}
+        <Footer />
         <FloatingWhatsApp />
       </body>
     </html>

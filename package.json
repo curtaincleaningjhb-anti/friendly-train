@@ -12,5 +12,10 @@
     "start": "npm --prefix curtain-site run start",
     "lint": "npm --prefix curtain-site run lint",
     "legacy": "npm --prefix legacy-messaging start"
+  },
+  "dependencies": {
+    "@stripe/react-stripe-js": "^5.3.0",
+    "@stripe/stripe-js": "^8.3.0",
+    "stripe": "^19.3.0"
   }
 }
