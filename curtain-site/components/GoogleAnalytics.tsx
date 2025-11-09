@@ -11,7 +11,8 @@ export default function GoogleAnalytics({ measurementId }: { measurementId: stri
   useEffect(() => {
     if (!measurementId) return;
 
-    const url = pathname + searchParams.toString();
+    const queryString = searchParams.toString();
+    const url = pathname + (queryString ? `?${queryString}` : "");
     
     window.gtag?.("config", measurementId, {
       page_path: url,
