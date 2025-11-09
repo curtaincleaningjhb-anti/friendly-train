@@ -22,111 +22,137 @@ export default function Footer() {
 
       {/* Main Footer */}
       <div className="py-12 px-4">
-        <div className="max-w-7xl mx-auto grid md:grid-cols-4 gap-8">
+        <div className="max-w-7xl mx-auto grid md:grid-cols-5 gap-8">
           {/* Company Info */}
           <div>
-            <h3 className="text-xl font-bold mb-4">On The Spot Curtain Cleaning</h3>
+            <h3 className="text-xl font-bold mb-4">On The Spot</h3>
             <p className="text-gray-400 mb-4">
               Professional on-site curtain and soft furnishing cleaning services in Johannesburg since 1998.
             </p>
-            <div className="space-y-2">
+            <div className="space-y-2 mb-4">
               <a 
                 href="tel:+27750119200"
-                className="flex items-center gap-2 text-gray-400 hover:text-white"
+                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
               >
                 <PhoneIcon className="h-5 w-5" />
                 <span>+27 75 011 9200</span>
               </a>
               <a 
                 href="mailto:info@curtaincleaning.co.za"
-                className="flex items-center gap-2 text-gray-400 hover:text-white"
+                className="flex items-center gap-2 text-gray-400 hover:text-white transition-colors"
               >
                 <EnvelopeIcon className="h-5 w-5" />
                 <span>info@curtaincleaning.co.za</span>
               </a>
             </div>
+            <div className="space-y-2">
+              <Link href="/" className="block text-gray-400 hover:text-white transition-colors">
+                Home
+              </Link>
+              <Link href="/contact" className="block text-gray-400 hover:text-white transition-colors">
+                Contact Us
+              </Link>
+              <Link href="/booking/deposit" className="block text-gray-400 hover:text-white transition-colors">
+                Book Online
+              </Link>
+            </div>
           </div>
 
-          {/* Services */}
+          {/* Cleaning Services */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Our Services</h4>
+            <h4 className="text-lg font-bold mb-4">Cleaning Services</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/services/curtain-cleaning" className="text-gray-400 hover:text-white">
+                <Link href="/services/curtain-cleaning" className="text-gray-400 hover:text-white transition-colors">
                   Curtain Dry Cleaning
                 </Link>
               </li>
               <li>
-                <Link href="/services/mattress-cleaning" className="text-gray-400 hover:text-white">
+                <Link href="/services/mattress-cleaning" className="text-gray-400 hover:text-white transition-colors">
                   Mattress Sanitization
                 </Link>
               </li>
               <li>
-                <Link href="/services/upholstery-cleaning" className="text-gray-400 hover:text-white">
+                <Link href="/services/upholstery-cleaning" className="text-gray-400 hover:text-white transition-colors">
                   Upholstery Cleaning
                 </Link>
               </li>
               <li>
-                <Link href="/services/rug-cleaning" className="text-gray-400 hover:text-white">
+                <Link href="/services/rug-cleaning" className="text-gray-400 hover:text-white transition-colors">
                   Persian Rug Cleaning
                 </Link>
               </li>
               <li>
-                <Link href="/services/fabric-protection" className="text-gray-400 hover:text-white">
+                <Link href="/services/fabric-protection" className="text-gray-400 hover:text-white transition-colors">
                   Fabric Protection
                 </Link>
               </li>
               <li>
-                <Link href="/services/fireproofing" className="text-gray-400 hover:text-white">
+                <Link href="/services/fireproofing" className="text-gray-400 hover:text-white transition-colors">
                   Fireproofing Services
                 </Link>
               </li>
             </ul>
           </div>
 
-          {/* Locations */}
+          {/* Service Areas - Johannesburg */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Service Areas</h4>
+            <h4 className="text-lg font-bold mb-4">Sandton & Northern Suburbs</h4>
             <ul className="space-y-2">
               <li>
-                <Link href="/locations/sandton" className="text-gray-400 hover:text-white">
-                  Sandton
+                <Link href="/locations/sandton" className="text-gray-400 hover:text-white transition-colors">
+                  Sandton & Hyde Park
                 </Link>
               </li>
               <li>
-                <Link href="/locations/fourways" className="text-gray-400 hover:text-white">
-                  Fourways
+                <Link href="/locations/fourways" className="text-gray-400 hover:text-white transition-colors">
+                  Fourways & Bryanston
                 </Link>
               </li>
               <li>
-                <Link href="/locations/rosebank" className="text-gray-400 hover:text-white">
-                  Rosebank
+                <Link href="/locations/randburg" className="text-gray-400 hover:text-white transition-colors">
+                  Randburg & Parkhurst
                 </Link>
               </li>
               <li>
-                <Link href="/locations/randburg" className="text-gray-400 hover:text-white">
-                  Randburg
+                <Link href="/locations/rosebank" className="text-gray-400 hover:text-white transition-colors">
+                  Rosebank & Morningside
                 </Link>
               </li>
-              <li className="text-gray-400">
+              <li className="text-gray-400 pt-2">
                 <MapPinIcon className="h-4 w-4 inline mr-1" />
-                All Johannesburg Suburbs
+                All Johannesburg Areas
               </li>
             </ul>
           </div>
 
-          {/* Quick Links */}
+          {/* Additional Service Areas */}
           <div>
-            <h4 className="text-lg font-bold mb-4">Quick Links</h4>
+            <h4 className="text-lg font-bold mb-4">More Service Areas</h4>
             <ul className="space-y-2">
+              <li className="text-gray-400">Melrose</li>
+              <li className="text-gray-400">Illovo</li>
+              <li className="text-gray-400">Kramerville</li>
+              <li className="text-gray-400">Sunninghill</li>
+              <li className="text-gray-400">Woodmead</li>
+              <li className="text-gray-400">Greenside</li>
+              <li className="text-gray-400">Parktown</li>
+              <li className="text-gray-400">Houghton</li>
+            </ul>
+          </div>
+
+          {/* Quick Actions & Info */}
+          <div>
+            <h4 className="text-lg font-bold mb-4">Get Started</h4>
+            <ul className="space-y-2 mb-6">
               <li>
-                <Link href="/" className="text-gray-400 hover:text-white">
-                  Home
+                <Link href="/contact" className="text-gray-400 hover:text-white transition-colors">
+                  Get a Free Quote
                 </Link>
               </li>
               <li>
-                <Link href="/contact" className="text-gray-400 hover:text-white">
-                  Get a Free Quote
+                <Link href="/booking/deposit" className="text-gray-400 hover:text-white transition-colors">
+                  Pay Deposit Online
                 </Link>
               </li>
               <li>
@@ -134,22 +160,29 @@ export default function Footer() {
                   href="https://wa.me/27750119200?text=Hi%2C%20I%27d%20like%20a%20quote%20for%20curtain%20cleaning"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white"
+                  className="text-gray-400 hover:text-white transition-colors"
                 >
-                  WhatsApp Us
+                  WhatsApp Quote
                 </a>
               </li>
               <li>
                 <a 
-                  href="https://www.curtainclean.co.za"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="text-gray-400 hover:text-white"
+                  href="tel:+27750119200"
+                  className="text-gray-400 hover:text-white transition-colors"
                 >
-                  Main Website
+                  Call Now
                 </a>
               </li>
             </ul>
+            <div className="pt-4 border-t border-gray-800">
+              <h5 className="text-sm font-bold mb-2 text-white">Service Types</h5>
+              <ul className="space-y-1 text-sm">
+                <li className="text-gray-400">Residential Cleaning</li>
+                <li className="text-gray-400">Commercial Cleaning</li>
+                <li className="text-gray-400">Hospitality Services</li>
+                <li className="text-gray-400">On-Site Service</li>
+              </ul>
+            </div>
           </div>
         </div>
       </div>
