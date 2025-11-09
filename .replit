@@ -7,7 +7,9 @@ packages = ["static-web-server"]
 
 [deployment]
 publicDir = "/"
-deploymentTarget = "static"
+deploymentTarget = "autoscale"
+run = ["npm", "run", "start", "--prefix", "curtain-site"]
+build = ["npm", "run", "build", "--prefix", "curtain-site"]
 
 [workflows]
 runButton = "Project"
