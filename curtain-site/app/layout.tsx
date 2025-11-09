@@ -5,6 +5,7 @@ import Navbar from "@/components/Navbar";
 import FloatingWhatsApp from "@/components/FloatingWhatsApp";
 import GoogleAnalytics from "@/components/GoogleAnalytics";
 import Footer from "@/components/Footer";
+import GeoLocation from "@/components/GeoLocation";
 
 export const metadata: Metadata = {
   title: {
@@ -116,6 +117,28 @@ export default function RootLayout({
       "bestRating": "5",
       "worstRating": "1"
     },
+    "paymentAccepted": ["Cash", "Credit Card", "Debit Card", "EFT", "Instant EFT"],
+    "currenciesAccepted": "ZAR",
+    "knowsAbout": [
+      "curtain cleaning",
+      "curtain dry cleaning",
+      "on-site curtain cleaning",
+      "mattress cleaning",
+      "mattress sanitization",
+      "upholstery cleaning",
+      "sofa cleaning",
+      "couch cleaning",
+      "Persian rug cleaning",
+      "oriental rug cleaning",
+      "fabric protection",
+      "Masterguard",
+      "fireproofing",
+      "fire retardant treatment",
+      "drape cleaning",
+      "drapery cleaning",
+      "blind cleaning",
+      "soft furnishing care"
+    ],
     "areaServed": [
       {
         "@type": "City",
@@ -136,8 +159,33 @@ export default function RootLayout({
       {
         "@type": "Neighborhood",
         "name": "Randburg"
+      },
+      {
+        "@type": "Neighborhood",
+        "name": "Hyde Park"
+      },
+      {
+        "@type": "Neighborhood",
+        "name": "Bryanston"
+      },
+      {
+        "@type": "Neighborhood",
+        "name": "Morningside"
+      },
+      {
+        "@type": "Neighborhood",
+        "name": "Parkhurst"
       }
     ],
+    "serviceArea": {
+      "@type": "GeoCircle",
+      "geoMidpoint": {
+        "@type": "GeoCoordinates",
+        "latitude": -26.2041,
+        "longitude": 28.0473
+      },
+      "geoRadius": "25000"
+    },
     "hasOfferCatalog": {
       "@type": "OfferCatalog",
       "name": "Cleaning Services",
@@ -200,6 +248,10 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
+        <meta name="geo.region" content="ZA-GP" />
+        <meta name="geo.placename" content="Johannesburg" />
+        <meta name="geo.position" content="-26.2041;28.0473" />
+        <meta name="ICBM" content="-26.2041, 28.0473" />
         <Script id="google-tag-manager" strategy="afterInteractive">
           {`(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
 new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
@@ -222,6 +274,7 @@ j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
           />
         </noscript>
         {gaId && <GoogleAnalytics measurementId={gaId} />}
+        <GeoLocation />
         <Navbar />
         {children}
         <Footer />

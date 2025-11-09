@@ -123,8 +123,8 @@ export default function Home() {
             <h2 className="text-4xl font-bold text-gray-900 mb-4">
               Our Professional Cleaning Services
             </h2>
-            <p className="text-xl text-gray-700">
-              Complete soft furnishing care for homes, hotels, and offices
+            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
+              Specialist curtain dry cleaning, drapery care, upholstery restoration, mattress sanitizing, and soft furnishing maintenance for homes, hotels, and offices across Johannesburg
             </p>
           </div>
 
@@ -133,7 +133,7 @@ export default function Home() {
             <div className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-primary hover:shadow-lg transition-all">
               <h3 className="text-2xl font-bold mb-3 text-primary">On-Site Curtain Dry Cleaning</h3>
               <p className="text-gray-700 mb-4">
-                Dry clean curtains and blinds where they hang. Our service includes repairing, servicing, and cleaning of curtain hardware.
+                Dry clean curtains, drapes, and window treatments where they hang. Our service includes repairing, servicing, and cleaning of curtain hardware and tracks.
               </p>
               <ul className="space-y-2 mb-4 text-gray-700">
                 <li className="flex items-start gap-2">
@@ -181,9 +181,9 @@ export default function Home() {
 
             {/* Upholstery Cleaning */}
             <div className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-primary hover:shadow-lg transition-all">
-              <h3 className="text-2xl font-bold mb-3 text-primary">Upholstery Cleaning</h3>
+              <h3 className="text-2xl font-bold mb-3 text-primary">Upholstery & Furniture Cleaning</h3>
               <p className="text-gray-700 mb-4">
-                Professional dry/wet cleaning for all upholstery. Regular maintenance extends furniture life.
+                Professional dry/wet cleaning for sofas, couches, chairs, and all upholstered furniture. Regular maintenance extends furniture life.
               </p>
               <ul className="space-y-2 mb-4 text-gray-700">
                 <li className="flex items-start gap-2">

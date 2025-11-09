@@ -30,11 +30,11 @@ export default function Navbar() {
   ];
 
   return (
-    <nav className="bg-white shadow-md sticky top-0 z-50">
+    <nav className="bg-white shadow-md sticky top-0 z-50" aria-label="Main navigation">
       <div className="max-w-7xl mx-auto px-4">
         <div className="flex justify-between items-center h-16">
           {/* Logo */}
-          <Link href="/" className="flex items-center">
+          <Link href="/" className="flex items-center" aria-label="Curtain Cleaning Johannesburg home">
             <span className="text-xl font-bold text-primary">Curtain Cleaning</span>
             <span className="text-xl font-normal text-gray-700 ml-2">Johannesburg</span>
           </Link>
@@ -46,6 +46,8 @@ export default function Navbar() {
               className={`font-semibold transition-colors ${
                 isActive("/") ? "text-primary" : "text-gray-700 hover:text-primary"
               }`}
+              aria-label="Home page"
+              aria-current={isActive("/") ? "page" : undefined}
             >
               Home
             </Link>
@@ -56,17 +58,31 @@ export default function Navbar() {
               onMouseEnter={() => setServicesOpen(true)}
               onMouseLeave={() => setServicesOpen(false)}
             >
-              <button className="font-semibold text-gray-700 hover:text-primary flex items-center gap-1">
+              <button 
+                className="font-semibold text-gray-700 hover:text-primary flex items-center gap-1"
+                aria-label="Services menu"
+                aria-expanded={servicesOpen}
+                aria-haspopup="true"
+                onClick={() => setServicesOpen(!servicesOpen)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setServicesOpen(!servicesOpen);
+                  }
+                }}
+              >
                 Services
                 <ChevronDownIcon className="h-4 w-4" />
               </button>
               {servicesOpen && (
-                <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-lg py-2 border border-gray-200">
+                <div className="absolute top-full left-0 mt-2 w-64 bg-white shadow-lg rounded-lg py-2 border border-gray-200" role="menu" aria-label="Services">
                   {services.map((service) => (
                     <Link
                       key={service.href}
                       href={service.href}
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary"
+                      role="menuitem"
+                      aria-label={`${service.name} service page`}
                     >
                       {service.name}
                     </Link>
@@ -81,17 +97,31 @@ export default function Navbar() {
               onMouseEnter={() => setLocationsOpen(true)}
               onMouseLeave={() => setLocationsOpen(false)}
             >
-              <button className="font-semibold text-gray-700 hover:text-primary flex items-center gap-1">
+              <button 
+                className="font-semibold text-gray-700 hover:text-primary flex items-center gap-1"
+                aria-label="Locations menu"
+                aria-expanded={locationsOpen}
+                aria-haspopup="true"
+                onClick={() => setLocationsOpen(!locationsOpen)}
+                onKeyDown={(e) => {
+                  if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    setLocationsOpen(!locationsOpen);
+                  }
+                }}
+              >
                 Locations
                 <ChevronDownIcon className="h-4 w-4" />
               </button>
               {locationsOpen && (
-                <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 border border-gray-200">
+                <div className="absolute top-full left-0 mt-2 w-48 bg-white shadow-lg rounded-lg py-2 border border-gray-200" role="menu" aria-label="Service locations">
                   {locations.map((location) => (
                     <Link
                       key={location.href}
                       href={location.href}
                       className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary"
+                      role="menuitem"
+                      aria-label={`Curtain cleaning in ${location.name}`}
                     >
                       {location.name}
                     </Link>
@@ -105,6 +135,8 @@ export default function Navbar() {
               className={`font-semibold transition-colors ${
                 isActive("/contact") ? "text-primary" : "text-gray-700 hover:text-primary"
               }`}
+              aria-label="Contact us page"
+              aria-current={isActive("/contact") ? "page" : undefined}
             >
               Contact
             </Link>
@@ -114,6 +146,8 @@ export default function Navbar() {
               className={`font-semibold transition-colors ${
                 isActive("/booking/deposit") ? "text-primary" : "text-gray-700 hover:text-primary"
               }`}
+              aria-label="Book online and pay deposit"
+              aria-current={isActive("/booking/deposit") ? "page" : undefined}
             >
               Book Online
             </Link>
@@ -121,8 +155,9 @@ export default function Navbar() {
             <a
               href="tel:+27750119200"
               className="bg-primary text-white hover:bg-primary-dark px-4 py-2 rounded-lg font-semibold transition-all flex items-center gap-2"
+              aria-label="Call us at +27 75 011 9200"
             >
-              <PhoneIcon className="h-5 w-5" />
+              <PhoneIcon className="h-5 w-5" aria-hidden="true" />
               +27 75 011 9200
             </a>
           </div>
@@ -131,23 +166,27 @@ export default function Navbar() {
           <button
             onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
             className="lg:hidden text-gray-700 hover:text-primary"
+            aria-label={mobileMenuOpen ? "Close mobile menu" : "Open mobile menu"}
+            aria-expanded={mobileMenuOpen}
+            aria-controls="mobile-navigation"
           >
             {mobileMenuOpen ? (
-              <XMarkIcon className="h-6 w-6" />
+              <XMarkIcon className="h-6 w-6" aria-hidden="true" />
             ) : (
-              <Bars3Icon className="h-6 w-6" />
+              <Bars3Icon className="h-6 w-6" aria-hidden="true" />
             )}
           </button>
         </div>
 
         {/* Mobile Navigation */}
         {mobileMenuOpen && (
-          <div className="lg:hidden py-4 border-t border-gray-200">
+          <div className="lg:hidden py-4 border-t border-gray-200" id="mobile-navigation" role="navigation" aria-label="Mobile navigation">
             <div className="space-y-2">
               <Link
                 href="/"
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary font-semibold"
                 onClick={() => setMobileMenuOpen(false)}
+                aria-label="Home page"
               >
                 Home
               </Link>
@@ -157,18 +196,23 @@ export default function Navbar() {
                 <button
                   onClick={() => setServicesOpen(!servicesOpen)}
                   className="w-full flex items-center justify-between px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary font-semibold"
+                  aria-label="Services menu"
+                  aria-expanded={servicesOpen}
+                  aria-controls="mobile-services-menu"
                 >
                   Services
-                  <ChevronDownIcon className={`h-4 w-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} />
+                  <ChevronDownIcon className={`h-4 w-4 transition-transform ${servicesOpen ? "rotate-180" : ""}`} aria-hidden="true" />
                 </button>
                 {servicesOpen && (
-                  <div className="pl-4 space-y-1">
+                  <div className="pl-4 space-y-1" id="mobile-services-menu" role="menu" aria-label="Services">
                     {services.map((service) => (
                       <Link
                         key={service.href}
                         href={service.href}
                         className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-primary"
                         onClick={() => setMobileMenuOpen(false)}
+                        role="menuitem"
+                        aria-label={`${service.name} service page`}
                       >
                         {service.name}
                       </Link>
@@ -182,18 +226,23 @@ export default function Navbar() {
                 <button
                   onClick={() => setLocationsOpen(!locationsOpen)}
                   className="w-full flex items-center justify-between px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary font-semibold"
+                  aria-label="Locations menu"
+                  aria-expanded={locationsOpen}
+                  aria-controls="mobile-locations-menu"
                 >
                   Locations
-                  <ChevronDownIcon className={`h-4 w-4 transition-transform ${locationsOpen ? "rotate-180" : ""}`} />
+                  <ChevronDownIcon className={`h-4 w-4 transition-transform ${locationsOpen ? "rotate-180" : ""}`} aria-hidden="true" />
                 </button>
                 {locationsOpen && (
-                  <div className="pl-4 space-y-1">
+                  <div className="pl-4 space-y-1" id="mobile-locations-menu" role="menu" aria-label="Service locations">
                     {locations.map((location) => (
                       <Link
                         key={location.href}
                         href={location.href}
                         className="block px-4 py-2 text-sm text-gray-600 hover:bg-gray-50 hover:text-primary"
                         onClick={() => setMobileMenuOpen(false)}
+                        role="menuitem"
+                        aria-label={`Curtain cleaning in ${location.name}`}
                       >
                         {location.name}
                       </Link>
@@ -206,6 +255,7 @@ export default function Navbar() {
                 href="/contact"
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary font-semibold"
                 onClick={() => setMobileMenuOpen(false)}
+                aria-label="Contact us page"
               >
                 Contact
               </Link>
@@ -214,6 +264,7 @@ export default function Navbar() {
                 href="/booking/deposit"
                 className="block px-4 py-2 text-gray-700 hover:bg-gray-50 hover:text-primary font-semibold"
                 onClick={() => setMobileMenuOpen(false)}
+                aria-label="Book online and pay deposit"
               >
                 Book Online
               </Link>
@@ -221,8 +272,9 @@ export default function Navbar() {
               <a
                 href="tel:+27750119200"
                 className="block mx-4 mt-4 bg-primary text-white hover:bg-primary-dark px-4 py-3 rounded-lg font-semibold transition-all text-center"
+                aria-label="Call us at +27 75 011 9200"
               >
-                <PhoneIcon className="h-5 w-5 inline mr-2" />
+                <PhoneIcon className="h-5 w-5 inline mr-2" aria-hidden="true" />
                 +27 75 011 9200
               </a>
             </div>
