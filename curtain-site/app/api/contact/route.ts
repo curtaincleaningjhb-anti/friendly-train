@@ -60,14 +60,13 @@ export async function POST(request: NextRequest) {
       timestamp: new Date().toISOString(),
     });
 
-    try {
-      const { client, fromEmail } = await getUncachableSendGridClient();
+    const { client, fromEmail } = await getUncachableSendGridClient();
 
-      const emailContent = {
-        to: fromEmail,
-        from: fromEmail,
-        subject: `New Quote Request - ${service} in ${location}`,
-        text: `
+    const emailContent = {
+      to: fromEmail,
+      from: fromEmail,
+      subject: `New Quote Request - ${service} in ${location}`,
+      text: `
 New Quote Request Received
 
 Customer Details:
@@ -82,8 +81,8 @@ Message:
 ${message || 'No additional message provided'}
 
 Received: ${new Date().toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg' })}
-        `,
-        html: `
+      `,
+      html: `
 <!DOCTYPE html>
 <html>
 <head>
@@ -138,18 +137,14 @@ Received: ${new Date().toLocaleString('en-ZA', { timeZone: 'Africa/Johannesburg'
   </div>
 </body>
 </html>
-        `,
-      };
+      `,
+    };
 
-      await client.send(emailContent);
-      console.log("Email sent successfully to:", fromEmail);
-
-    } catch (emailError) {
-      console.error("Failed to send email via SendGrid:", emailError);
-    }
+    await client.send(emailContent);
+    console.log("Email sent successfully to:", fromEmail);
 
     return NextResponse.json(
-      { success: true, message: "Form submitted successfully" },
+      { success: true, message: "Quote request sent successfully! We'll contact you shortly." },
       { status: 200 }
     );
   } catch (error) {
