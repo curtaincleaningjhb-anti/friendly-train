@@ -123,26 +123,46 @@ function initSMSTab() {
   }
 
   function displayMessages(messages) {
-    messageHistory.innerHTML = messages.map(msg => {
-      const date = new Date(msg.created_at);
-      const formattedDate = date.toLocaleString();
-      const safePhoneNumber = escapeHtml(msg.phone_number);
-      const safeMessage = escapeHtml(msg.message);
-      const safeStatus = escapeHtml(msg.status);
+    messageHistory.innerHTML = '';
+    
+    messages.forEach(msg => {
+      const messageItem = document.createElement('div');
+      messageItem.className = 'message-item';
       
-      return `
-        <div class="message-item">
-          <div class="message-header">
-            <span class="phone-number">${safePhoneNumber}</span>
-            <span class="message-date">${formattedDate}</span>
-          </div>
-          <div class="message-body">${safeMessage}</div>
-          <div class="message-footer">
-            <span class="message-status status-${safeStatus}">${safeStatus}</span>
-          </div>
-        </div>
-      `;
-    }).join('');
+      const messageHeader = document.createElement('div');
+      messageHeader.className = 'message-header';
+      
+      const phoneSpan = document.createElement('span');
+      phoneSpan.className = 'phone-number';
+      phoneSpan.textContent = msg.phone_number;
+      
+      const dateSpan = document.createElement('span');
+      dateSpan.className = 'message-date';
+      const date = new Date(msg.created_at);
+      dateSpan.textContent = date.toLocaleString();
+      
+      messageHeader.appendChild(phoneSpan);
+      messageHeader.appendChild(dateSpan);
+      
+      const messageBody = document.createElement('div');
+      messageBody.className = 'message-body';
+      messageBody.textContent = msg.message;
+      
+      const messageFooter = document.createElement('div');
+      messageFooter.className = 'message-footer';
+      
+      const statusSpan = document.createElement('span');
+      statusSpan.className = `message-status status-${msg.status}`;
+      statusSpan.textContent = msg.status;
+      
+      messageFooter.appendChild(statusSpan);
+      
+      messageItem.appendChild(messageHeader);
+      messageItem.appendChild(messageBody);
+      messageItem.appendChild(messageFooter);
+      
+      messageHistory.appendChild(messageItem);
+    });
   }
 }
 
@@ -234,29 +254,56 @@ function initEmailTab() {
   }
 
   function displayEmails(emails) {
-    emailHistory.innerHTML = emails.map(email => {
-      const date = new Date(email.created_at);
-      const formattedDate = date.toLocaleString();
-      const safeEmail = escapeHtml(email.recipient_email);
-      const safeSubject = escapeHtml(email.subject);
-      const safeMessage = escapeHtml(email.message);
-      const safeStatus = escapeHtml(email.status);
+    emailHistory.innerHTML = '';
+    
+    emails.forEach(email => {
+      const messageItem = document.createElement('div');
+      messageItem.className = 'message-item';
       
-      return `
-        <div class="message-item">
-          <div class="message-header">
-            <span class="phone-number">${safeEmail}</span>
-            <span class="message-date">${formattedDate}</span>
-          </div>
-          <div class="message-body">
-            <strong>Subject:</strong> ${safeSubject}<br>
-            ${safeMessage}
-          </div>
-          <div class="message-footer">
-            <span class="message-status status-${safeStatus}">${safeStatus}</span>
-          </div>
-        </div>
-      `;
-    }).join('');
+      const messageHeader = document.createElement('div');
+      messageHeader.className = 'message-header';
+      
+      const recipientSpan = document.createElement('span');
+      recipientSpan.className = 'phone-number';
+      recipientSpan.textContent = email.recipient_email;
+      
+      const dateSpan = document.createElement('span');
+      dateSpan.className = 'message-date';
+      const date = new Date(email.created_at);
+      dateSpan.textContent = date.toLocaleString();
+      
+      messageHeader.appendChild(recipientSpan);
+      messageHeader.appendChild(dateSpan);
+      
+      const messageBody = document.createElement('div');
+      messageBody.className = 'message-body';
+      
+      const subjectLabel = document.createElement('strong');
+      subjectLabel.textContent = 'Subject:';
+      
+      const subjectText = document.createTextNode(' ' + email.subject);
+      const lineBreak = document.createElement('br');
+      const messageText = document.createTextNode(email.message);
+      
+      messageBody.appendChild(subjectLabel);
+      messageBody.appendChild(subjectText);
+      messageBody.appendChild(lineBreak);
+      messageBody.appendChild(messageText);
+      
+      const messageFooter = document.createElement('div');
+      messageFooter.className = 'message-footer';
+      
+      const statusSpan = document.createElement('span');
+      statusSpan.className = `message-status status-${email.status}`;
+      statusSpan.textContent = email.status;
+      
+      messageFooter.appendChild(statusSpan);
+      
+      messageItem.appendChild(messageHeader);
+      messageItem.appendChild(messageBody);
+      messageItem.appendChild(messageFooter);
+      
+      emailHistory.appendChild(messageItem);
+    });
   }
 }
