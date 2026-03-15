@@ -1,0 +1,1910 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>On The Spot — Brand Kit v2.1.0</title>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com"/>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin/>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800&family=Work+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+  <link href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:wght,FILL@100..700,0..1&display=swap" rel="stylesheet"/>
+
+  <!-- Tailwind -->
+  <script src="https://cdn.tailwindcss.com?plugins=forms,container-queries"></script>
+  <script id="tailwind-config">
+    tailwind.config = {
+      darkMode: "class",
+      theme: {
+        extend: {
+          colors: {
+            "primary":          "#0A369D",
+            "primary-dark":     "#082d84",
+            "background-light": "#F8F9FA",
+            "background-dark":  "#101522",
+            "surface-light":    "#FFFFFF",
+            "surface-dark":     "#1F2937",
+            "text-main":        "#111827",
+            "text-muted":       "#6B7280",
+            "border-color":     "#E5E7EB",
+            "accent":           "#00B4D8",
+          },
+          fontFamily: {
+            "display": ["Plus Jakarta Sans", "sans-serif"],
+            "body":    ["Work Sans", "sans-serif"],
+          },
+          borderRadius: {
+            "DEFAULT": "0.125rem",
+            "sm": "0.125rem",
+            "md": "0.375rem",
+            "lg": "0.5rem",
+            "xl": "0.75rem",
+            "full": "9999px",
+          },
+          boxShadow: {
+            "crisp":       "4px 4px 0px rgba(10,54,157,0.10)",
+            "crisp-hover": "6px 6px 0px rgba(10,54,157,0.18)",
+          },
+        },
+      },
+    }
+  </script>
+
+  <style>
+    body { font-family: 'Work Sans', sans-serif; }
+    h1,h2,h3,h4,h5,h6,.font-display { font-family: 'Plus Jakarta Sans', sans-serif; }
+
+    ::-webkit-scrollbar { width:6px; height:6px; }
+    ::-webkit-scrollbar-track { background: transparent; }
+    ::-webkit-scrollbar-thumb { background:#cbd5e1; border-radius:3px; }
+    ::-webkit-scrollbar-thumb:hover { background:#94a3b8; }
+
+    @keyframes pulse-fast { 0%,100%{opacity:1} 50%{opacity:.5} }
+    .animate-pulse-fast { animation: pulse-fast 1.5s cubic-bezier(0.4,0,0.6,1) infinite; }
+
+    /* Section panels */
+    .kit-section { display: none; }
+    .kit-section.active { display: block; }
+
+    /* Active nav item */
+    .nav-item.active {
+      background-color: rgba(10,54,157,0.08);
+      color: #0A369D;
+      border-left-color: #0A369D;
+    }
+    .nav-item { transition: all 150ms ease-in-out; }
+
+    /* Version badge */
+    .version-badge { font-size:10px; }
+
+    /* Smooth transitions on interactive elements */
+    button, a { transition: all 150ms ease-in-out; }
+
+    /* Toast */
+    #toast {
+      position: fixed; bottom: 24px; right: 24px; z-index:9999;
+      background:#111827; color:#fff; padding:10px 18px;
+      border-radius:2px; font-size:13px; font-family:'Work Sans',sans-serif;
+      display:none; align-items:center; gap:8px;
+      box-shadow: 4px 4px 0px rgba(10,54,157,0.2);
+    }
+    #toast.show { display:flex; }
+
+    /* Mobile sidebar overlay */
+    #sidebar-overlay {
+      display:none; position:fixed; inset:0; background:rgba(0,0,0,0.4); z-index:30;
+    }
+    #sidebar-overlay.show { display:block; }
+    @media(max-width:768px) {
+      #sidebar {
+        position:fixed; top:0; left:-280px; height:100vh; z-index:40;
+        transition:left 200ms ease-in-out;
+      }
+      #sidebar.open { left:0; }
+    }
+  </style>
+</head>
+
+<body class="bg-background-light text-text-main min-h-screen antialiased">
+
+<!-- ═══ TOAST NOTIFICATION ═══ -->
+<div id="toast">
+  <span class="material-symbols-outlined" style="font-size:16px">check_circle</span>
+  <span id="toast-msg">Copied to clipboard!</span>
+</div>
+
+<!-- ═══ SIDEBAR OVERLAY (mobile) ═══ -->
+<div id="sidebar-overlay" onclick="closeSidebar()"></div>
+
+<!-- ═══ TOP NAV ═══ -->
+<header class="sticky top-0 z-20 flex items-center justify-between px-4 md:px-6 py-3.5 bg-surface-light border-b border-border-color shadow-sm">
+  <div class="flex items-center gap-3">
+    <!-- Mobile hamburger -->
+    <button class="md:hidden text-text-muted hover:text-primary p-1" onclick="toggleSidebar()">
+      <span class="material-symbols-outlined">menu</span>
+    </button>
+    <!-- Logo -->
+    <div class="size-5 text-primary flex-shrink-0">
+      <svg viewBox="0 0 48 48" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+        <path fill-rule="evenodd" clip-rule="evenodd" d="M24 4H6V17.3333V30.6667H24V44H42V30.6667V17.3333H24V4Z"/>
+      </svg>
+    </div>
+    <span class="font-display font-bold text-base tracking-tight">On The Spot Brand Kit</span>
+    <span class="version-badge px-1.5 py-0.5 bg-slate-100 text-text-muted rounded font-mono hidden sm:inline">v2.1.0 &bull; Stable</span>
+  </div>
+  <div class="flex items-center gap-3">
+    <button class="text-text-muted hover:text-primary hidden sm:block" title="Search">
+      <span class="material-symbols-outlined" style="font-size:20px">search</span>
+    </button>
+    <div class="w-7 h-7 rounded bg-primary text-white flex items-center justify-center font-bold text-xs font-display">OS</div>
+  </div>
+</header>
+
+<!-- ═══ LAYOUT ═══ -->
+<div class="flex h-[calc(100vh-57px)]">
+
+  <!-- SIDEBAR -->
+  <aside id="sidebar" class="w-64 flex-shrink-0 border-r border-border-color bg-surface-light hidden md:flex flex-col overflow-y-auto">
+    <div class="p-5 flex flex-col gap-5">
+      <!-- Brand badge -->
+      <div class="flex items-center gap-3 pt-1">
+        <div class="bg-primary/10 rounded-sm size-9 flex items-center justify-center text-primary border border-primary/20 flex-shrink-0">
+          <span class="material-symbols-outlined" style="font-size:18px">water_drop</span>
+        </div>
+        <div>
+          <div class="font-display font-bold text-sm">Brand Kit</div>
+          <div class="text-text-muted text-[10px] uppercase tracking-widest font-medium">On The Spot</div>
+        </div>
+      </div>
+
+      <!-- Divider -->
+      <div class="h-px bg-border-color"></div>
+      <div class="text-[10px] uppercase tracking-widest text-text-muted font-semibold pl-1">Design System</div>
+
+      <!-- Nav links -->
+      <nav class="flex flex-col gap-0.5 -mt-2">
+        <button onclick="showSection('brand-overview')" data-section="brand-overview"
+          class="nav-item active flex items-center gap-3 px-3 py-2.5 rounded-sm border-l-2 border-primary text-left w-full">
+          <span class="material-symbols-outlined text-[18px]">dashboard</span>
+          <span class="text-sm font-medium">Brand Overview</span>
+        </button>
+        <button onclick="showSection('color-system')" data-section="color-system"
+          class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-sm border-l-2 border-transparent text-text-main hover:bg-slate-50 text-left w-full">
+          <span class="material-symbols-outlined text-[18px] text-text-muted">palette</span>
+          <span class="text-sm font-medium">Color System</span>
+        </button>
+        <button onclick="showSection('typography')" data-section="typography"
+          class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-sm border-l-2 border-transparent text-text-main hover:bg-slate-50 text-left w-full">
+          <span class="material-symbols-outlined text-[18px] text-text-muted">text_fields</span>
+          <span class="text-sm font-medium">Typography</span>
+        </button>
+        <button onclick="showSection('ui-components')" data-section="ui-components"
+          class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-sm border-l-2 border-transparent text-text-main hover:bg-slate-50 text-left w-full">
+          <span class="material-symbols-outlined text-[18px] text-text-muted">widgets</span>
+          <span class="text-sm font-medium">UI Components</span>
+        </button>
+        <button onclick="showSection('ctas-banners')" data-section="ctas-banners"
+          class="nav-item flex items-center gap-3 px-3 py-2.5 rounded-sm border-l-2 border-transparent text-text-main hover:bg-slate-50 text-left w-full">
+          <span class="material-symbols-outlined text-[18px] text-text-muted">campaign</span>
+          <span class="text-sm font-medium">CTAs &amp; Banners</span>
+        </button>
+      </nav>
+
+      <!-- Bottom info -->
+      <div class="mt-auto pt-4 border-t border-border-color">
+        <div class="text-[10px] text-text-muted space-y-1">
+          <div class="flex justify-between"><span>Version</span><span class="font-mono">v2.1.0</span></div>
+          <div class="flex justify-between"><span>Status</span><span class="text-emerald-600 font-medium">Stable</span></div>
+          <div class="flex justify-between"><span>Primary</span><span class="font-mono text-primary">#0A369D</span></div>
+        </div>
+      </div>
+    </div>
+  </aside>
+
+  <!-- MAIN CONTENT AREA -->
+  <main class="flex-1 overflow-y-auto">
+    <div class="max-w-5xl mx-auto px-6 lg:px-12 py-8 lg:py-12">
+
+      <!-- ══ SECTION: Brand Overview ══ -->
+      <div id="section-brand-overview" class="kit-section active">
+
+
+<div class="max-w-5xl mx-auto flex flex-col gap-10">
+
+<!-- Page Header -->
+
+<div class="flex flex-col gap-4 border-b border-border-color
+dark:border-slate-800 pb-8">
+
+<h1 class="font-display text-4xl md:text-5xl font-extrabold
+leading-tight tracking-tight text-text-main dark:text-white">
+
+Brand Overview
+
+</h1>
+
+<p class="text-text-muted text-lg max-w-2xl leading-relaxed">
+
+Standardizing the On The Spot aesthetic. This is the single source of
+truth for our core identity assets, ensuring a consistent, trustworthy,
+and premium presence.
+
+</p>
+
+</div>
+
+<!-- Content Grid (Masonry-ish via CSS Columns/Grid) -->
+
+<div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-start">
+
+<!-- Column 1: Primary Logo & Clear Space -->
+
+<div class="flex flex-col gap-8">
+
+<!-- Primary Logo Section -->
+
+<section class="flex flex-col gap-4">
+
+<div class="flex items-center justify-between">
+
+<h3 class="font-display text-xl font-bold text-text-main
+dark:text-white">Primary Logo</h3>
+
+<span class="px-2.5 py-1 bg-primary/10 text-primary text-xs font-bold
+rounded-sm uppercase tracking-wide">Core Asset</span>
+
+</div>
+
+<!-- Logo Display Card -->
+
+<div class="group relative w-full aspect-[4/3] max-w-[400px]
+bg-surface-light border border-border-color rounded-sm shadow-crisp
+hover:shadow-crisp-hover transition-all-fast overflow-hidden flex
+items-center justify-center cursor-crosshair">
+
+<!-- Background Grid Pattern for Transparency Check -->
+
+<div class="absolute inset-0 opacity-[0.03] pointer-events-none"
+style="background-image: radial-gradient(#111827 1px, transparent 1px);
+background-size: 16px 16px;"></div>
+
+<!-- The Logo (Simulated with text/icon for this example) -->
+
+<div class="relative z-10 flex items-center gap-3 text-primary
+transition-transform duration-300 group-hover:scale-105">
+
+<span class="material-symbols-outlined text-[48px]">water_drop</span>
+
+<span class="font-display text-3xl font-black tracking-tighter">On The
+Spot</span>
+
+</div>
+
+<!-- Hover Overlay: Bounding Box & Tooltip -->
+
+<div class="absolute inset-0 border-2 border-dashed border-primary/0
+group-hover:border-primary/50 transition-colors duration-200
+pointer-events-none m-8"></div>
+
+<div class="absolute bottom-4 left-1/2 -translate-x-1/2 opacity-0
+group-hover:opacity-100 transition-opacity duration-200
+pointer-events-none">
+
+<div class="bg-text-main text-white text-xs font-medium px-3 py-1.5
+rounded-sm shadow-lg whitespace-nowrap flex items-center gap-2">
+
+<span class="material-symbols-outlined text-[14px]">download</span>
+
+Download SVG
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Actions -->
+
+<div class="flex gap-3 mt-2">
+
+<button class="bg-primary hover:bg-primary/90 text-white font-display
+font-semibold text-sm px-5 py-2.5 rounded-sm transition-colors flex
+items-center gap-2 shadow-sm border border-transparent">
+
+<span class="material-symbols-outlined text-[18px]">download</span>
+
+Download SVG
+
+</button>
+
+<button class="bg-surface-light dark:bg-surface-dark border
+border-border-color text-text-main dark:text-slate-200 hover:bg-slate-50
+dark:hover:bg-slate-800 font-display font-semibold text-sm px-5 py-2.5
+rounded-sm transition-colors flex items-center gap-2">
+
+<span class="material-symbols-outlined text-[18px]">file_copy</span>
+
+Copy URL
+
+</button>
+
+</div>
+
+</section>
+
+<!-- Clear Space Guide -->
+
+<section class="flex flex-col gap-4 mt-4">
+
+<h3 class="font-display text-xl font-bold text-text-main
+dark:text-white">Clear Space Rules</h3>
+
+<p class="text-sm text-text-muted mb-2">Maintain a minimum padding of
+<code class="bg-slate-100 dark:bg-slate-800 px-1.5 py-0.5 rounded
+text-primary font-mono text-xs">48px</code> (or 'X' height of the drop)
+around the logo.</p>
+
+<div class="w-full aspect-video bg-surface-light border
+border-border-color rounded-sm flex items-center justify-center relative
+overflow-hidden">
+
+<!-- Padding Indicator Box -->
+
+<div class="relative bg-primary/5 border border-primary/20 p-[48px] flex
+items-center justify-center">
+
+<!-- Measurement Lines -->
+
+<div class="absolute top-0 left-1/2 -translate-x-1/2 -translate-y-full
+w-px h-[48px] bg-accent/50"></div>
+
+<div class="absolute bottom-0 left-1/2 -translate-x-1/2 translate-y-full
+w-px h-[48px] bg-accent/50"></div>
+
+<div class="absolute left-0 top-1/2 -translate-y-1/2 -translate-x-full
+h-px w-[48px] bg-accent/50"></div>
+
+<div class="absolute right-0 top-1/2 -translate-y-1/2 translate-x-full
+h-px w-[48px] bg-accent/50"></div>
+
+<span class="absolute top-2 left-1/2 -translate-x-1/2 text-[10px]
+text-accent font-mono font-bold">48px</span>
+
+<span class="absolute left-2 top-1/2 -translate-y-1/2 text-[10px]
+text-accent font-mono font-bold">48px</span>
+
+<!-- Small Logo -->
+
+<div class="flex items-center gap-2 text-text-main">
+
+<span class="material-symbols-outlined text-[24px]">water_drop</span>
+
+<span class="font-display text-xl font-black tracking-tighter">On The
+Spot</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+<!-- Column 2: Variations & Downloads -->
+
+<div class="flex flex-col gap-8">
+
+<!-- Logo Variations -->
+
+<section class="flex flex-col gap-4">
+
+<h3 class="font-display text-xl font-bold text-text-main
+dark:text-white">Variations</h3>
+
+<div class="grid grid-cols-2 gap-4">
+
+<!-- Reversed -->
+
+<div class="flex flex-col gap-2">
+
+<div class="aspect-square bg-primary rounded-sm flex items-center
+justify-center p-6 border border-primary relative group">
+
+<div class="flex flex-col items-center gap-2 text-white">
+
+<span class="material-symbols-outlined text-[32px]">water_drop</span>
+
+<span class="font-display text-sm font-black tracking-tighter
+text-center leading-tight">On The<br/>Spot</span>
+
+</div>
+
+<!-- Tooltip -->
+
+<div class="absolute inset-0 bg-text-main/90 opacity-0
+group-hover:opacity-100 transition-opacity duration-200 flex
+items-center justify-center rounded-sm">
+
+<button class="text-white hover:text-accent flex flex-col items-center
+gap-1">
+
+<span class="material-symbols-outlined">download</span>
+
+<span class="text-xs font-medium">SVG</span>
+
+</button>
+
+</div>
+
+</div>
+
+<span class="text-sm font-medium text-text-main
+dark:text-slate-300">Reversed (Primary)</span>
+
+</div>
+
+<!-- Monochrome Dark -->
+
+<div class="flex flex-col gap-2">
+
+<div class="aspect-square bg-surface-light border border-border-color
+rounded-sm flex items-center justify-center p-6 relative group">
+
+<div class="flex flex-col items-center gap-2 text-text-main">
+
+<span class="material-symbols-outlined text-[32px]">water_drop</span>
+
+<span class="font-display text-sm font-black tracking-tighter
+text-center leading-tight">On The<br/>Spot</span>
+
+</div>
+
+<!-- Tooltip -->
+
+<div class="absolute inset-0 bg-slate-100/90 dark:bg-slate-800/90
+opacity-0 group-hover:opacity-100 transition-opacity duration-200 flex
+items-center justify-center rounded-sm">
+
+<button class="text-primary hover:text-accent flex flex-col items-center
+gap-1">
+
+<span class="material-symbols-outlined">download</span>
+
+<span class="text-xs font-medium">SVG</span>
+
+</button>
+
+</div>
+
+</div>
+
+<span class="text-sm font-medium text-text-main
+dark:text-slate-300">Monochrome Dark</span>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Mission / Usage Guidelines -->
+
+<section class="bg-surface-light dark:bg-surface-dark border
+border-border-color rounded-sm p-6 flex flex-col gap-4 shadow-sm">
+
+<div class="flex items-center gap-3 text-primary">
+
+<span class="material-symbols-outlined">info</span>
+
+<h4 class="font-display font-bold text-lg text-text-main
+dark:text-white">Usage Guidelines</h4>
+
+</div>
+
+<ul class="text-sm text-text-muted space-y-3 pl-2">
+
+<li class="flex items-start gap-2">
+
+<span class="material-symbols-outlined text-[16px] text-accent
+mt-0.5">check_circle</span>
+
+<span>Always use the provided SVG files for digital applications to
+ensure crisp rendering.</span>
+
+</li>
+
+<li class="flex items-start gap-2">
+
+<span class="material-symbols-outlined text-[16px] text-accent
+mt-0.5">check_circle</span>
+
+<span>Maintain the 48px clear space minimum to prevent visual
+crowding.</span>
+
+</li>
+
+<li class="flex items-start gap-2">
+
+<span class="material-symbols-outlined text-[16px] text-red-500
+mt-0.5">cancel</span>
+
+<span>Do not stretch, skew, or alter the proportions of the logo mark or
+typography.</span>
+
+</li>
+
+<li class="flex items-start gap-2">
+
+<span class="material-symbols-outlined text-[16px] text-red-500
+mt-0.5">cancel</span>
+
+<span>Do not change the brand colors. Use the defined Royal Blue
+(#0A369D) or monochrome variants only.</span>
+
+</li>
+
+</ul>
+
+</section>
+
+<!-- Full Asset Bundle Download -->
+
+<section class="mt-4 p-6 bg-primary/5 border border-primary/20
+rounded-sm flex flex-col sm:flex-row items-start sm:items-center
+justify-between gap-4">
+
+<div>
+
+<h4 class="font-display font-bold text-text-main dark:text-white">Full
+Brand Bundle</h4>
+
+<p class="text-xs text-text-muted mt-1">Includes all SVGs, PNGs, and
+guidelines PDF. (12 MB)</p>
+
+</div>
+
+<button class="bg-text-main hover:bg-black dark:bg-white
+dark:text-text-main dark:hover:bg-slate-200 text-white font-display
+font-semibold text-sm px-5 py-2.5 rounded-sm transition-colors flex
+items-center gap-2 whitespace-nowrap shadow-sm border
+border-transparent">
+
+<span class="material-symbols-outlined text-[18px]">folder_zip</span>
+
+Download ZIP
+
+</button>
+
+</section>
+
+</div>
+
+</div>
+
+</div>
+
+
+      </div>
+
+      <!-- ══ SECTION: Color System ══ -->
+      <div id="section-color-system" class="kit-section ">
+
+
+<div class="max-w-[960px] flex flex-col gap-10">
+
+<!-- Page Header -->
+
+<section class="flex flex-col gap-4 border-b border-border-color pb-8">
+
+<h2 class="text-text-main text-4xl font-display font-bold leading-tight
+tracking-tight">Color System</h2>
+
+<p class="text-muted text-base font-body max-w-2xl leading-relaxed">
+
+Our brand's foundational color palette. Designed for precision,
+contrast, and reliability. Click any hex code to copy it directly to
+your clipboard.
+
+</p>
+
+</section>
+
+<!-- Primary Color Section -->
+
+<section class="flex flex-col gap-6">
+
+<h3 class="text-text-main text-2xl font-display font-bold leading-tight
+border-l-4 border-primary pl-4 py-1">Primary Color</h3>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+xl:grid-cols-4 gap-6">
+
+<!-- Primary Swatch -->
+
+<div class="swatch-card flex flex-col w-full aspect-square bg-surface
+border border-border-color transition-transform-shadow duration-150
+fast-in-out cursor-pointer group">
+
+<div class="h-[70%] bg-primary w-full relative">
+
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5
+transition-colors duration-150"></div>
+
+</div>
+
+<div class="h-[30%] p-4 flex flex-col justify-center bg-surface
+relative">
+
+<span class="text-text-main font-display font-bold text-sm">Royal
+Blue</span>
+
+<div class="flex items-center justify-between mt-1 text-muted
+group-hover:text-primary transition-colors duration-150 hex-group">
+
+<span class="font-body text-sm hex-text">#0A369D</span>
+
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100
+transition-opacity duration-150" style="font-size:
+16px;">content_copy</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Neutral & Surface Colors Section -->
+
+<section class="flex flex-col gap-6">
+
+<h3 class="text-text-main text-2xl font-display font-bold leading-tight
+border-l-4 border-muted pl-4 py-1">Neutral & Surface</h3>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+xl:grid-cols-4 gap-6">
+
+<!-- Background Swatch -->
+
+<div class="swatch-card flex flex-col w-full aspect-square bg-surface
+border border-border-color transition-transform-shadow duration-150
+fast-in-out cursor-pointer group">
+
+<div class="h-[70%] bg-[#F8F9FA] w-full border-b border-border-color
+relative">
+
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5
+transition-colors duration-150"></div>
+
+</div>
+
+<div class="h-[30%] p-4 flex flex-col justify-center bg-surface
+relative">
+
+<span class="text-text-main font-display font-bold text-sm">Off-White
+(App Bg)</span>
+
+<div class="flex items-center justify-between mt-1 text-muted
+group-hover:text-primary transition-colors duration-150 hex-group">
+
+<span class="font-body text-sm hex-text">#F8F9FA</span>
+
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100
+transition-opacity duration-150" style="font-size:
+16px;">content_copy</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Surface Swatch -->
+
+<div class="swatch-card flex flex-col w-full aspect-square bg-surface
+border border-border-color transition-transform-shadow duration-150
+fast-in-out cursor-pointer group">
+
+<div class="h-[70%] bg-[#FFFFFF] w-full border-b border-border-color
+relative">
+
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5
+transition-colors duration-150"></div>
+
+</div>
+
+<div class="h-[30%] p-4 flex flex-col justify-center bg-surface
+relative">
+
+<span class="text-text-main font-display font-bold text-sm">True White
+(Surface)</span>
+
+<div class="flex items-center justify-between mt-1 text-muted
+group-hover:text-primary transition-colors duration-150 hex-group">
+
+<span class="font-body text-sm hex-text">#FFFFFF</span>
+
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100
+transition-opacity duration-150" style="font-size:
+16px;">content_copy</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Text Main Swatch -->
+
+<div class="swatch-card flex flex-col w-full aspect-square bg-surface
+border border-border-color transition-transform-shadow duration-150
+fast-in-out cursor-pointer group">
+
+<div class="h-[70%] bg-[#111827] w-full relative">
+
+<div class="absolute inset-0 bg-white/0 group-hover:bg-white/10
+transition-colors duration-150"></div>
+
+</div>
+
+<div class="h-[30%] p-4 flex flex-col justify-center bg-surface
+relative">
+
+<span class="text-text-main font-display font-bold text-sm">Deep Slate
+(Text)</span>
+
+<div class="flex items-center justify-between mt-1 text-muted
+group-hover:text-primary transition-colors duration-150 hex-group">
+
+<span class="font-body text-sm hex-text">#111827</span>
+
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100
+transition-opacity duration-150" style="font-size:
+16px;">content_copy</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Muted Swatch -->
+
+<div class="swatch-card flex flex-col w-full aspect-square bg-surface
+border border-border-color transition-transform-shadow duration-150
+fast-in-out cursor-pointer group">
+
+<div class="h-[70%] bg-[#6B7280] w-full relative">
+
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/10
+transition-colors duration-150"></div>
+
+</div>
+
+<div class="h-[30%] p-4 flex flex-col justify-center bg-surface
+relative">
+
+<span class="text-text-main font-display font-bold text-sm">Mid-Grey
+(Muted)</span>
+
+<div class="flex items-center justify-between mt-1 text-muted
+group-hover:text-primary transition-colors duration-150 hex-group">
+
+<span class="font-body text-sm hex-text">#6B7280</span>
+
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100
+transition-opacity duration-150" style="font-size:
+16px;">content_copy</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Accent Color Section -->
+
+<section class="flex flex-col gap-6 mb-12">
+
+<h3 class="text-text-main text-2xl font-display font-bold leading-tight
+border-l-4 border-accent pl-4 py-1">Accent Colors</h3>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3
+xl:grid-cols-4 gap-6">
+
+<!-- Accent Swatch -->
+
+<div class="swatch-card flex flex-col w-full aspect-square bg-surface
+border border-border-color transition-transform-shadow duration-150
+fast-in-out cursor-pointer group">
+
+<div class="h-[70%] bg-accent w-full relative">
+
+<div class="absolute inset-0 bg-black/0 group-hover:bg-black/5
+transition-colors duration-150"></div>
+
+</div>
+
+<div class="h-[30%] p-4 flex flex-col justify-center bg-surface
+relative">
+
+<span class="text-text-main font-display font-bold text-sm">Bright
+Cyan</span>
+
+<div class="flex items-center justify-between mt-1 text-muted
+group-hover:text-primary transition-colors duration-150 hex-group">
+
+<span class="font-body text-sm hex-text">#00B4D8</span>
+
+<span class="material-symbols-outlined opacity-0 group-hover:opacity-100
+transition-opacity duration-150" style="font-size:
+16px;">content_copy</span>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+      </div>
+
+      <!-- ══ SECTION: Typography ══ -->
+      <div id="section-typography" class="kit-section ">
+
+
+<div class="max-w-[960px] mx-auto p-8 md:p-12 lg:p-16">
+
+<!-- Page Header -->
+
+<div class="mb-12">
+
+<h1 class="text-4xl md:text-5xl font-bold font-display tracking-tight
+text-text-main dark:text-white mb-4">Typography</h1>
+
+<p class="text-lg text-text-muted max-w-2xl leading-relaxed">
+
+Distinctive, razor-sharp geometric sans-serifs that communicate
+precision and cleanliness. Structure and clarity are paramount.
+
+</p>
+
+</div>
+
+<!-- Main Specimen -->
+
+<section class="mb-16">
+
+<div class="flex items-center justify-between mb-4">
+
+<h2 class="text-xl font-bold font-display text-text-main
+dark:text-white">Main Specimen</h2>
+
+<span class="text-xs font-mono bg-border-color/50 dark:bg-slate-800
+text-text-muted px-2 py-1">Plus Jakarta Sans</span>
+
+</div>
+
+<div class="bg-surface dark:bg-slate-900 border border-border-color
+dark:border-slate-700 p-8 md:p-16 shadow-crisp">
+
+<div class="flex flex-col gap-4">
+
+<p class="font-display font-bold text-4xl md:text-[64px] leading-[1.1]
+tracking-tight text-text-main dark:text-white">
+
+Clean curtains.<br/>Clear views.
+
+</p>
+
+<div class="flex items-center gap-4 mt-8 pt-6 border-t
+border-border-color dark:border-slate-800 text-sm text-text-muted">
+
+<span>Aa</span>
+
+<span class="w-1 h-1 bg-border-color rounded-full"></span>
+
+<span>Plus Jakarta Sans</span>
+
+<span class="w-1 h-1 bg-border-color rounded-full"></span>
+
+<span>Bold (700)</span>
+
+<span class="w-1 h-1 bg-border-color rounded-full"></span>
+
+<span>64px / 1.1</span>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Hierarchy Table -->
+
+<section class="mb-16">
+
+<div class="mb-6">
+
+<h2 class="text-xl font-bold font-display text-text-main dark:text-white
+mb-2">Heading Scale</h2>
+
+<p class="text-sm text-text-muted">Used for structural hierarchy and
+major section delineations.</p>
+
+</div>
+
+<div class="bg-surface dark:bg-slate-900 border border-border-color
+dark:border-slate-700 shadow-crisp overflow-hidden">
+
+<!-- Table Header -->
+
+<div class="grid grid-cols-12 gap-4 p-4 border-b border-border-color
+dark:border-slate-700 bg-background-light dark:bg-slate-800/50 text-xs
+font-semibold text-text-muted uppercase tracking-wider">
+
+<div class="col-span-2">Level</div>
+
+<div class="col-span-6">Preview</div>
+
+<div class="col-span-4 text-right">Properties</div>
+
+</div>
+
+<!-- H1 -->
+
+<div class="group grid grid-cols-12 gap-4 p-6 border-b
+border-border-color dark:border-slate-700 items-center
+hover:bg-background-light/50 dark:hover:bg-slate-800/20
+transition-colors">
+
+<div class="col-span-2 text-sm font-mono text-text-muted">H1</div>
+
+<div class="col-span-6 font-display font-bold text-[48px] leading-tight
+text-text-main dark:text-white truncate">
+
+The quick brown fox
+
+</div>
+
+<div class="col-span-4 flex justify-end items-center gap-3">
+
+<button class="copy-btn text-xs text-primary hover:text-accent
+font-medium flex items-center gap-1">
+
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+text-5xl
+
+</button>
+
+<div class="text-right text-sm text-text-muted font-mono">
+
+48px / 700 / 1.2
+
+</div>
+
+</div>
+
+</div>
+
+<!-- H2 -->
+
+<div class="group grid grid-cols-12 gap-4 p-6 border-b
+border-border-color dark:border-slate-700 items-center
+hover:bg-background-light/50 dark:hover:bg-slate-800/20
+transition-colors">
+
+<div class="col-span-2 text-sm font-mono text-text-muted">H2</div>
+
+<div class="col-span-6 font-display font-bold text-[36px] leading-tight
+text-text-main dark:text-white truncate">
+
+The quick brown fox
+
+</div>
+
+<div class="col-span-4 flex justify-end items-center gap-3">
+
+<button class="copy-btn text-xs text-primary hover:text-accent
+font-medium flex items-center gap-1">
+
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+text-4xl
+
+</button>
+
+<div class="text-right text-sm text-text-muted font-mono">
+
+36px / 700 / 1.25
+
+</div>
+
+</div>
+
+</div>
+
+<!-- H3 -->
+
+<div class="group grid grid-cols-12 gap-4 p-6 border-b
+border-border-color dark:border-slate-700 items-center
+hover:bg-background-light/50 dark:hover:bg-slate-800/20
+transition-colors">
+
+<div class="col-span-2 text-sm font-mono text-text-muted">H3</div>
+
+<div class="col-span-6 font-display font-semibold text-[24px]
+leading-snug text-text-main dark:text-white truncate">
+
+The quick brown fox
+
+</div>
+
+<div class="col-span-4 flex justify-end items-center gap-3">
+
+<button class="copy-btn text-xs text-primary hover:text-accent
+font-medium flex items-center gap-1">
+
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+text-2xl
+
+</button>
+
+<div class="text-right text-sm text-text-muted font-mono">
+
+24px / 600 / 1.3
+
+</div>
+
+</div>
+
+</div>
+
+<!-- H4 -->
+
+<div class="group grid grid-cols-12 gap-4 p-6 border-b
+border-border-color dark:border-slate-700 items-center
+hover:bg-background-light/50 dark:hover:bg-slate-800/20
+transition-colors">
+
+<div class="col-span-2 text-sm font-mono text-text-muted">H4</div>
+
+<div class="col-span-6 font-display font-semibold text-[20px]
+leading-snug text-text-main dark:text-white truncate">
+
+The quick brown fox jumps over
+
+</div>
+
+<div class="col-span-4 flex justify-end items-center gap-3">
+
+<button class="copy-btn text-xs text-primary hover:text-accent
+font-medium flex items-center gap-1">
+
+<span class="material-symbols-outlined text-[14px]">content_copy</span>
+text-xl
+
+</button>
+
+<div class="text-right text-sm text-text-muted font-mono">
+
+20px / 600 / 1.4
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Body Typography -->
+
+<section>
+
+<div class="mb-6">
+
+<h2 class="text-xl font-bold font-display text-text-main dark:text-white
+mb-2">Body & Interface</h2>
+
+<p class="text-sm text-text-muted">Work Sans is utilized for extended
+reading and utilitarian UI elements.</p>
+
+</div>
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+
+<!-- Body Text -->
+
+<div class="bg-surface dark:bg-slate-900 border border-border-color
+dark:border-slate-700 p-6 shadow-crisp group">
+
+<div class="flex justify-between items-start mb-6 border-b
+border-border-color dark:border-slate-800 pb-4">
+
+<div>
+
+<h3 class="font-display font-semibold text-sm mb-1">Body Text</h3>
+
+<p class="text-xs text-text-muted font-mono">16px / 400 / 1.5</p>
+
+</div>
+
+<button class="copy-btn text-xs text-primary hover:text-accent
+font-medium flex items-center gap-1 border border-primary/20 px-2 py-1">
+
+text-base
+
+</button>
+
+</div>
+
+<p class="text-[16px] leading-relaxed text-text-main dark:text-slate-300
+font-body">
+
+Our curtain cleaning process ensures every fiber is treated with the
+utmost care. We utilize specialized, eco-friendly solvents that
+penetrate deep to remove years of dust, allergens, and odors without
+damaging delicate fabrics or causing shrinkage.
+
+</p>
+
+</div>
+
+<!-- Small / Utility Text -->
+
+<div class="flex flex-col gap-6">
+
+<div class="bg-surface dark:bg-slate-900 border border-border-color
+dark:border-slate-700 p-6 shadow-crisp group flex-1">
+
+<div class="flex justify-between items-start mb-4">
+
+<div>
+
+<h3 class="font-display font-semibold text-sm mb-1">Small Details</h3>
+
+<p class="text-xs text-text-muted font-mono">13px / 500 / 1.4</p>
+
+</div>
+
+<button class="copy-btn text-xs text-primary hover:text-accent
+font-medium flex items-center gap-1">
+
+text-[13px]
+
+</button>
+
+</div>
+
+<p class="text-[13px] font-medium text-text-muted font-body">
+
+* Service available in select metropolitan areas. Pricing varies based
+on fabric weight and dimensions.
+
+</p>
+
+</div>
+
+<div class="bg-surface dark:bg-slate-900 border border-border-color
+dark:border-slate-700 p-6 shadow-crisp group flex-1">
+
+<div class="flex justify-between items-start mb-4">
+
+<div>
+
+<h3 class="font-display font-semibold text-sm mb-1">Button Label</h3>
+
+<p class="text-xs text-text-muted font-mono">14px / 600 / 1</p>
+
+</div>
+
+<button class="copy-btn text-xs text-primary hover:text-accent
+font-medium flex items-center gap-1">
+
+text-sm font-semibold
+
+</button>
+
+</div>
+
+<div class="inline-block bg-primary text-white font-display
+font-semibold text-[14px] px-6 py-3 cursor-pointer hover:bg-accent
+transition-colors duration-150">
+
+BOOK A SPOT
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+      </div>
+
+      <!-- ══ SECTION: UI Components ══ -->
+      <div id="section-ui-components" class="kit-section ">
+
+
+<div class="max-w-5xl mx-auto p-8 lg:p-12">
+
+<!-- Header -->
+
+<header class="flex flex-col sm:flex-row justify-between items-start
+sm:items-center gap-4 mb-12">
+
+<div>
+
+<h1 class="font-display text-4xl font-bold text-text-primary
+dark:text-white mb-2">UI Components</h1>
+
+<p class="text-text-muted text-base">Interactive library of all buttons,
+inputs, and base elements.</p>
+
+</div>
+
+<button class="flex items-center gap-2 px-4 py-2 bg-surface-light
+dark:bg-surface-dark border border-gray-200 dark:border-gray-700 text-sm
+font-display font-semibold hover:border-primary text-text-primary
+dark:text-white transition-colors duration-fast shadow-sm">
+
+<span class="material-symbols-outlined text-lg">toggle_on</span>
+
+Interactive Mode
+
+</button>
+
+</header>
+
+<!-- Components Sections -->
+
+<div class="space-y-16">
+
+<!-- Buttons Section -->
+
+<section>
+
+<h2 class="font-display text-2xl font-bold mb-6 pb-2 border-b
+border-gray-200 dark:border-gray-800 text-text-primary
+dark:text-white">Buttons</h2>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+<!-- Primary Button Def -->
+
+<div class="col-span-1">
+
+<h3 class="font-display font-semibold text-lg mb-2">Primary</h3>
+
+<p class="text-sm text-text-muted mb-4">Used for main actions. Features
+a solid Royal Blue fill, 0px border radius, and crisp shadow on
+hover.</p>
+
+<div class="bg-surface-light dark:bg-surface-dark p-4 border
+border-gray-100 dark:border-gray-800 font-mono text-xs text-text-muted">
+
+bg-primary text-white font-display font-semibold
+
+</div>
+
+</div>
+
+<!-- Primary Button Demos -->
+
+<div class="col-span-1 lg:col-span-2 grid grid-cols-2 gap-6
+bg-surface-light dark:bg-surface-dark p-8 border border-gray-200
+dark:border-gray-800">
+
+<div class="space-y-2">
+
+<span class="text-xs font-semibold text-text-muted uppercase
+tracking-wider">Default</span>
+
+<div>
+
+<button class="bg-primary text-white font-display font-semibold text-sm
+px-6 py-3 min-w-[120px] transition-all duration-fast
+hover:shadow-crisp">
+
+Book Service
+
+</button>
+
+</div>
+
+</div>
+
+<div class="space-y-2">
+
+<span class="text-xs font-semibold text-text-muted uppercase
+tracking-wider">Active / Hover</span>
+
+<div>
+
+<button class="bg-accent text-white font-display font-semibold text-sm
+px-6 py-3 min-w-[120px] shadow-crisp">
+
+Book Service
+
+</button>
+
+</div>
+
+</div>
+
+<div class="space-y-2">
+
+<span class="text-xs font-semibold text-text-muted uppercase
+tracking-wider">Disabled</span>
+
+<div>
+
+<button class="bg-gray-300 text-gray-500 font-display font-semibold
+text-sm px-6 py-3 min-w-[120px] cursor-not-allowed">
+
+Book Service
+
+</button>
+
+</div>
+
+</div>
+
+<div class="space-y-2">
+
+<span class="text-xs font-semibold text-text-muted uppercase
+tracking-wider">With Icon</span>
+
+<div>
+
+<button class="bg-primary text-white font-display font-semibold text-sm
+px-6 py-3 min-w-[120px] transition-all duration-fast hover:shadow-crisp
+flex items-center justify-center gap-2">
+
+<span class="material-symbols-outlined
+text-[18px]">calendar_today</span>
+
+Schedule
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8 mt-12">
+
+<!-- Secondary Button Def -->
+
+<div class="col-span-1">
+
+<h3 class="font-display font-semibold text-lg mb-2">Secondary</h3>
+
+<p class="text-sm text-text-muted mb-4">Used for alternative actions.
+Transparent fill with a 2px Royal Blue border.</p>
+
+<div class="bg-surface-light dark:bg-surface-dark p-4 border
+border-gray-100 dark:border-gray-800 font-mono text-xs text-text-muted">
+
+border-2 border-primary text-primary font-display font-semibold
+
+</div>
+
+</div>
+
+<!-- Secondary Button Demos -->
+
+<div class="col-span-1 lg:col-span-2 grid grid-cols-2 gap-6
+bg-surface-light dark:bg-surface-dark p-8 border border-gray-200
+dark:border-gray-800">
+
+<div class="space-y-2">
+
+<span class="text-xs font-semibold text-text-muted uppercase
+tracking-wider">Default</span>
+
+<div>
+
+<button class="bg-transparent border-2 border-primary text-primary
+dark:text-white dark:border-white font-display font-semibold text-sm
+px-6 py-[10px] min-w-[120px] transition-all duration-fast
+hover:shadow-crisp hover:bg-primary/5">
+
+View Details
+
+</button>
+
+</div>
+
+</div>
+
+<div class="space-y-2">
+
+<span class="text-xs font-semibold text-text-muted uppercase
+tracking-wider">Active / Hover</span>
+
+<div>
+
+<button class="bg-primary/10 border-2 border-accent text-accent
+font-display font-semibold text-sm px-6 py-[10px] min-w-[120px]
+shadow-crisp">
+
+View Details
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Inputs Section -->
+
+<section>
+
+<h2 class="font-display text-2xl font-bold mb-6 pb-2 border-b
+border-gray-200 dark:border-gray-800 text-text-primary
+dark:text-white">Inputs & Forms</h2>
+
+<div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
+
+<!-- Input Def -->
+
+<div class="col-span-1">
+
+<h3 class="font-display font-semibold text-lg mb-2">Text Field</h3>
+
+<p class="text-sm text-text-muted mb-4">Standard 48px height input with
+sharp corners and distinct focus states.</p>
+
+<div class="bg-surface-light dark:bg-surface-dark p-4 border
+border-gray-100 dark:border-gray-800 font-mono text-xs text-text-muted">
+
+h-12 border border-gray-200 focus:border-primary
+focus:shadow-inner-crisp
+
+</div>
+
+</div>
+
+<!-- Input Demos -->
+
+<div class="col-span-1 lg:col-span-2 grid grid-cols-1 md:grid-cols-2
+gap-8 bg-surface-light dark:bg-surface-dark p-8 border border-gray-200
+dark:border-gray-800">
+
+<div class="space-y-2">
+
+<label class="text-sm font-semibold text-text-primary
+dark:text-gray-300">Default Input</label>
+
+<input class="w-full h-12 px-4 bg-white dark:bg-gray-800 border
+border-gray-300 dark:border-gray-600 text-text-primary dark:text-white
+placeholder-gray-400 focus:outline-none focus:border-primary
+focus:shadow-inner-crisp transition-all duration-fast"
+placeholder="Enter your email" type="text"/>
+
+</div>
+
+<div class="space-y-2">
+
+<label class="text-sm font-semibold text-primary">Focused Input</label>
+
+<input class="w-full h-12 px-4 bg-white dark:bg-gray-800 border
+border-primary text-text-primary dark:text-white shadow-inner-crisp
+outline-none" type="text" value="john@example.com"/>
+
+</div>
+
+<div class="space-y-2 md:col-span-2">
+
+<label class="text-sm font-semibold text-text-primary
+dark:text-gray-300">With Error State</label>
+
+<input class="w-full h-12 px-4 bg-white dark:bg-gray-800 border
+border-red-500 text-red-600 outline-none
+shadow-[inset_0_0_0_1px_#ef4444]" type="text" value="invalid-email"/>
+
+<p class="text-xs text-red-500 mt-1">Please enter a valid email
+address.</p>
+
+</div>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+</div>
+
+
+      </div>
+
+      <!-- ══ SECTION: CTAs & Banners ══ -->
+      <div id="section-ctas-banners" class="kit-section ">
+
+
+<div class="max-w-5xl mx-auto p-8 md:p-12 lg:p-16 flex flex-col gap-12">
+
+<!-- Page Header -->
+
+<header class="flex flex-col gap-4 border-b border-gray-200
+dark:border-slate-800 pb-8">
+
+<h1 class="font-display text-4xl font-black tracking-tight
+text-text-main dark:text-white">CTAs & Banners</h1>
+
+<p class="text-lg text-muted dark:text-slate-400
+max-w-2xl">High-conversion marketing blocks and promotional elements
+designed for immediate impact and user action.</p>
+
+</header>
+
+<!-- Booking Banner Section -->
+
+<section class="flex flex-col gap-6">
+
+<div class="flex justify-between items-end">
+
+<h2 class="font-display text-2xl font-bold tracking-tight text-text-main
+dark:text-white">Booking Banner</h2>
+
+<span class="text-xs font-mono text-muted bg-gray-100 dark:bg-slate-800
+px-2 py-1">.banner-primary</span>
+
+</div>
+
+<!-- Preview Canvas -->
+
+<div class="bg-surface dark:bg-slate-900 border border-gray-200
+dark:border-slate-700 p-8 shadow-sm flex flex-col items-center
+justify-center">
+
+<!-- The Component -->
+
+<div class="w-full bg-primary text-white p-12 flex flex-col md:flex-row
+items-center justify-between gap-8 shadow-crisp relative overflow-hidden
+group">
+
+<!-- Decorative geometric background element -->
+
+<div class="absolute top-0 right-0 w-64 h-64 bg-white opacity-5
+transform rotate-45 translate-x-32 -translate-y-32"></div>
+
+<div class="flex flex-col gap-3 relative z-10">
+
+<h3 class="font-display text-[32px] font-bold leading-tight">Book a Spot
+Today</h3>
+
+<p class="text-primary/20 dark:text-slate-300 font-body text-lg max-w-md
+text-white/80">Schedule your professional curtain cleaning in under 2
+minutes. Clear views await.</p>
+
+</div>
+
+<div class="relative z-10 shrink-0">
+
+<button class="bg-surface text-primary font-display font-bold
+text-[14px] px-8 py-4 hover:bg-gray-50 transition-colors duration-150
+border border-transparent hover:border-accent">
+
+Schedule Cleaning
+
+</button>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Guidelines -->
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+
+<div class="flex flex-col gap-2">
+
+<strong class="font-display text-text-main
+dark:text-white">Usage</strong>
+
+<p class="text-muted dark:text-slate-400">Place at the bottom of service
+pages or as a mid-page interruptive block on content-heavy pages. Do not
+stack multiple banners.</p>
+
+</div>
+
+<div class="flex flex-col gap-2">
+
+<strong class="font-display text-text-main
+dark:text-white">Specifications</strong>
+
+<ul class="text-muted dark:text-slate-400 list-disc list-inside">
+
+<li>Background: <code class="font-mono text-xs bg-gray-100
+dark:bg-slate-800 px-1">#0A369D</code></li>
+
+<li>Heading: <code class="font-mono text-xs bg-gray-100
+dark:bg-slate-800 px-1">32px Plus Jakarta Sans, Bold</code></li>
+
+<li>Button: <code class="font-mono text-xs bg-gray-100 dark:bg-slate-800
+px-1">14px, #FFFFFF surface, #0A369D text</code></li>
+
+</ul>
+
+</div>
+
+</div>
+
+</section>
+
+<!-- Trust Badges Section -->
+
+<section class="flex flex-col gap-6 pt-8 border-t border-gray-200
+dark:border-slate-800">
+
+<div class="flex justify-between items-end">
+
+<h2 class="font-display text-2xl font-bold tracking-tight text-text-main
+dark:text-white">Trust Badges</h2>
+
+<span class="text-xs font-mono text-muted bg-gray-100 dark:bg-slate-800
+px-2 py-1">.trust-row</span>
+
+</div>
+
+<!-- Preview Canvas -->
+
+<div class="bg-surface dark:bg-slate-900 border border-gray-200
+dark:border-slate-700 p-12 shadow-sm flex flex-col items-center
+justify-center bg-gray-50/50 dark:bg-slate-900/50">
+
+<!-- The Component -->
+
+<div class="flex flex-wrap justify-center items-center gap-12
+md:gap-16">
+
+<div class="flex items-center gap-3 text-muted dark:text-slate-500
+opacity-50 hover:opacity-100 hover:text-primary dark:hover:text-primary
+transition-all duration-150 ease-in-out cursor-default group">
+
+<span class="material-symbols-outlined text-[24px]">verified</span>
+
+<span class="font-display font-semibold text-sm tracking-wide
+uppercase">Certified</span>
+
+</div>
+
+<div class="flex items-center gap-3 text-muted dark:text-slate-500
+opacity-50 hover:opacity-100 hover:text-primary dark:hover:text-primary
+transition-all duration-150 ease-in-out cursor-default group">
+
+<span class="material-symbols-outlined text-[24px]">eco</span>
+
+<span class="font-display font-semibold text-sm tracking-wide
+uppercase">Eco-Safe</span>
+
+</div>
+
+<div class="flex items-center gap-3 text-muted dark:text-slate-500
+opacity-50 hover:opacity-100 hover:text-primary dark:hover:text-primary
+transition-all duration-150 ease-in-out cursor-default group">
+
+<span class="material-symbols-outlined text-[24px]">schedule</span>
+
+<span class="font-display font-semibold text-sm tracking-wide
+uppercase">On-Time</span>
+
+</div>
+
+<div class="flex items-center gap-3 text-muted dark:text-slate-500
+opacity-50 hover:opacity-100 hover:text-primary dark:hover:text-primary
+transition-all duration-150 ease-in-out cursor-default group">
+
+<span class="material-symbols-outlined text-[24px]">thumb_up</span>
+
+<span class="font-display font-semibold text-sm tracking-wide
+uppercase">Guaranteed</span>
+
+</div>
+
+</div>
+
+</div>
+
+<!-- Guidelines -->
+
+<div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+
+<div class="flex flex-col gap-2">
+
+<strong class="font-display text-text-main dark:text-white">Interaction
+Pattern</strong>
+
+<p class="text-muted dark:text-slate-400">Default state is 50% opacity
+grayscale to reduce visual noise. On hover, transitioning to 100%
+opacity and Royal Blue (<code class="font-mono text-xs bg-gray-100
+dark:bg-slate-800 px-1">#0A369D</code>) over 150ms.</p>
+
+</div>
+
+<div class="flex flex-col gap-2">
+
+<strong class="font-display text-text-main
+dark:text-white">Placement</strong>
+
+<p class="text-muted dark:text-slate-400">Position directly beneath
+primary call-to-actions, near pricing tables, or in the global footer to
+reinforce reliability.</p>
+
+</div>
+
+</div>
+
+</section>
+
+</div>
+
+
+      </div>
+
+    </div>
+  </main>
+</div>
+
+<!-- ═══ JAVASCRIPT ═══ -->
+<script>
+  // ── Section switching ──
+  function showSection(id) {
+    // Hide all sections
+    document.querySelectorAll('.kit-section').forEach(s => s.classList.remove('active'));
+    // Show target
+    const target = document.getElementById('section-' + id);
+    if (target) target.classList.add('active');
+
+    // Update nav items
+    document.querySelectorAll('.nav-item').forEach(btn => {
+      btn.classList.remove('active');
+      if (btn.dataset.section === id) btn.classList.add('active');
+    });
+
+    // Close mobile sidebar
+    closeSidebar();
+
+    // Scroll to top
+    document.querySelector('main').scrollTop = 0;
+  }
+
+  // ── Toast notification ──
+  function showToast(msg = 'Copied to clipboard!') {
+    const t = document.getElementById('toast');
+    document.getElementById('toast-msg').textContent = msg;
+    t.classList.add('show');
+    setTimeout(() => t.classList.remove('show'), 2200);
+  }
+
+  // ── Copy to clipboard ──
+  function copyToClipboard(text, label) {
+    navigator.clipboard.writeText(text).then(() => {
+      showToast((label || text) + ' copied!');
+    }).catch(() => {
+      // Fallback
+      const el = document.createElement('textarea');
+      el.value = text; document.body.appendChild(el);
+      el.select(); document.execCommand('copy');
+      document.body.removeChild(el);
+      showToast((label || text) + ' copied!');
+    });
+  }
+
+  // ── Wire up ALL hex code clicks ──
+  document.addEventListener('click', function(e) {
+    const el = e.target.closest('[data-copy]');
+    if (el) {
+      copyToClipboard(el.dataset.copy, el.dataset.label || el.dataset.copy);
+      // Visual feedback
+      const orig = el.textContent;
+      el.textContent = 'Copied!';
+      setTimeout(() => el.textContent = orig, 1800);
+    }
+  });
+
+  // ── Also catch any element with hex text on click ──
+  document.querySelectorAll('[class*="font-mono"]').forEach(el => {
+    if (/^#[0-9A-Fa-f]{3,6}$/.test(el.textContent.trim())) {
+      el.style.cursor = 'pointer';
+      el.title = 'Click to copy';
+      el.addEventListener('click', () => copyToClipboard(el.textContent.trim()));
+    }
+  });
+
+  // ── Interactive Mode toggle (UI Components) ──
+  let interactiveMode = false;
+  function toggleInteractiveMode() {
+    interactiveMode = !interactiveMode;
+    const btn = document.getElementById('interactive-toggle');
+    if (btn) {
+      btn.textContent = interactiveMode ? '● Interactive: ON' : '○ Interactive Mode';
+      btn.classList.toggle('bg-primary', interactiveMode);
+      btn.classList.toggle('text-white', interactiveMode);
+    }
+    document.querySelectorAll('.interactive-demo').forEach(d => {
+      d.classList.toggle('pointer-events-auto', interactiveMode);
+      d.classList.toggle('pointer-events-none', !interactiveMode);
+      d.classList.toggle('ring-2', interactiveMode);
+      d.classList.toggle('ring-accent/40', interactiveMode);
+    });
+  }
+
+  // ── Mobile sidebar ──
+  function toggleSidebar() {
+    document.getElementById('sidebar').classList.toggle('open');
+    document.getElementById('sidebar-overlay').classList.toggle('show');
+  }
+  function closeSidebar() {
+    document.getElementById('sidebar').classList.remove('open');
+    document.getElementById('sidebar-overlay').classList.remove('show');
+  }
+
+  // ── Keyboard shortcut: Escape closes sidebar ──
+  document.addEventListener('keydown', e => {
+    if (e.key === 'Escape') closeSidebar();
+  });
+
+  // ── Wire hex codes in color section after DOM ready ──
+  setTimeout(() => {
+    document.querySelectorAll('[class*="font-mono"]').forEach(el => {
+      const txt = el.textContent.trim();
+      if (/^#[0-9A-Fa-f]{3,8}$/.test(txt)) {
+        el.style.cursor = 'pointer';
+        el.setAttribute('title', 'Click to copy ' + txt);
+        el.addEventListener('click', function() {
+          copyToClipboard(txt);
+          const orig = this.textContent;
+          this.textContent = 'Copied!';
+          setTimeout(() => this.textContent = orig, 1600);
+        });
+      }
+    });
+  }, 500);
+</script>
+
+</body>
+</html>
