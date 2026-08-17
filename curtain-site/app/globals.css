@@ -704,24 +704,45 @@ footer { color: var(--muted-dark); }
 
 /* Aura & Loom: the Stitch reference's quiet textile-led surface treatment. */
 .story-section,
-.detail-process,
-.pricing-section,
-.gallery-section,
-.newsletter-benefits,
-.areas-section,
-.related-section {
+.gallery-section {
   background-color: var(--warm-secondary);
   background-image:
     radial-gradient(circle at 8% 0%, rgba(255, 255, 255, .86), transparent 34%),
     radial-gradient(circle at 92% 100%, rgba(212, 175, 55, .08), transparent 28%),
     linear-gradient(118deg, rgba(249, 247, 242, .86), rgba(242, 238, 230, .98));
 }
+.detail-process,
+.newsletter-benefits,
+.related-section {
+  background-color: var(--warm-secondary);
+  background-image:
+    linear-gradient(118deg, rgba(249, 247, 242, .95), rgba(242, 238, 230, .9)),
+    url('/backgrounds/ivory-satin-texture.jpg');
+  background-position: center;
+  background-size: cover;
+}
+.pricing-section {
+  background-color: var(--warm-secondary);
+  background-image:
+    linear-gradient(118deg, rgba(249, 247, 242, .84), rgba(242, 238, 230, .74)),
+    url('/backgrounds/ivory-satin-texture.jpg');
+  background-position: center 46%;
+  background-size: cover;
+}
+.areas-section {
+  background-color: var(--warm-secondary);
+  background-image:
+    linear-gradient(118deg, rgba(249, 247, 242, .92), rgba(242, 238, 230, .82)),
+    url('/backgrounds/ivory-satin-texture.jpg');
+  background-position: center 54%;
+  background-size: cover;
+}
 .contact-section {
   background-color: var(--black);
   background-image:
-    linear-gradient(90deg, rgba(17, 17, 17, .98) 0%, rgba(17, 17, 17, .94) 44%, rgba(17, 17, 17, .88) 100%),
+    linear-gradient(90deg, rgba(17, 17, 17, .97) 0%, rgba(17, 17, 17, .88) 44%, rgba(17, 17, 17, .82) 100%),
     url('/jhb-textile-hero.webp');
-  background-position: center;
+  background-position: right center;
   background-size: cover;
 }
 .hero-stats strong,
