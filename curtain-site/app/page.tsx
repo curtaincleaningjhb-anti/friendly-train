@@ -1,6 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
-import { Armchair, BedDouble, Flame, Gem, ShieldCheck, Sparkles, type LucideIcon } from "lucide-react";
+import { Armchair, BedDouble, Building2, Clock3, Construction, FileText, Flame, Gem, Ruler, ShieldCheck, Sparkles, Spool, ThumbsUp, type LucideIcon } from "lucide-react";
 import { ContactSection, Footer, Header } from "./site-chrome";
 import { areas, sectors, services, whatsappUrl } from "./site-content";
 
@@ -9,6 +9,19 @@ const guarantees = [
   { title: "Fabric-specific care", copy: "Material, lining and condition are assessed before treatment begins." },
   { title: "Minimal disruption", copy: "The on-site process avoids transport, rehanging and conventional drying stages." },
   { title: "Free assessment", copy: "Clear advice and a transparent quotation before any work begins." },
+];
+
+const quoteFactors = [
+  { icon: Spool, title: "Fabric Type", copy: "Sheer, lined, blackout, velvet — each requires a different approach and cleaning agent." },
+  { icon: Construction, title: "Track or Rod Hardware", copy: "Ceiling tracks, face-fit rods, motorised systems — access affects labour and time." },
+  { icon: Building2, title: "Sector Requirements", copy: "Hotels, hospitals, offices, and homes each have different standards and scheduling needs." },
+  { icon: Ruler, title: "Size & Quantity", copy: "Floor-to-ceiling vs standard height, single panel vs full suite — it all matters." },
+];
+
+const quoteBenefits = [
+  { icon: FileText, title: "Detailed Written Quote", copy: "Itemised breakdown of every item, method, and cost — no surprises." },
+  { icon: ThumbsUp, title: "Honest Assessment", copy: "If something doesn’t need cleaning, Kathy will tell you. No upselling." },
+  { icon: Clock3, title: "Scheduling That Works for You", copy: "After hours, weekends, or during business — we work around your needs." },
 ];
 
 const serviceImages: Record<string, string> = {
@@ -48,7 +61,7 @@ const areaImages: Record<string, string> = {
 };
 
 const homeFaqs = [
-  { question: "How much does curtain cleaning cost in Johannesburg?", answer: "Indicative residential packages start at R800–R1,500 for 1–2 standard rooms, R1,500–R3,000 for 3–4 rooms and R3,000–R5,500 for larger homes. Fabric, dimensions, condition and access are confirmed during a free assessment before a line-item quotation is issued." },
+  { question: "How much does curtain cleaning cost in Johannesburg?", answer: "Every quotation is based on a free on-site assessment because fabric type, lining, hardware, size, quantity and sector requirements affect the correct method and cost. Kathy evaluates the curtains properly and provides a detailed written quote with no obligation." },
   { question: "Can velvet or blackout curtains be dry cleaned on site?", answer: "Suitable velvet, sheer and blackout curtains may be treated on site, subject to a fabric, lining, condition and colourfastness assessment before work begins." },
   { question: "Do you clean curtains without taking them down?", answer: "Yes. Curtains remain hanging, which removes the need for transport, rehanging and room disruption." },
   { question: "Do you offer a professional blind cleaning service in Johannesburg?", answer: "Yes. We assess and clean suitable Roman, roller, vertical, Venetian and fabric blinds across Johannesburg. The treatment is selected for the blind material, construction, operating system and condition." },
@@ -175,14 +188,43 @@ export default function Home() {
 
       <section className="section pricing-section" id="pricing">
         <div className="page-shell">
-          <div className="section-heading split-heading"><div><span className="eyebrow">Indicative pricing</span><h2>Clear expectations before the assessment.</h2></div><p>These residential guide ranges help with planning. Your written quotation is based on fabric, curtain size, room count, condition and access.</p></div>
-          <div className="pricing-grid">
-            <article><span>1–2 standard rooms</span><strong>R800–R1,500</strong><p>Small residential package.</p></article>
-            <article><span>3–4 rooms</span><strong>R1,500–R3,000</strong><p>Medium residential package.</p></article>
-            <article><span>5+ rooms</span><strong>R3,000–R5,500</strong><p>Large homes and double-volume drapery.</p></article>
-            <article><span>Commercial portfolios</span><strong>Site quotation</strong><p>Line-item pricing by room count, fabric and schedule.</p></article>
+          <div className="quote-story-grid">
+            <div className="quote-story-copy">
+              <span className="eyebrow">A quote you can trust</span>
+              <h2>Why we don’t publish prices online</h2>
+              <p className="quote-story-lead">Because “one size fits all” doesn’t work for curtains. Here’s why we do it differently — and why you’ll be glad we do.</p>
+              <h3>Every job is genuinely different</h3>
+              <blockquote>“Every job genuinely requires a proper assessment first — fabric type, lining construction, track or rod hardware, the cleaning method required, and your specific sector requirements all affect the process and the outcome.”</blockquote>
+              <p>Publishing a price without seeing your curtains would mean either overcharging you or cutting corners — and we’re not willing to do either.</p>
+              <p>Instead, we offer a completely free, no-obligation on-site assessment. Kathy personally visits, evaluates everything properly, and provides a detailed written quote you can trust.</p>
+              <p className="quote-story-emphasis">Most clients are genuinely surprised by how affordable professional on-site cleaning is compared to replacement or conventional services.</p>
+            </div>
+            <aside className="quote-cta-card" aria-labelledby="quote-cta-title">
+              <span className="eyebrow">Book your free assessment</span>
+              <h3 id="quote-cta-title">A proper assessment, at no cost.</h3>
+              <p>Free <span aria-hidden="true">·</span> No obligation <span aria-hidden="true">·</span> Kathy visits within 48 hours</p>
+              <a className="button" href="#contact">Get a Free Quote</a>
+              <div className="quote-phone-list" aria-label="Call JHB Curtain Cleaning">
+                <a href="tel:+27750119200"><span>Call</span><strong>+27 75 011 9200</strong></a>
+                <a href="tel:+27716226753"><span>Kathy</span><strong>071 622 6753</strong></a>
+                <a href="tel:+27615222037"><span>Office</span><strong>061 522 2037</strong></a>
+              </div>
+            </aside>
           </div>
-          <p className="pricing-note">Indicative ranges only; final pricing is confirmed in writing after a free, no-obligation assessment.</p>
+
+          <div className="quote-factors-section">
+            <div className="quote-subheading"><span className="eyebrow">What affects your quote</span><h3>Four details shape the right treatment.</h3></div>
+            <div className="quote-factor-grid">
+              {quoteFactors.map(({ icon: Icon, title, copy }) => <article key={title}><span className="quote-icon" aria-hidden="true"><Icon size={24} strokeWidth={1.35} /></span><h4>{title}</h4><p>{copy}</p></article>)}
+            </div>
+          </div>
+
+          <div className="quote-benefits-section">
+            <div className="quote-subheading"><span className="eyebrow">What you get instead of a price list</span><h3>When Kathy visits for your free assessment, you’ll receive:</h3></div>
+            <div className="quote-benefit-grid">
+              {quoteBenefits.map(({ icon: Icon, title, copy }) => <article key={title}><span className="quote-icon" aria-hidden="true"><Icon size={24} strokeWidth={1.35} /></span><div><h4>{title}</h4><p>{copy}</p></div></article>)}
+            </div>
+          </div>
         </div>
       </section>
 

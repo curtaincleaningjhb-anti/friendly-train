@@ -383,14 +383,38 @@ footer { background: #080706; color: #aaa197; border-top: 1px solid rgba(255,255
 .comparison-table b { color: var(--bronze); }
 
 .pricing-section { background: #e9e2d8; }
-.pricing-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid #c9bfb2; border-bottom: 1px solid #c9bfb2; }
-.pricing-grid article { min-height: 245px; padding: 34px 28px; border-right: 1px solid #c9bfb2; display: flex; flex-direction: column; }
-.pricing-grid article:first-child { padding-left: 0; }
-.pricing-grid article:last-child { border-right: 0; }
-.pricing-grid span { color: var(--bronze); text-transform: uppercase; letter-spacing: .12em; font-size: 10px; }
-.pricing-grid strong { margin-top: 56px; font: 400 29px/1.2 Georgia, serif; }
-.pricing-grid p { margin-top: auto; color: #665f56; font-size: 13px; line-height: 1.6; }
-.pricing-note { margin: 22px 0 0; color: #6f685f; font-size: 11px; }
+.quote-story-grid { display: grid; grid-template-columns: minmax(0, 1.18fr) minmax(340px, .82fr); gap: 90px; align-items: start; }
+.quote-story-copy h2 { max-width: 780px; margin: 24px 0 24px; font-size: clamp(48px, 5vw, 76px); line-height: 1.02; letter-spacing: -.04em; }
+.quote-story-lead { max-width: 760px; margin: 0 0 44px; color: #3d3731; font: 400 22px/1.6 "Playfair Display", Georgia, serif; }
+.quote-story-copy h3 { margin: 0 0 18px; font-size: 31px; line-height: 1.15; }
+.quote-story-copy blockquote { max-width: 820px; margin: 0 0 28px; padding: 28px 30px; border-left: 2px solid var(--gold-dark); background: rgba(255, 253, 249, .64); color: #342e28; font-size: 21px; line-height: 1.6; }
+.quote-story-copy > p:not(.quote-story-lead) { max-width: 790px; color: var(--muted-light); font-size: 15px; line-height: 1.85; }
+.quote-story-copy .quote-story-emphasis { margin-top: 28px; padding-top: 24px; border-top: 1px solid rgba(32, 32, 32, .18); color: var(--ink); font: 400 20px/1.55 "Playfair Display", Georgia, serif; }
+.quote-cta-card { position: sticky; top: 30px; padding: 48px; background: rgba(17, 17, 17, .96); color: var(--warm); box-shadow: 26px 26px 0 rgba(212, 175, 55, .14); }
+.quote-cta-card h3 { margin: 20px 0 18px; font-size: 42px; line-height: 1.08; }
+.quote-cta-card > p { margin: 0; color: var(--muted-dark); line-height: 1.7; }
+.quote-cta-card > .button { width: 100%; margin-top: 30px; }
+.quote-phone-list { margin-top: 30px; border-top: 1px solid var(--line); }
+.quote-phone-list a { min-height: 82px; display: flex; align-items: center; justify-content: space-between; gap: 20px; border-bottom: 1px solid var(--line); }
+.quote-phone-list span { color: var(--gold-hover); font-size: 10px; font-weight: 700; letter-spacing: .14em; text-transform: uppercase; }
+.quote-phone-list strong { font: 400 21px/1.25 "Playfair Display", Georgia, serif; }
+.quote-factors-section,
+.quote-benefits-section { margin-top: 110px; padding-top: 80px; border-top: 1px solid rgba(32, 32, 32, .18); }
+.quote-subheading { display: grid; grid-template-columns: .72fr 1.28fr; gap: 80px; align-items: end; margin-bottom: 48px; }
+.quote-subheading h3 { max-width: 760px; margin: 0; font-size: clamp(38px, 3.8vw, 56px); line-height: 1.08; letter-spacing: -.035em; }
+.quote-factor-grid { display: grid; grid-template-columns: repeat(4, 1fr); border-top: 1px solid rgba(32, 32, 32, .18); border-bottom: 1px solid rgba(32, 32, 32, .18); }
+.quote-factor-grid article { min-height: 320px; padding: 36px 30px 32px; border-right: 1px solid rgba(32, 32, 32, .18); }
+.quote-factor-grid article:first-child { padding-left: 0; }
+.quote-factor-grid article:last-child { border-right: 0; }
+.quote-icon { width: 52px; height: 52px; display: inline-grid; place-items: center; border: 1px solid rgba(180, 139, 39, .46); border-radius: 50%; background: rgba(255, 253, 249, .48); color: var(--gold-dark); }
+.quote-factor-grid h4,
+.quote-benefit-grid h4 { font: 400 25px/1.2 "Playfair Display", Georgia, serif; }
+.quote-factor-grid h4 { margin: 68px 0 16px; }
+.quote-factor-grid p,
+.quote-benefit-grid p { margin: 0; color: var(--muted-light); font-size: 13px; line-height: 1.75; }
+.quote-benefit-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 22px; }
+.quote-benefit-grid article { min-height: 230px; display: grid; grid-template-columns: 58px 1fr; gap: 24px; align-items: start; padding: 34px; border: 1px solid rgba(32, 32, 32, .16); background: rgba(255, 253, 249, .58); }
+.quote-benefit-grid h4 { margin: 6px 0 15px; }
 
 .sectors-heading { align-items: end; }
 .sectors-heading p { color: #aaa197; }
@@ -534,9 +558,14 @@ footer { background: #080706; color: #aaa197; border-top: 1px solid rgba(255,255
   .area-card-grid a:nth-child(n+4) { border-bottom: 1px solid rgba(11,10,9,.2); }
   .area-card-grid a:nth-child(n+5) { border-bottom: 0; }
   .guide-cta { align-items: flex-start; flex-direction: column; }
-  .pricing-grid { grid-template-columns: 1fr 1fr; }
-  .pricing-grid article:nth-child(2) { border-right: 0; }
-  .pricing-grid article:nth-child(-n+2) { border-bottom: 1px solid #c9bfb2; }
+  .quote-story-grid { grid-template-columns: 1fr; gap: 58px; }
+  .quote-cta-card { position: relative; top: auto; }
+  .quote-subheading { grid-template-columns: 1fr; gap: 24px; }
+  .quote-factor-grid { grid-template-columns: 1fr 1fr; }
+  .quote-factor-grid article:nth-child(2) { border-right: 0; }
+  .quote-factor-grid article:nth-child(-n+2) { border-bottom: 1px solid rgba(32, 32, 32, .18); }
+  .quote-factor-grid article:nth-child(3) { padding-left: 0; }
+  .quote-benefit-grid { grid-template-columns: 1fr; }
   .sector-card { min-height: 330px; }
   .category-card-grid { grid-template-columns: 1fr; }
 }
@@ -589,9 +618,22 @@ footer { background: #080706; color: #aaa197; border-top: 1px solid rgba(255,255
   .sector-card { min-height: 330px; }
   .comparison-table [role="row"] { grid-template-columns: 1.2fr .9fr .9fr; gap: 10px; }
   .comparison-table-four [role="row"] { grid-template-columns: 1.05fr 1fr 1fr 1fr; }
-  .pricing-grid { grid-template-columns: 1fr; }
-  .pricing-grid article, .pricing-grid article:first-child { min-height: 210px; padding: 30px 0; border-right: 0; border-bottom: 1px solid #c9bfb2; }
-  .pricing-grid article:last-child { border-bottom: 0; }
+  .quote-story-copy h2 { font-size: 43px; }
+  .quote-story-lead { font-size: 19px; }
+  .quote-story-copy h3 { font-size: 27px; }
+  .quote-story-copy blockquote { padding: 23px 20px; font-size: 18px; }
+  .quote-cta-card { padding: 36px 24px; box-shadow: 12px 12px 0 rgba(212, 175, 55, .14); }
+  .quote-cta-card h3 { font-size: 35px; }
+  .quote-phone-list a { align-items: flex-start; flex-direction: column; justify-content: center; gap: 7px; }
+  .quote-factors-section, .quote-benefits-section { margin-top: 78px; padding-top: 58px; }
+  .quote-subheading h3 { font-size: 36px; }
+  .quote-factor-grid { grid-template-columns: 1fr; }
+  .quote-factor-grid article,
+  .quote-factor-grid article:first-child,
+  .quote-factor-grid article:nth-child(3) { min-height: 250px; padding: 30px 0; border-right: 0; border-bottom: 1px solid rgba(32, 32, 32, .18); }
+  .quote-factor-grid article:last-child { border-bottom: 0; }
+  .quote-factor-grid h4 { margin-top: 36px; }
+  .quote-benefit-grid article { grid-template-columns: 52px 1fr; padding: 28px 22px; }
   .contact-trust { grid-template-columns: 1fr; }
   .editorial-card-grid article { padding: 42px 0; border-right: 0; }
   .gallery-item:nth-child(3n) { grid-column: auto; }
@@ -655,8 +697,6 @@ footer { background-color: var(--black); }
 .category-card p,
 .faq-list p,
 .comparison-layout > div:first-child p,
-.pricing-grid p,
-.pricing-note,
 .faq-intro,
 .editorial-card-grid p,
 .legal-copy p,
@@ -671,8 +711,6 @@ footer { background-color: var(--black); }
 .faq-list details,
 .comparison-table,
 .comparison-table [role="row"],
-.pricing-grid,
-.pricing-grid article,
 .editorial-card-grid,
 .editorial-card-grid article,
 .area-card-grid { border-color: var(--line-light); }

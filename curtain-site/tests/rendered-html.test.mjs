@@ -46,6 +46,9 @@ test("renders production metadata and a page-scoped high-priority home hero", as
   assert.equal(linkHref(home, "canonical"), "https://www.jhbcurtaincleaning.co.za/");
   assert.ok(metaContent(home, "og:image", "property"), "home must have an Open Graph image");
   assert.match(home, /<img(?=[^>]+jhb-textile-hero\.webp)(?=[^>]+loading=["']eager["'])(?=[^>]+fetchPriority=["']high["'])[^>]*>/i);
+  assert.match(home, /Why we don(?:’|&#x27;|')t publish prices online/i);
+  assert.match(home, /Kathy visits within 48 hours/i);
+  assert.doesNotMatch(home, /R800|R1,500|R3,000|R5,500/i);
 
   const service = await fetchHtml("/services/curtain-blind-cleaning");
   assert.doesNotMatch(service, /<img[^>]+jhb-textile-hero\.webp[^>]+fetchPriority=["']high["']/i);
