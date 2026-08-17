@@ -1,355 +1,251 @@
+import Image from "next/image";
 import Link from "next/link";
-import { PhoneIcon, EnvelopeIcon, MapPinIcon, CheckCircleIcon } from "@heroicons/react/24/solid";
-import { getHomepageHero, getHomepageTrustBadges } from "@/lib/content";
+import { Armchair, BedDouble, Flame, Gem, ShieldCheck, Sparkles, type LucideIcon } from "lucide-react";
+import { ContactSection, Footer, Header } from "./site-chrome";
+import { areas, sectors, services, whatsappUrl } from "./site-content";
 
-export default async function Home() {
-  const hero = await getHomepageHero();
-  const trustBadges = await getHomepageTrustBadges();
-  const faqSchema = {
-    "@context": "https://schema.org",
-    "@type": "FAQPage",
-    "mainEntity": [
-      {
-        "@type": "Question",
-        "name": "How does on-site curtain cleaning work?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We clean your curtains where they hang using specialized dry-cleaning methods. No need to take them down. Our service includes hardware cleaning, repairs, and fabric protection."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Will my curtains shrink?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "No. We guarantee against shrinkage. Our dry-cleaning process is specifically designed to prevent fabric damage and shrinkage, working safely on all fabric types."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Which areas in Johannesburg do you serve?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We serve all Johannesburg suburbs including Sandton, Bryanston, Fourways, Rosebank, Randburg, Parkhurst, Morningside, and surrounding areas."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "Do you offer same-day service?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "Yes. Hotels and offices can rent rooms the same day. We offer flexible scheduling for residential and commercial clients."
-        }
-      },
-      {
-        "@type": "Question",
-        "name": "What other cleaning services do you offer?",
-        "acceptedAnswer": {
-          "@type": "Answer",
-          "text": "We offer mattress sanitization, upholstery cleaning, Persian rug cleaning, fabric protection (Masterguard), and fireproofing services for curtains and soft furnishings."
-        }
-      }
-    ]
-  };
+const guarantees = [
+  { title: "No removal", copy: "Curtains remain safely hanging throughout the cleaning process." },
+  { title: "Fabric-specific care", copy: "Material, lining and condition are assessed before treatment begins." },
+  { title: "Minimal disruption", copy: "The on-site process avoids transport, rehanging and conventional drying stages." },
+  { title: "Free assessment", copy: "Clear advice and a transparent quotation before any work begins." },
+];
 
+const serviceImages: Record<string, string> = {
+  "curtain-blind-cleaning": "/cards/service-curtain-blind.webp",
+  "mattress-sanitisation": "/cards/service-mattress.webp",
+  "upholstery-carpet-cleaning": "/cards/service-upholstery-carpet.webp",
+  "master-guarding": "/cards/service-master-guarding.webp",
+  "fire-proofing": "/cards/service-fire-proofing.webp",
+  "rug-care": "/cards/service-rug-care.webp",
+};
+
+const serviceIcons: Record<string, LucideIcon> = {
+  "curtain-blind-cleaning": Sparkles,
+  "mattress-sanitisation": BedDouble,
+  "upholstery-carpet-cleaning": Armchair,
+  "master-guarding": ShieldCheck,
+  "fire-proofing": Flame,
+  "rug-care": Gem,
+};
+
+const sectorImages: Record<string, string> = {
+  hotels: "/cards/sector-hotels.webp",
+  corporate: "/cards/sector-corporate.webp",
+  healthcare: "/cards/sector-healthcare.webp",
+  education: "/cards/sector-education.webp",
+  theatres: "/cards/sector-theatres.webp",
+  residential: "/cards/sector-residential.webp",
+};
+
+const areaImages: Record<string, string> = {
+  "jhb-north": "/cards/area-jhb-north.webp",
+  "jhb-east": "/cards/area-jhb-east.webp",
+  "jhb-south": "/cards/area-jhb-south.webp",
+  "jhb-west": "/cards/area-jhb-west.webp",
+  "jhb-central": "/cards/area-jhb-central.webp",
+  "pretoria-midrand": "/cards/area-pretoria-midrand.webp",
+};
+
+const homeFaqs = [
+  { question: "How much does curtain cleaning cost in Johannesburg?", answer: "Indicative residential packages start at R800–R1,500 for 1–2 standard rooms, R1,500–R3,000 for 3–4 rooms and R3,000–R5,500 for larger homes. Fabric, dimensions, condition and access are confirmed during a free assessment before a line-item quotation is issued." },
+  { question: "Can velvet or blackout curtains be dry cleaned on site?", answer: "Suitable velvet, sheer and blackout curtains may be treated on site, subject to a fabric, lining, condition and colourfastness assessment before work begins." },
+  { question: "Do you clean curtains without taking them down?", answer: "Yes. Curtains remain hanging, which removes the need for transport, rehanging and room disruption." },
+  { question: "Do you offer a professional blind cleaning service in Johannesburg?", answer: "Yes. We assess and clean suitable Roman, roller, vertical, Venetian and fabric blinds across Johannesburg. The treatment is selected for the blind material, construction, operating system and condition." },
+  { question: "How long does the cleaning take?", answer: "Timing depends on the number, size and condition of the curtains. We confirm the expected schedule with your quotation." },
+  { question: "Which areas do you serve?", answer: "We serve greater Johannesburg, Midrand and selected Pretoria areas from our Roodepoort base." },
+  { question: "How is hotel curtain cleaning scheduled?", answer: "Hospitality work can be phased during low-occupancy windows or approved night shifts, with daily capacity and room sequencing confirmed after the site survey." },
+  { question: "What is Master Guarding?", answer: "It is a professional protective treatment that helps suitable fabrics resist spills and everyday soiling." },
+  { question: "Do you offer fire-retardant fabric treatment?", answer: "We assess the fabric and venue requirement before confirming a suitable treatment scope and any applicable documentation." },
+  { question: "How do I book a cleaning?", answer: "Call or WhatsApp +27 75 011 9200, or email info@jhbcurtaincleaning.co.za to arrange your free assessment." },
+];
+
+export default function Home() {
   return (
     <main>
-      <script
-        type="application/ld+json"
-        dangerouslySetInnerHTML={{ __html: JSON.stringify(faqSchema) }}
-      />
-
-      {/* Hero Section */}
-      <section className="gradient-hero text-white py-20 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="max-w-3xl">
-            <h1 className="text-5xl md:text-6xl font-bold mb-6">
-              {hero.title}
-            </h1>
-            <p className="text-xl md:text-2xl mb-4 text-blue-100">
-              {hero.subtitle}
-            </p>
-            <p className="text-lg mb-8 text-blue-50">
-              {hero.location}
-            </p>
-            <div className="flex flex-wrap gap-4">
-              <a 
-                href="tel:+27750119200"
-                className="bg-white text-primary hover:bg-gray-100 px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105 inline-flex items-center gap-2"
-              >
-                <PhoneIcon className="h-6 w-6" />
-                {hero.cta1Text}
-              </a>
-              <Link 
-                href="#quote"
-                className="bg-accent text-gray-900 hover:bg-green-400 px-8 py-4 rounded-lg font-bold text-lg transition-all transform hover:scale-105"
-              >
-                {hero.cta2Text}
-              </Link>
+      <section className="hero" id="home" aria-labelledby="hero-title">
+        <Image
+          className="hero-media"
+          src="/jhb-textile-hero.webp"
+          alt=""
+          fill
+          sizes="100vw"
+          quality={80}
+          loading="eager"
+          fetchPriority="high"
+        />
+        <div className="hero-shade" />
+        <Header />
+        <div className="hero-content page-shell">
+          <div className="hero-copy">
+            <span className="eyebrow">Johannesburg-wide specialist care</span>
+            <h1 id="hero-title">Professional curtain cleaning Johannesburg</h1>
+            <p className="hero-subtitle">On-site curtain &amp; blind cleaning, planned around your fabric and property.</p>
+            <div className="hero-cta">
+              <a className="button" href="#contact">Book a free assessment</a>
+              <a className="button button-outline" href={whatsappUrl}>WhatsApp us <span aria-hidden="true">↗</span></a>
+            </div>
+            <div className="hero-stats" aria-label="Business credentials">
+              <div><span>Approach</span><strong>Assessment first</strong></div>
+              <div><span>Service</span><strong>Delivered on site</strong></div>
+              <div><span>Coverage</span><strong>Johannesburg-wide</strong></div>
             </div>
           </div>
         </div>
+        <a className="scroll-cue" href="#services" aria-label="Scroll to services"><span /></a>
       </section>
 
-      {/* Trust Badges */}
-      <section className="bg-gray-50 py-12 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="grid grid-cols-1 md:grid-cols-4 gap-6">
-            {trustBadges.map((badge, index) => (
-              <div key={index} className="text-center">
-                <CheckCircleIcon className="h-12 w-12 text-accent mx-auto mb-3" />
-                <h3 className="font-bold text-lg mb-2">{badge.title}</h3>
-                <p className="text-gray-700">{badge.description}</p>
-              </div>
+      <section className="promise-strip" aria-label="Service promise">
+        <div className="page-shell promise-grid">
+          <p><strong>On-site convenience</strong><span>We clean while your curtains remain hanging.</span></p>
+          <p><strong>Fabric-specific care</strong><span>Material, lining and condition are assessed first.</span></p>
+          <p><strong>Less disruption</strong><span>No transport or rehanging stages.</span></p>
+        </div>
+      </section>
+
+      <section className="section section-light" id="services">
+        <div className="page-shell">
+          <div className="section-heading split-heading">
+            <div><span className="eyebrow">Our services</span><h2>Specialist care for every fabric in your space.</h2></div>
+            <p>Six focused services—each beginning with a fabric assessment and a treatment selected for the material, construction and condition.</p>
+          </div>
+          <div className="service-grid service-grid-six">
+            {services.map((service, index) => (
+              <article className="service-card" key={service.slug}>
+                <Link className="card-image service-card-image" href={service.path} aria-label={`Explore ${service.shortTitle}`}>
+                  <Image
+                    src={serviceImages[service.slug]}
+                    alt={`${service.shortTitle} by JHB Curtain Cleaning`}
+                    width={960}
+                    height={720}
+                    sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1180px) calc(50vw - 40px), calc(33vw - 40px)"
+                  />
+                </Link>
+                <div className="service-card-copy">
+                  <div className="service-card-meta">
+                    <span className="service-number">{String(index + 1).padStart(2, "0")}</span>
+                    {(() => {
+                      const ServiceIcon = serviceIcons[service.slug] ?? Sparkles;
+                      return <span className="service-card-icon" aria-hidden="true"><ServiceIcon size={21} strokeWidth={1.35} /></span>;
+                    })()}
+                  </div>
+                  <h3>{service.shortTitle}</h3>
+                  <p>{service.description}</p>
+                  <Link href={service.path}>{service.slug === "curtain-blind-cleaning" ? "Curtain & blind cleaning services in Johannesburg" : `${service.shortTitle} in Johannesburg`} <span aria-hidden="true">→</span></Link>
+                </div>
+              </article>
             ))}
           </div>
         </div>
       </section>
 
-      {/* Services Overview */}
-      <section className="py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              Our Professional Cleaning Services
-            </h2>
-            <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-              Specialist curtain dry cleaning, drapery care, upholstery restoration, mattress sanitizing, and soft furnishing maintenance for homes, hotels, and offices across Johannesburg
-            </p>
+      <section className="section detail-process" id="process">
+        <div className="page-shell">
+          <div className="section-heading split-heading"><div><span className="eyebrow">How on-site curtain cleaning works</span><h2>A careful process, with none of the disruption.</h2></div><p>From the first assessment to the final finish, your curtains stay in place and your room stays intact.</p></div>
+          <div className="process-grid">
+            <article><span>01</span><h3>Free assessment</h3><p>We inspect fabric, construction, lining, condition and access.</p></article>
+            <article><span>02</span><h3>Pre-treatment</h3><p>Surroundings are protected and marks receive targeted attention.</p></article>
+            <article><span>03</span><h3>Deep clean</h3><p>A controlled on-site process lifts embedded dust and soiling.</p></article>
+            <article><span>04</span><h3>Protect & finish</h3><p>We complete a quality check and advise on optional protection.</p></article>
           </div>
+        </div>
+      </section>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {/* Curtain Cleaning */}
-            <div className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-primary hover:shadow-lg transition-all">
-              <h3 className="text-2xl font-bold mb-3 text-primary">On-Site Curtain Dry Cleaning</h3>
-              <p className="text-gray-700 mb-4">
-                Dry clean curtains, drapes, and window treatments where they hang. Our service includes repairing, servicing, and cleaning of curtain hardware and tracks.
-              </p>
-              <ul className="space-y-2 mb-4 text-gray-700">
-                <li className="flex items-start gap-2">
-                  <CheckCircleIcon className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                  <span>No takedown required</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircleIcon className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                  <span>Hardware cleaning & repair included</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircleIcon className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                  <span>Works on all fabric types</span>
-                </li>
-              </ul>
-              <Link href="/services/curtain-cleaning" className="text-primary hover:text-primary-dark font-semibold">
-                Learn More →
-              </Link>
-            </div>
+      <section className="section section-dark guarantees-section">
+        <div className="page-shell">
+          <div className="section-heading split-heading"><div><span className="eyebrow">Our guarantees</span><h2>Confident care from first assessment to final finish.</h2></div><p>Our service model is built around protecting the fabric, the room and your time.</p></div>
+          <div className="guarantee-grid">{guarantees.map((item, index) => <article key={item.title}><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.copy}</p></article>)}</div>
+        </div>
+      </section>
 
-            {/* Mattress Cleaning */}
-            <div className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-primary hover:shadow-lg transition-all">
-              <h3 className="text-2xl font-bold mb-3 text-primary">Deep Mattress Sanitization</h3>
-              <p className="text-gray-700 mb-4">
-                Deep clean & sanitize mattresses on-site. Clinical process removes dust mites, bacteria, and allergens.
-              </p>
-              <ul className="space-y-2 mb-4 text-gray-700">
-                <li className="flex items-start gap-2">
-                  <CheckCircleIcon className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                  <span>Removes 4.5kg annual skin shedding</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircleIcon className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                  <span>Eliminates dust mites & bacteria</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircleIcon className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                  <span>Healthier sleeping environment</span>
-                </li>
-              </ul>
-              <Link href="/services/mattress-cleaning" className="text-primary hover:text-primary-dark font-semibold">
-                Learn More →
-              </Link>
-            </div>
-
-            {/* Upholstery Cleaning */}
-            <div className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-primary hover:shadow-lg transition-all">
-              <h3 className="text-2xl font-bold mb-3 text-primary">Upholstery & Furniture Cleaning</h3>
-              <p className="text-gray-700 mb-4">
-                Professional dry/wet cleaning for sofas, couches, chairs, and all upholstered furniture. Regular maintenance extends furniture life.
-              </p>
-              <ul className="space-y-2 mb-4 text-gray-700">
-                <li className="flex items-start gap-2">
-                  <CheckCircleIcon className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                  <span>Dry & wet cleaning options</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircleIcon className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                  <span>Masterguard fabric protection</span>
-                </li>
-                <li className="flex items-start gap-2">
-                  <CheckCircleIcon className="h-5 w-5 text-accent mt-0.5 flex-shrink-0" />
-                  <span>Doubles furniture lifespan</span>
-                </li>
-              </ul>
-              <Link href="/services/upholstery-cleaning" className="text-primary hover:text-primary-dark font-semibold">
-                Learn More →
-              </Link>
-            </div>
-
-            {/* Persian Rug Cleaning */}
-            <div className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-primary hover:shadow-lg transition-all">
-              <h3 className="text-2xl font-bold mb-3 text-primary">Persian & Oriental Rugs</h3>
-              <p className="text-gray-700 mb-4">
-                Expert cleaning for valuable Persian and Oriental rugs. Professional care preserves beauty and value.
-              </p>
-              <Link href="/services/rug-cleaning" className="text-primary hover:text-primary-dark font-semibold">
-                Learn More →
-              </Link>
-            </div>
-
-            {/* Fabric Protection */}
-            <div className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-primary hover:shadow-lg transition-all">
-              <h3 className="text-2xl font-bold mb-3 text-primary">Masterguard Fabric Protection</h3>
-              <p className="text-gray-700 mb-4">
-                Prevents oil & water stains, extends beauty and wear life, reduces UV fading.
-              </p>
-              <Link href="/services/fabric-protection" className="text-primary hover:text-primary-dark font-semibold">
-                Learn More →
-              </Link>
-            </div>
-
-            {/* Fire Proofing */}
-            <div className="bg-white border-2 border-gray-200 rounded-lg p-6 hover:border-primary hover:shadow-lg transition-all">
-              <h3 className="text-2xl font-bold mb-3 text-primary">Fire Proofing Services</h3>
-              <p className="text-gray-700 mb-4">
-                Professional fireproofing treatment for soft furnishings. Essential for commercial properties.
-              </p>
-              <Link href="/services/fireproofing" className="text-primary hover:text-primary-dark font-semibold">
-                Learn More →
-              </Link>
+      <section className="section section-light comparison-section">
+        <div className="page-shell comparison-layout">
+          <div><span className="eyebrow">A better way to care</span><h2>On-site dry cleaning vs conventional wet cleaning.</h2><p>Traditional cleaning adds removal, transport, drying, pressing and rehanging. Our on-site method removes those handling stages and keeps your space operational.</p></div>
+          <div className="comparison-scroll">
+            <div className="comparison-table comparison-table-four" role="table" aria-label="Curtain cleaning method comparison">
+              <div role="row"><strong role="columnheader">What matters</strong><strong role="columnheader">JHB dry care</strong><strong role="columnheader">Off-site cleaning</strong><strong role="columnheader">On-site wet extraction</strong></div>
+              <div role="row"><span>Handling</span><b>Remains hanging</b><span>Removed and transported</span><span>Remains hanging</span></div>
+              <div role="row"><span>Drying</span><b>No conventional drying stage</b><span>Often several days</span><span>Several hours possible</span></div>
+              <div role="row"><span>Fabric control</span><b>Assessment-led process</b><span>Wash-and-dry exposure</span><span>Moisture and heat exposure</span></div>
+              <div role="row"><span>Hardware care</span><b>Track check included</b><span>Not usually included</span><span>Fabric-focused</span></div>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Why Choose Us */}
-      <section className="bg-primary text-white py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold mb-4">Why On The Spot?</h2>
+      <section className="section pricing-section" id="pricing">
+        <div className="page-shell">
+          <div className="section-heading split-heading"><div><span className="eyebrow">Indicative pricing</span><h2>Clear expectations before the assessment.</h2></div><p>These residential guide ranges help with planning. Your written quotation is based on fabric, curtain size, room count, condition and access.</p></div>
+          <div className="pricing-grid">
+            <article><span>1–2 standard rooms</span><strong>R800–R1,500</strong><p>Small residential package.</p></article>
+            <article><span>3–4 rooms</span><strong>R1,500–R3,000</strong><p>Medium residential package.</p></article>
+            <article><span>5+ rooms</span><strong>R3,000–R5,500</strong><p>Large homes and double-volume drapery.</p></article>
+            <article><span>Commercial portfolios</span><strong>Site quotation</strong><p>Line-item pricing by room count, fabric and schedule.</p></article>
           </div>
-
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
-            <div>
-              <h3 className="text-2xl font-bold mb-3">Convenience</h3>
-              <p className="text-blue-100">
-                All work is done on-site at suitable and convenient times so minimum disruption is caused.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold mb-3">Cost Saving</h3>
-              <p className="text-blue-100">
-                Our on-site systems are less expensive than conventional dry cleaning without any inconvenience.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold mb-3">Regular Maintenance</h3>
-              <p className="text-blue-100">
-                Extends the life of fabrics and mattresses by up to double. Cleaned rooms can be rented same day - NO DOWN TIME.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold mb-3">Hygiene</h3>
-              <p className="text-blue-100">
-                You can be assured all your soft furnishings and mattresses are hygienically clean and customer satisfaction is at an optimum.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold mb-3">Professional Expertise</h3>
-              <p className="text-blue-100">
-                All our services are performed by friendly, well-trained staff with unique ability to service and repair curtaining hardware.
-              </p>
-            </div>
-
-            <div>
-              <h3 className="text-2xl font-bold mb-3">Industry Leader</h3>
-              <p className="text-blue-100">
-                Highly beneficial to Hospitality, Corporate & Domestic industries where hygiene, cleanliness and appearance matter most.
-              </p>
-            </div>
-          </div>
+          <p className="pricing-note">Indicative ranges only; final pricing is confirmed in writing after a free, no-obligation assessment.</p>
         </div>
       </section>
 
-      {/* Contact CTA */}
-      <section id="quote" className="bg-gray-50 py-16 px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-4xl font-bold text-gray-900 mb-6">
-            Get Your Free On-Site Quotation
-          </h2>
-          <p className="text-xl text-gray-700 mb-8">
-            Contact interior decorator and fabric expert, Kathy Dunlop
-          </p>
-
-          <div className="flex flex-col md:flex-row justify-center gap-6 mb-8">
-            <a 
-              href="tel:+27750119200"
-              className="bg-primary text-white hover:bg-primary-dark px-8 py-4 rounded-lg font-bold text-lg transition-all inline-flex items-center justify-center gap-2"
-            >
-              <PhoneIcon className="h-6 w-6" />
-              Mobile: +27 75 011 9200
-            </a>
+      <section className="section section-dark sectors-section" id="sectors">
+        <div className="page-shell">
+          <div className="section-heading split-heading sectors-heading">
+            <div><span className="eyebrow">Sectors we serve</span><h2>One specialist standard, across every property.</h2></div>
+            <div><p>Discreet, scheduled service for private homes and demanding professional environments throughout Johannesburg.</p><a className="button button-outline" href="#contact">Discuss your property</a></div>
           </div>
-
-          <div className="flex flex-col md:flex-row justify-center gap-6">
-            <a 
-              href="mailto:info@curtaincleaning.co.za"
-              className="text-primary hover:text-primary-dark font-semibold text-lg inline-flex items-center justify-center gap-2"
-            >
-              <EnvelopeIcon className="h-6 w-6" />
-              info@curtaincleaning.co.za
-            </a>
-            <a 
-              href="https://www.curtainclean.co.za"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="text-primary hover:text-primary-dark font-semibold text-lg inline-flex items-center justify-center gap-2"
-            >
-              www.curtainclean.co.za
-            </a>
-          </div>
+          <div className="sector-card-grid">{sectors.map((item, index) => (
+            <Link className="sector-card" href={item.path} key={item.slug}>
+              <Image
+                src={sectorImages[item.slug]}
+                alt={`${item.shortTitle} fabric-care environment`}
+                width={960}
+                height={720}
+                sizes="(max-width: 700px) calc(100vw - 32px), (max-width: 1180px) calc(50vw - 40px), calc(33vw - 40px)"
+              />
+              <span className="sector-card-shade" />
+              <span className="sector-card-number">0{index + 1}</span>
+              <span className="sector-card-copy"><strong>{item.shortTitle}</strong><b>Explore sector <span aria-hidden="true">↗</span></b></span>
+            </Link>
+          ))}</div>
         </div>
       </section>
 
-      {/* Service Areas */}
-      <section className="py-16 px-4">
-        <div className="max-w-7xl mx-auto">
-          <div className="text-center mb-12">
-            <h2 className="text-4xl font-bold text-gray-900 mb-4">
-              <MapPinIcon className="h-10 w-10 text-primary inline-block mr-2" />
-              Areas We Serve in Johannesburg
-            </h2>
-            <p className="text-xl text-gray-700">
-              Professional curtain cleaning across all major Johannesburg suburbs
-            </p>
-          </div>
-
-          <div className="grid grid-cols-2 md:grid-cols-4 lg:grid-cols-6 gap-4 text-center">
-            {['Sandton', 'Bryanston', 'Fourways', 'Rosebank', 'Randburg', 'Midrand', 
-              'Bedfordview', 'Hyde Park', 'Morningside', 'Rivonia', 'Sunninghill', 'Parkhurst'].map((area) => (
-              <Link
-                key={area}
-                href={`/locations/${area.toLowerCase().replace(' ', '-')}`}
-                className="bg-white border-2 border-gray-200 hover:border-primary rounded-lg px-4 py-3 font-semibold text-gray-700 hover:text-primary transition-all"
-              >
-                {area}
-              </Link>
-            ))}
-          </div>
+      <section className="section areas-section" id="areas">
+        <div className="page-shell">
+          <div className="section-heading split-heading"><div><span className="eyebrow">Areas we serve</span><h2>Expert care across Johannesburg.</h2></div><p>Based in Roodepoort and serving homes, hotels and businesses across greater Johannesburg, Midrand and selected Pretoria areas.</p></div>
+          <div className="area-card-grid">{areas.map((item) => <Link href={item.path} key={item.slug}>
+            <Image
+              src={areaImages[item.slug]}
+              alt={`Luxury interior in ${item.shortTitle}`}
+              width={960}
+              height={720}
+              sizes="(max-width: 700px) calc(100vw - 32px), (max-width: 1180px) calc(50vw - 40px), calc(33vw - 40px)"
+            />
+            <span className="area-card-shade" />
+            <span className="area-card-copy"><em>Service area</em><strong>{item.shortTitle}</strong><b>On-site curtain cleaning in {item.shortTitle} <span aria-hidden="true">↗</span></b></span>
+          </Link>)}</div>
         </div>
       </section>
+
+      <section className="section story-section" id="about">
+        <div className="page-shell story-grid">
+          <div className="story-image" role="img" aria-label="Elegant ivory curtains in a Johannesburg interior" />
+          <div className="story-copy"><span className="eyebrow">About JHB Curtain Cleaning</span><h2>Every curtain is different. That’s why we come to you.</h2><p className="lead">JHB Curtain Cleaning brings fabric assessment and on-site care directly to your home or business.</p><p>We assess first, explain the proposed treatment and work carefully around your space, with a practical plan for residential and professional properties.</p><ul className="tick-list"><li>Fabric-specific assessment</li><li>No removal or rehanging</li><li>Clear written quotation</li><li>Residential and commercial care</li></ul><Link className="text-link" href="/about">Learn about our approach <span aria-hidden="true">→</span></Link></div>
+        </div>
+      </section>
+
+      <section className="section section-light" id="faq">
+        <div className="page-shell faq-layout">
+          <div><span className="eyebrow">Curtain cleaning FAQ</span><h2>Clear answers before we visit.</h2><p className="faq-intro">Still have questions? Call or WhatsApp and speak directly with a curtain-care specialist.</p></div>
+          <div className="faq-list">{homeFaqs.map((faq) => <details key={faq.question}><summary>{faq.question}</summary><p>{faq.answer}</p></details>)}</div>
+        </div>
+      </section>
+
+      <section className="guide-cta-section">
+        <div className="page-shell guide-cta"><div><span className="eyebrow">Free fabric-care guide</span><h2>Expert advice for beautifully kept curtains.</h2><p>Explore practical curtain, mattress, upholstery and rug-care guidance from Johannesburg specialists.</p></div><Link className="button" href="/guides">Get your free fabric-care guide</Link></div>
+      </section>
+
+      <ContactSection title="Get your free assessment." />
+      <Footer />
     </main>
   );
 }

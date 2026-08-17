@@ -1,16 +1,12 @@
-import { MetadataRoute } from "next";
+import type { MetadataRoute } from "next";
+import { absoluteUrl } from "./seo/site-config";
 
 export default function robots(): MetadataRoute.Robots {
-  const baseUrl = "https://www.curtainclean.co.za";
-
   return {
     rules: [
-      {
-        userAgent: "*",
-        allow: "/",
-        disallow: ["/api/", "/_next/"],
-      },
+      { userAgent: "*", allow: "/", disallow: "/api/" },
+      { userAgent: ["GPTBot", "PerplexityBot", "ClaudeBot", "Google-Extended"], allow: "/", disallow: "/api/" },
     ],
-    sitemap: `${baseUrl}/sitemap.xml`,
+    sitemap: absoluteUrl("/sitemap.xml"),
   };
 }
