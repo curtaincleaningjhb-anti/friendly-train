@@ -115,15 +115,27 @@ export function ContactSection({ title = "Let’s restore the beauty of your fab
 export function Footer() {
   return (
     <>
-      <footer>
+      <footer id="site-footer">
         <div className="page-shell footer-grid expanded-footer">
           <div className="footer-brand"><Link className="brand footer-brand-lockup" href="/" aria-label="JHB Curtain Cleaning home"><Image className="brand-symbol" src="/brand-drapery-mark.svg" alt="" width={50} height={62} /><span className="brand-copy"><strong>JHB Curtain Cleaning</strong><small>Professional services</small></span></Link><p>Johannesburg’s specialist on-site curtain and fabric care team.</p><Link className="text-link" href="/guides">Read our fabric-care guides →</Link></div>
           <div><Link href="/sectors"><strong>Sectors we serve</strong></Link>{sectors.map((item) => <Link href={item.path} key={item.slug}>{item.shortTitle}</Link>)}</div>
           <div><Link href="/services"><strong>Our services</strong></Link>{services.map((item) => <Link href={item.path} key={item.slug}>{item.shortTitle}</Link>)}</div>
           <div><Link href="/areas"><strong>Service areas</strong></Link>{areas.map((item) => <Link href={item.path} key={item.slug}>{item.shortTitle}</Link>)}</div>
-          <div><strong>Contact us</strong><a href="tel:+27750119200">+27 75 011 9200</a><a href="mailto:info@jhbcurtaincleaning.co.za">info@jhbcurtaincleaning.co.za</a><a href={whatsappUrl}>WhatsApp us</a><span>10 Second Avenue, Florida, Roodepoort, 1710</span><small>Administrative dispatch base; all cleaning is delivered on site.</small></div>
+          <div><Link href="/#contact"><strong>Contact us</strong></Link><a href="tel:+27750119200">+27 75 011 9200</a><a href="mailto:info@jhbcurtaincleaning.co.za">info@jhbcurtaincleaning.co.za</a><a href={whatsappUrl}>WhatsApp us</a><span>10 Second Avenue, Florida, Roodepoort, 1710</span><small>Administrative dispatch base; all cleaning is delivered on site.</small></div>
         </div>
-        <div className="page-shell footer-bottom"><span>© 2026 JHB Curtain Cleaning. All rights reserved.</span><span><Link href="/about">About</Link> · <Link href="/guides">Guides</Link> · <Link href="/advice">Advice</Link> · <Link href="/case-studies">Case studies</Link> · <Link href="/gallery">Gallery</Link> · <Link href="/newsletter">Newsletter</Link> · <Link href="/privacy-policy">Privacy</Link> · <Link href="/terms-of-service">Terms</Link></span></div>
+        <div className="page-shell footer-bottom">
+          <nav className="footer-legal-links" aria-label="Footer utility navigation">
+            <Link href="/about">About</Link>
+            <Link href="/guides">Guides</Link>
+            <Link href="/advice">Advice</Link>
+            <Link href="/case-studies">Case studies</Link>
+            <Link href="/gallery">Gallery</Link>
+            <Link href="/newsletter">Newsletter</Link>
+            <Link href="/privacy-policy">Privacy</Link>
+            <Link href="/terms-of-service">Terms</Link>
+          </nav>
+          <span>© 2026 JHB Curtain Cleaning. All rights reserved.</span>
+        </div>
       </footer>
       <a className="floating-whatsapp" href={whatsappUrl} aria-label="Chat with JHB Curtain Cleaning on WhatsApp">WhatsApp</a>
     </>

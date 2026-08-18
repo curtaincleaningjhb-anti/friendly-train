@@ -61,6 +61,16 @@ test("renders production metadata and a page-scoped high-priority home hero", as
   const guides = await fetchHtml("/guides");
   assert.match(guides, /blackout-lined-curtain-cleaning/i);
   assert.match(guides, /curtain-stains-odours-mould-what-to-do/i);
+
+  assert.match(home, /<header[^>]+site-header[^>]*>/i, "sticky header markup must render");
+  assert.match(home, /<footer[^>]+id=["']site-footer["']/i, "footer must have a stable internal target");
+  assert.match(home, /<nav[^>]+footer-legal-links[^>]+aria-label=["']Footer utility navigation["']/i);
+  for (const path of ["/about", "/guides", "/advice", "/case-studies", "/gallery", "/newsletter", "/privacy-policy", "/terms-of-service"]) {
+    assert.match(home, new RegExp(`href=["']${path.replaceAll("/", "\\/")}["']`), `footer utility link ${path} is missing`);
+  }
+  for (const path of ["/services", "/sectors", "/areas", "/#contact"]) {
+    assert.match(home, new RegExp(`href=["']${path.replaceAll("/", "\\/")}["']`), `footer section backlink ${path} is missing`);
+  }
 });
 
 test("every sitemap page has unique production metadata and resolvable internal links", async () => {
@@ -138,7 +148,7 @@ test("every sitemap page has unique production metadata and resolvable internal 
   }
 });
 
-test("form endpoints reject invalid submissions without external credentials", async () => {
+test("form integrations validate, filter bots and fail gracefully without provider credentials", async () => {
   const worker = await loadWorker();
   const request = (path, body) => worker.fetch(new Request(`http://localhost${path}`, {
     method: "POST",
@@ -148,4 +158,27 @@ test("form endpoints reject invalid submissions without external credentials", a
 
   assert.equal((await request("/api/contact", { email: "invalid" })).status, 400);
   assert.equal((await request("/api/subscribe", { email: "invalid", consent: false })).status, 400);
+
+  const bot = await request("/api/contact", { website: "https://spam.example" });
+  assert.equal(bot.status, 200);
+
+  const contact = await request("/api/contact", {
+    name: "Layout Audit",
+    email: "audit@example.com",
+    phone: "+27 75 011 9200",
+    location: "Johannesburg",
+    message: "Integration fallback test",
+    website: "",
+  });
+  assert.equal(contact.status, 503);
+  assert.match(await contact.text(), /call or WhatsApp/i);
+
+  const subscription = await request("/api/subscribe", {
+    name: "Layout Audit",
+    email: "audit@example.com",
+    interest: "Curtain care",
+    consent: true,
+  });
+  assert.equal(subscription.status, 503);
+  assert.match(await subscription.text(), /temporarily unavailable/i);
 });
