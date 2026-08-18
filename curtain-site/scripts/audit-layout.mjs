@@ -190,7 +190,7 @@ async function main() {
         const top = await client.send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
         writeFileSync(path.join(outputDir, `${slugFor(route)}-${viewport.name}-top.png`), Buffer.from(top.data, "base64"));
         if (route === "/") {
-          for (const section of ["services", "sectors", "areas", "about"]) {
+          for (const section of ["services", "sectors", "areas", "about", "contact"]) {
             await client.send("Runtime.evaluate", { expression: `document.getElementById('${section}')?.scrollIntoView({ block: 'start' })`, returnByValue: true });
             await delay(750);
             await client.send("Runtime.evaluate", { expression: `document.getElementById('${section}')?.scrollIntoView({ block: 'start' })`, returnByValue: true });
@@ -202,6 +202,12 @@ async function main() {
               await delay(350);
               const playerShot = await client.send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
               writeFileSync(path.join(outputDir, `home-${viewport.name}-about-video.png`), Buffer.from(playerShot.data, "base64"));
+            }
+            if (section === "contact") {
+              await client.send("Runtime.evaluate", { expression: "document.querySelector('.contact-form')?.scrollIntoView({ block: 'center' })", returnByValue: true });
+              await delay(350);
+              const formShot = await client.send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
+              writeFileSync(path.join(outputDir, `home-${viewport.name}-contact-form.png`), Buffer.from(formShot.data, "base64"));
             }
           }
         }
