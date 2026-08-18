@@ -117,7 +117,7 @@ export function Footer() {
     <>
       <footer id="site-footer">
         <div className="page-shell footer-grid expanded-footer">
-          <div className="footer-brand"><Link className="brand footer-brand-lockup" href="/" aria-label="JHB Curtain Cleaning home"><Image className="brand-symbol" src="/brand-drapery-mark.svg" alt="" width={50} height={62} /><span className="brand-copy"><strong>JHB Curtain Cleaning</strong><small>Professional services</small></span></Link><p>Johannesburg’s specialist on-site curtain and fabric care team.</p><Link className="text-link" href="/guides">Read our fabric-care guides →</Link></div>
+          <div className="footer-brand"><Link className="brand footer-brand-lockup" href="/" aria-label="JHB Curtain Cleaning home"><Image className="brand-symbol" src="/brand-drapery-mark.svg" alt="" width={50} height={62} /><span className="brand-copy"><strong>JHB Curtain<br />Cleaning</strong><small>Professional services</small></span></Link><p>Johannesburg’s specialist on-site curtain and fabric care team.</p><Link className="text-link" href="/guides">Read our fabric-care guides →</Link></div>
           <div><Link href="/sectors"><strong>Sectors we serve</strong></Link>{sectors.map((item) => <Link href={item.path} key={item.slug}>{item.shortTitle}</Link>)}</div>
           <div><Link href="/services"><strong>Our services</strong></Link>{services.map((item) => <Link href={item.path} key={item.slug}>{item.shortTitle}</Link>)}</div>
           <div><Link href="/areas"><strong>Service areas</strong></Link>{areas.map((item) => <Link href={item.path} key={item.slug}>{item.shortTitle}</Link>)}</div>

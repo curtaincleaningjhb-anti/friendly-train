@@ -122,6 +122,15 @@ const layoutExpression = `(() => {
   for (let i = 0; i < footerColumns.length; i += 1) for (let j = i + 1; j < footerColumns.length; j += 1) {
     if (intersects(footerColumns[i], footerColumns[j])) findings.push('Footer columns overlap');
   }
+  for (const column of document.querySelectorAll('.footer-grid > div')) {
+    if (!visible(column)) continue;
+    const columnRect = rect(column);
+    for (const child of column.querySelectorAll('a, p, span, small, strong')) {
+      if (!visible(child)) continue;
+      const childRect = rect(child);
+      if (childRect.left < columnRect.left - 1 || childRect.right > columnRect.right + 1) findings.push('Footer content escapes its column');
+    }
+  }
   const footerLinks = document.querySelector('.footer-legal-links');
   let footerCenterDelta = null;
   if (!footerLinks || !visible(footerLinks)) findings.push('Centered footer utility links are missing');
@@ -147,6 +156,7 @@ async function main() {
 
   const routes = ["/", "/services", "/sectors", "/areas", "/guides", "/services/curtain-blind-cleaning", "/advice/curtain-cleaning-prices"];
   const viewports = [
+    { name: "wide", width: 1872, height: 552 },
     { name: "desktop", width: 1440, height: 1000 },
     { name: "tablet", width: 1024, height: 900 },
     { name: "mobile", width: 390, height: 844 },
@@ -165,7 +175,7 @@ async function main() {
       if (browserErrors.length) value.findings.push(`Browser errors: ${browserErrors.join(" | ")}`);
       results.push({ route, viewportName: viewport.name, browserErrors, ...value });
 
-      if (["/", "/services", "/sectors", "/areas"].includes(route) && ["desktop", "mobile"].includes(viewport.name)) {
+      if ((["/", "/services", "/sectors", "/areas"].includes(route) && ["desktop", "mobile"].includes(viewport.name)) || (route === "/" && viewport.name === "wide")) {
         await client.send("Runtime.evaluate", { expression: "window.scrollTo(0, 0)", returnByValue: true });
         await delay(150);
         const top = await client.send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });

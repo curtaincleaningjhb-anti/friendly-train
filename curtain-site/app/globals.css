@@ -948,8 +948,9 @@ body { overflow-x: clip; }
 
 .footer-grid { align-items: start; }
 .footer-grid > div { min-width: 0; }
-.footer-brand-lockup { gap: 10px; }
-.footer-brand-lockup .brand-copy strong { font-size: 23px; }
+.footer-brand-lockup { width: 100%; max-width: 100%; gap: 10px; white-space: normal; }
+.footer-brand-lockup .brand-copy { min-width: 0; max-width: calc(100% - 60px); }
+.footer-brand-lockup .brand-copy strong { max-width: 100%; font-size: 22px; line-height: 1.05; white-space: normal; }
 .footer-grid > div:not(.footer-brand) { gap: 11px; line-height: 1.5; }
 .footer-grid a { transition: color .2s ease; }
 .footer-grid a:hover,
