@@ -271,7 +271,23 @@ export default function Home() {
 
       <section className="section story-section" id="about">
         <div className="page-shell story-grid">
-          <div className="story-image" role="img" aria-label="Elegant ivory curtains in a Johannesburg interior" />
+          <figure className="story-video" id="about-video">
+            <div className="story-video-shell">
+              <video
+                controls
+                playsInline
+                preload="metadata"
+                poster="/videos/jhb-brand-ambassador-poster.jpg"
+                aria-label="JHB Curtain Cleaning brand ambassador introducing six professional fabric-care services"
+              >
+                <source src="/videos/jhb-brand-ambassador.mp4" type="video/mp4" />
+                <track default kind="captions" src="/videos/jhb-brand-ambassador.vtt" srcLang="en" label="English" />
+                Your browser does not support embedded video. <a href="https://www.jhbcurtaincleaning.co.za/videos/jhb-brand-ambassador.mp4">Watch the ambassador video</a>.
+              </video>
+              <span className="story-video-label">Meet our brand ambassador · 47 seconds</span>
+            </div>
+            <figcaption>Discover our assessment-led approach and all six specialist fabric-care services.</figcaption>
+          </figure>
           <div className="story-copy"><span className="eyebrow">About JHB Curtain Cleaning</span><h2>Every curtain is different. That’s why we come to you.</h2><p className="lead">JHB Curtain Cleaning brings fabric assessment and on-site care directly to your home or business.</p><p>We assess first, explain the proposed treatment and work carefully around your space, with a practical plan for residential and professional properties.</p><ul className="tick-list"><li>Fabric-specific assessment</li><li>No removal or rehanging</li><li>Clear written quotation</li><li>Residential and commercial care</li></ul><Link className="text-link" href="/about">Learn about our approach <span aria-hidden="true">→</span></Link></div>
         </div>
       </section>

@@ -136,6 +136,15 @@ const layoutExpression = `(() => {
   if (!footerLinks || !visible(footerLinks)) findings.push('Centered footer utility links are missing');
   else footerCenterDelta = Math.abs((rect(footerLinks).left + rect(footerLinks).right) / 2 - innerWidth / 2);
   if (footerCenterDelta !== null && footerCenterDelta > 2) findings.push('Footer utility links are not centered');
+  const aboutVideo = document.querySelector('.story-video-shell');
+  if (aboutVideo && visible(aboutVideo)) {
+    const videoRect = rect(aboutVideo);
+    if (videoRect.left < -1 || videoRect.right > innerWidth + 1) findings.push('About video exceeds viewport bounds');
+    if (Math.abs(videoRect.width / videoRect.height - 16 / 9) > 0.02) findings.push('About video is not rendered at 16:9');
+    const video = aboutVideo.querySelector('video');
+    if (!video?.controls) findings.push('About video controls are missing');
+    if (video?.autoplay) findings.push('About video must not autoplay');
+  }
   const pageWidth = Math.max(document.documentElement.scrollWidth, document.body.scrollWidth);
   const overflowElements = pageWidth > innerWidth + 1 ? [...document.querySelectorAll('body *')].filter(visible).map((element) => ({
     element: element.tagName.toLowerCase() + (element.id ? '#' + element.id : '') + (element.classList.length ? '.' + [...element.classList].join('.') : ''),
@@ -181,13 +190,19 @@ async function main() {
         const top = await client.send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
         writeFileSync(path.join(outputDir, `${slugFor(route)}-${viewport.name}-top.png`), Buffer.from(top.data, "base64"));
         if (route === "/") {
-          for (const section of ["services", "sectors", "areas"]) {
+          for (const section of ["services", "sectors", "areas", "about"]) {
             await client.send("Runtime.evaluate", { expression: `document.getElementById('${section}')?.scrollIntoView({ block: 'start' })`, returnByValue: true });
             await delay(750);
             await client.send("Runtime.evaluate", { expression: `document.getElementById('${section}')?.scrollIntoView({ block: 'start' })`, returnByValue: true });
             await delay(250);
             const sectionShot = await client.send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
             writeFileSync(path.join(outputDir, `home-${viewport.name}-${section}.png`), Buffer.from(sectionShot.data, "base64"));
+            if (section === "about") {
+              await client.send("Runtime.evaluate", { expression: "document.getElementById('about-video')?.scrollIntoView({ block: 'center' })", returnByValue: true });
+              await delay(350);
+              const playerShot = await client.send("Page.captureScreenshot", { format: "png", captureBeyondViewport: false });
+              writeFileSync(path.join(outputDir, `home-${viewport.name}-about-video.png`), Buffer.from(playerShot.data, "base64"));
+            }
           }
         }
         await client.send("Runtime.evaluate", { expression: "window.scrollTo(0, document.documentElement.scrollHeight)", returnByValue: true });
