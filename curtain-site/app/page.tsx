@@ -4,24 +4,24 @@ import { Armchair, BedDouble, Building2, Clock3, Construction, FileText, Flame, 
 import { ContactSection, Footer, Header } from "./site-chrome";
 import { areas, sectors, services, whatsappUrl } from "./site-content";
 
-const guarantees = [
-  { title: "No removal", copy: "Curtains remain safely hanging throughout the cleaning process." },
+const assurances = [
+  { title: "On-site options", copy: "Suitable curtains may be treated while hanging after fabric, construction and condition are assessed." },
   { title: "Fabric-specific care", copy: "Material, lining and condition are assessed before treatment begins." },
-  { title: "Minimal disruption", copy: "The on-site process avoids transport, rehanging and conventional drying stages." },
+  { title: "Property-aware planning", copy: "Access, room protection, hardware and operating requirements are considered before work begins." },
   { title: "Free assessment", copy: "Clear advice and a transparent quotation before any work begins." },
 ];
 
 const quoteFactors = [
-  { icon: Spool, title: "Fabric Type", copy: "Sheer, lined, blackout, velvet — each requires a different approach and cleaning agent." },
+  { icon: Spool, title: "Fabric Type", copy: "Sheer, lined, blackout and velvet curtains each require individual assessment before a method is recommended." },
   { icon: Construction, title: "Track or Rod Hardware", copy: "Ceiling tracks, face-fit rods, motorised systems — access affects labour and time." },
   { icon: Building2, title: "Sector Requirements", copy: "Hotels, hospitals, offices, and homes each have different standards and scheduling needs." },
   { icon: Ruler, title: "Size & Quantity", copy: "Floor-to-ceiling vs standard height, single panel vs full suite — it all matters." },
 ];
 
 const quoteBenefits = [
-  { icon: FileText, title: "Detailed Written Quote", copy: "Itemised breakdown of every item, method, and cost — no surprises." },
+  { icon: FileText, title: "Detailed Written Quote", copy: "The assessed items, proposed scope and quoted cost are recorded in writing before approval." },
   { icon: ThumbsUp, title: "Honest Assessment", copy: "If something doesn’t need cleaning, Kathy will tell you. No upselling." },
-  { icon: Clock3, title: "Scheduling That Works for You", copy: "After hours, weekends, or during business — we work around your needs." },
+  { icon: Clock3, title: "Scheduling That Fits the Scope", copy: "After-hours, weekend or business-hour options can be discussed during assessment." },
 ];
 
 const serviceImages: Record<string, string> = {
@@ -30,7 +30,7 @@ const serviceImages: Record<string, string> = {
   "upholstery-carpet-cleaning": "/cards/service-upholstery-carpet.webp",
   "master-guarding": "/cards/service-master-guarding.webp",
   "fire-proofing": "/cards/service-fire-proofing.webp",
-  "rug-care": "/cards/service-rug-care.webp",
+  "persian-oriental-rug-care": "/cards/service-rug-care.webp",
 };
 
 const serviceIcons: Record<string, LucideIcon> = {
@@ -39,7 +39,7 @@ const serviceIcons: Record<string, LucideIcon> = {
   "upholstery-carpet-cleaning": Armchair,
   "master-guarding": ShieldCheck,
   "fire-proofing": Flame,
-  "rug-care": Gem,
+  "persian-oriental-rug-care": Gem,
 };
 
 const sectorImages: Record<string, string> = {
@@ -52,6 +52,7 @@ const sectorImages: Record<string, string> = {
 };
 
 const areaImages: Record<string, string> = {
+  "johannesburg": "/cards/area-jhb-central.webp",
   "jhb-north": "/cards/area-jhb-north.webp",
   "jhb-east": "/cards/area-jhb-east.webp",
   "jhb-south": "/cards/area-jhb-south.webp",
@@ -63,7 +64,7 @@ const areaImages: Record<string, string> = {
 const homeFaqs = [
   { question: "How much does curtain cleaning cost in Johannesburg?", answer: "Every quotation is based on a free on-site assessment because fabric type, lining, hardware, size, quantity and sector requirements affect the correct method and cost. Kathy evaluates the curtains properly and provides a detailed written quote with no obligation." },
   { question: "Can velvet or blackout curtains be dry cleaned on site?", answer: "Suitable velvet, sheer and blackout curtains may be treated on site, subject to a fabric, lining, condition and colourfastness assessment before work begins." },
-  { question: "Do you clean curtains without taking them down?", answer: "Yes. Curtains remain hanging, which removes the need for transport, rehanging and room disruption." },
+  { question: "Do you clean curtains without taking them down?", answer: "Suitable curtains may be treated while hanging after the fabric, lining, construction, hardware and existing condition have been assessed." },
   { question: "Do you offer a professional blind cleaning service in Johannesburg?", answer: "Yes. We assess and clean suitable Roman, roller, vertical, Venetian and fabric blinds across Johannesburg. The treatment is selected for the blind material, construction, operating system and condition." },
   { question: "How long does the cleaning take?", answer: "Timing depends on the number, size and condition of the curtains. We confirm the expected schedule with your quotation." },
   { question: "Which areas do you serve?", answer: "We serve greater Johannesburg, Midrand and selected Pretoria areas from our Roodepoort base." },
@@ -166,8 +167,8 @@ export default function Home() {
 
       <section className="section section-dark guarantees-section">
         <div className="page-shell">
-          <div className="section-heading split-heading"><div><span className="eyebrow">Our guarantees</span><h2>Confident care from first assessment to final finish.</h2></div><p>Our service model is built around protecting the fabric, the room and your time.</p></div>
-          <div className="guarantee-grid">{guarantees.map((item, index) => <article key={item.title}><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.copy}</p></article>)}</div>
+          <div className="section-heading split-heading"><div><span className="eyebrow">Our service commitments</span><h2>Careful planning from assessment to final review.</h2></div><p>Our service model starts with the fabric, property and agreed scope rather than a one-size-fits-all promise.</p></div>
+          <div className="guarantee-grid">{assurances.map((item, index) => <article key={item.title}><span>0{index + 1}</span><h3>{item.title}</h3><p>{item.copy}</p></article>)}</div>
         </div>
       </section>
 

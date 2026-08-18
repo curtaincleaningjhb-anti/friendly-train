@@ -15,7 +15,7 @@ const legacyRoutes: Record<string, string> = {
   "upholstery-cleaning": "/services/upholstery-carpet-cleaning",
   "carpet-cleaning": "/services/upholstery-carpet-cleaning",
   "fabric-protection": "/services/master-guarding",
-  "persian-rugs": "/services/rug-care",
+  "persian-rugs": "/services/persian-oriental-rug-care",
   "fire-proofing": "/services/fire-proofing",
   offices: "/sectors/corporate",
   restaurants: "/sectors/hotels",

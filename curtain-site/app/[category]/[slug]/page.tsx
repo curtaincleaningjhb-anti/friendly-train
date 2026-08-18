@@ -7,6 +7,7 @@ import { JsonLd } from "../../seo/json-ld";
 import { absoluteUrl, siteConfig } from "../../seo/site-config";
 import { ContactSection, Footer, Header } from "../../site-chrome";
 import { allDetailPages, areas, findPage, findPageByPath, landingHeroImages, sectors, services, whatsappUrl } from "../../site-content";
+import { findEditorialByPath } from "../../editorial-content";
 
 type Props = { params: Promise<{ category: string; slug: string }> };
 
@@ -16,7 +17,7 @@ const detailTitles: Record<string, string> = {
   "upholstery-carpet-cleaning": "Upholstery & Carpet Cleaning Johannesburg | JHB Curtain Cleaning",
   "master-guarding": "Fabric Protection Johannesburg | JHB Curtain Cleaning",
   "fire-proofing": "Fabric Fire-Retardant Treatment Johannesburg | JHB Curtain Cleaning",
-  "rug-care": "Persian & Oriental Rug Cleaning Johannesburg | JHB Curtain Cleaning",
+  "persian-oriental-rug-care": "Persian & Oriental Rug Cleaning Johannesburg | JHB Curtain Cleaning",
   hotels: "Hotel Curtain & Fabric Cleaning Johannesburg | JHB Curtain Cleaning",
   corporate: "Office Curtain & Upholstery Cleaning Johannesburg | JHB Curtain Cleaning",
   healthcare: "Healthcare Curtain & Mattress Cleaning Johannesburg | JHB Curtain Cleaning",
@@ -52,7 +53,13 @@ export default async function DetailPage({ params }: Props) {
   const page = findPage(category, slug);
   if (!page) notFound();
 
-  const relatedPages = page.related.map(findPageByPath).filter(Boolean);
+  const relatedPages = page.related.map((path) => {
+    const detail = findPageByPath(path);
+    if (detail) return { path: detail.path, shortTitle: detail.shortTitle, kind: detail.kind };
+    const editorial = findEditorialByPath(path);
+    if (editorial) return { path: editorial.path, shortTitle: editorial.shortTitle, kind: editorial.path.startsWith("/advice/") ? "advice" : editorial.path === "/case-studies" ? "proof" : "guide" };
+    return undefined;
+  }).filter(Boolean);
   const heroImage = landingHeroImages[page.slug] ?? "/hero-luxury.webp";
   const companionLinks = page.kind === "service" ? sectors.slice(0, 4) : services.slice(0, 4);
   const categoryLabel = page.kind === "service" ? "Services" : page.kind === "sector" ? "Sectors" : "Service areas";

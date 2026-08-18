@@ -52,6 +52,15 @@ test("renders production metadata and a page-scoped high-priority home hero", as
 
   const service = await fetchHtml("/services/curtain-blind-cleaning");
   assert.doesNotMatch(service, /<img[^>]+jhb-textile-hero\.webp[^>]+fetchPriority=["']high["']/i);
+  assert.doesNotMatch(service, /zero-shrinkage|zero guest disruption|hypoallergenic|anti-bacterial/i);
+
+  const pricing = await fetchHtml("/advice/curtain-cleaning-prices");
+  assert.match(pricing, /Curtain Cleaning Prices in Johannesburg/i);
+  assert.doesNotMatch(pricing, /R800|R1,500|R3,000|R5,500/i);
+
+  const guides = await fetchHtml("/guides");
+  assert.match(guides, /blackout-lined-curtain-cleaning/i);
+  assert.match(guides, /curtain-stains-odours-mould-what-to-do/i);
 });
 
 test("every sitemap page has unique production metadata and resolvable internal links", async () => {
@@ -61,10 +70,13 @@ test("every sitemap page has unique production metadata and resolvable internal 
   assert.equal(sitemapResponse.status, 200, "sitemap.xml must render");
   const sitemap = await sitemapResponse.text();
   const paths = [...sitemap.matchAll(/<loc>https:\/\/www\.jhbcurtaincleaning\.co\.za([^<]*)<\/loc>/g)].map((match) => match[1] || "/");
-  assert.equal(paths.length, 33, "canonical sitemap must contain 33 pages");
+  assert.equal(paths.length, 50, "canonical sitemap must contain 50 pages");
   assert.ok(paths.includes("/services"), "services overview must be in the sitemap");
   assert.ok(paths.includes("/sectors"), "sectors overview must be in the sitemap");
   assert.ok(paths.includes("/areas"), "areas overview must be in the sitemap");
+  assert.ok(paths.includes("/areas/johannesburg"), "Johannesburg parent must be in the sitemap");
+  assert.ok(paths.includes("/advice/curtain-cleaning-prices"), "pricing advice must be in the sitemap");
+  assert.ok(paths.includes("/case-studies"), "case-study hub must be in the sitemap");
 
   const rendered = new Map();
   const titles = new Map();

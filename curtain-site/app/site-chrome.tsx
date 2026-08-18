@@ -39,7 +39,8 @@ export function Header({ compact = false }: { compact?: boolean }) {
         <NavDropdown label="Sectors we serve" href="/sectors" items={sectors} />
         <NavDropdown label="Service areas" href="/areas" items={areas} />
         <Link href="/about">About</Link>
-        <Link href="/blog">Blog</Link>
+        <Link href="/guides">Guides</Link>
+        <Link href="/case-studies">Case studies</Link>
         <Link href="/#contact">Contact</Link>
       </nav>
       <div className="header-actions">
@@ -62,6 +63,8 @@ export function Header({ compact = false }: { compact?: boolean }) {
           <strong>Explore</strong>
           <Link href="/about">About</Link>
           <Link href="/guides">Guides</Link>
+          <Link href="/advice">Expert advice</Link>
+          <Link href="/case-studies">Case studies</Link>
           <Link href="/gallery">Gallery</Link>
           <Link href="/blog">Blog</Link>
           <Link href="/#faq">FAQ</Link>
@@ -95,7 +98,7 @@ export function ContactSection({ title = "Let’s restore the beauty of your fab
           <ContactForm />
         </div>
         <div className="contact-card">
-          <a className="contact-option" href={whatsappUrl}><span>Fastest response</span><strong>WhatsApp +27 75 011 9200</strong><b aria-hidden="true">↗</b></a>
+          <a className="contact-option" href={whatsappUrl}><span>WhatsApp enquiries</span><strong>WhatsApp +27 75 011 9200</strong><b aria-hidden="true">↗</b></a>
           <a className="contact-option" href="tel:+27750119200"><span>Speak to a specialist</span><strong>Call +27 75 011 9200</strong><b aria-hidden="true">↗</b></a>
           <a className="contact-option" href="mailto:info@jhbcurtaincleaning.co.za?subject=Free%20assessment"><span>Send your requirements</span><strong>info@jhbcurtaincleaning.co.za</strong><b aria-hidden="true">↗</b></a>
           <div className="contact-trust" aria-label="JHB Curtain Cleaning trust commitments">
@@ -120,7 +123,7 @@ export function Footer() {
           <div><Link href="/areas"><strong>Service areas</strong></Link>{areas.map((item) => <Link href={item.path} key={item.slug}>{item.shortTitle}</Link>)}</div>
           <div><strong>Contact us</strong><a href="tel:+27750119200">+27 75 011 9200</a><a href="mailto:info@jhbcurtaincleaning.co.za">info@jhbcurtaincleaning.co.za</a><a href={whatsappUrl}>WhatsApp us</a><span>10 Second Avenue, Florida, Roodepoort, 1710</span><small>Administrative dispatch base; all cleaning is delivered on site.</small></div>
         </div>
-        <div className="page-shell footer-bottom"><span>© 2026 JHB Curtain Cleaning. All rights reserved.</span><span><Link href="/about">About</Link> · <Link href="/gallery">Gallery</Link> · <Link href="/blog">Blog</Link> · <Link href="/newsletter">Newsletter</Link> · <Link href="/privacy-policy">Privacy</Link> · <Link href="/terms-of-service">Terms</Link></span></div>
+        <div className="page-shell footer-bottom"><span>© 2026 JHB Curtain Cleaning. All rights reserved.</span><span><Link href="/about">About</Link> · <Link href="/guides">Guides</Link> · <Link href="/advice">Advice</Link> · <Link href="/case-studies">Case studies</Link> · <Link href="/gallery">Gallery</Link> · <Link href="/newsletter">Newsletter</Link> · <Link href="/privacy-policy">Privacy</Link> · <Link href="/terms-of-service">Terms</Link></span></div>
       </footer>
       <a className="floating-whatsapp" href={whatsappUrl} aria-label="Chat with JHB Curtain Cleaning on WhatsApp">WhatsApp</a>
     </>
