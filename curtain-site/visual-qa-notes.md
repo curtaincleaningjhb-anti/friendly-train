@@ -17,3 +17,7 @@ The Markdown table separator and raw pipe formatting are no longer present. Pric
 ## Case-study hub
 
 The evidence-led hero, quick answer, three unpublished template sections, evidence requirements, FAQs and related links render correctly. The page does not present fabricated client outcomes. A minor text-format issue remains in template bullets: source placeholders contain escaped square brackets (`\\[` and `\\]`) that render visibly. The integration cleaner must unescape these characters before final build.
+
+## Public ngrok preview
+
+The requested public domain is reachable. As expected on ngrok's free tier, a one-time browser safety interstitial appears for a new visitor; selecting **Visit Site** loads the actual upgraded website. The public page exposes the expanded service, sector, area, guide and case-study navigation and the updated claim-governed homepage copy. The automated public crawl separately confirmed all 50 canonical routes, four migration redirects, security headers and five key upgraded pages.
