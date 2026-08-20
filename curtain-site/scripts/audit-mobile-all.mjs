@@ -80,10 +80,6 @@ class CdpClient {
   }
 }
 
-function slugFor(route) {
-  return route === "/" ? "home" : route.slice(1).replaceAll("/", "-");
-}
-
 const auditExpression = `(() => {
   const findings = [];
   const add = (severity, category, message, selector = null, metrics = null) => findings.push({ severity, category, message, selector, metrics });
@@ -252,7 +248,7 @@ const menuExpression = `(() => {
   return { open: details.open, linkCount, nav: box ? { left: box.left, top: box.top, right: box.right, bottom: box.bottom, width: box.width, height: box.height, scrollHeight: nav.scrollHeight, overflowY: style.overflowY } : null, findings };
 })()`;
 
-async function waitForPage(client) {
+async function waitForPage() {
   await delay(420);
 }
 

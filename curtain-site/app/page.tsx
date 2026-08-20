@@ -84,7 +84,7 @@ export default function Home() {
           alt=""
           fill
           sizes="100vw"
-          quality={80}
+          quality={72}
           loading="eager"
           fetchPriority="high"
         />
@@ -133,6 +133,7 @@ export default function Home() {
                     width={960}
                     height={720}
                     sizes="(max-width: 560px) calc(100vw - 32px), (max-width: 1180px) calc(50vw - 40px), calc(33vw - 40px)"
+                    quality={65}
                   />
                 </Link>
                 <div className="service-card-copy">
@@ -277,7 +278,7 @@ export default function Home() {
                 controls
                 playsInline
                 preload="metadata"
-                poster="/videos/jhb-brand-ambassador-poster.jpg"
+                poster="/videos/jhb-brand-ambassador-poster-optimized.webp"
                 aria-label="JHB Curtain Cleaning brand ambassador introducing six professional fabric-care services"
               >
                 <source src="/videos/jhb-brand-ambassador.mp4" type="video/mp4" />

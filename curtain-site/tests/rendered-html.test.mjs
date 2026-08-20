@@ -52,6 +52,7 @@ test("renders production metadata and a page-scoped high-priority home hero", as
   assert.match(home, /<figure[^>]+id=["']about-video["']/i, "about video must have a stable campaign anchor");
   assert.match(home, /<video(?=[^>]+controls)(?=[^>]+playsinline)(?=[^>]+preload=["']metadata["'])[^>]*>/i, "ambassador video must use mobile-safe controls and metadata preload");
   assert.match(home, /\/videos\/jhb-brand-ambassador\.mp4/i, "final ambassador video source is missing");
+  assert.match(home, /poster=["']\/videos\/jhb-brand-ambassador-poster-optimized\.webp["']/i, "optimized ambassador poster is missing");
   assert.match(home, /<track(?=[^>]+kind=["']captions["'])(?=[^>]+jhb-brand-ambassador\.vtt)[^>]*>/i, "video captions are missing");
   assert.doesNotMatch(home, /<video[^>]+autoplay/i, "homepage video must not autoplay");
 
